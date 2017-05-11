@@ -11,4 +11,5 @@ package com.ComputerShop.models;
  */
 public class ClienteModel {
     
+    private int cod;
 }
