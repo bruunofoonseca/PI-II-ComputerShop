@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author alef.nsousa
  */
-public class PesquisaProduto extends javax.swing.JInternalFrame {
+public class PesquisaProduto extends javax.swing.JFrame {
 
     /**
      * Creates new form PesquisaProduto
@@ -37,7 +37,7 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
         btnEditar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesquisar Produto");
 
         jLabel1.setText("Nome do produto");
@@ -99,18 +99,19 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnExcluir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnIncluir))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtNome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPesquisar)))
+                                .addComponent(btnPesquisar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnExcluir)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnEditar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnIncluir)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(

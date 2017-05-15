@@ -5,11 +5,13 @@
  */
 package com.ComputerShop.views;
 
+import com.ComputerShop.models.ProdutoModel;
+
 /**
  *
  * @author alef.nsousa
  */
-public class CadastrarProduto extends javax.swing.JInternalFrame {
+public class CadastrarProduto extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastrarProduto
@@ -31,7 +33,6 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txtNomeProduto = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtFabricante = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -44,8 +45,9 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         jLabel21 = new javax.swing.JLabel();
         selectQTD = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
+        txtFabricante = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastrar Produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
@@ -54,15 +56,9 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("* Fabricante:");
 
-        txtFabricante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFabricanteActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("* Quantidade do produto:");
 
-        jLabel4.setText("* Valor da venda:");
+        jLabel4.setText("* Valor do Produto:");
 
         jLabel5.setText("R$:");
 
@@ -73,6 +69,11 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         btnCancelar.setText("Cancelar");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         jLabel21.setText("* campos obrigatorios");
 
@@ -97,11 +98,12 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                                     .addComponent(txtTipoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
                                     .addComponent(selectQTD, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtFabricante, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(checkStatus)))
@@ -183,9 +185,18 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFabricanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFabricanteActionPerformed
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // Criando Objeto Produto
+        ProdutoModel prod = new ProdutoModel();
+        
+        
+        prod.setNome(txtFabricante.getText());
+        prod.setFabricante(txtFabricante.getText());
+        prod.setTipoProduto(txtTipoProduto.getText());
+        prod.setQtdProduto((int)selectQTD.getValue());
+        
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     /**
      * @param args the command line arguments

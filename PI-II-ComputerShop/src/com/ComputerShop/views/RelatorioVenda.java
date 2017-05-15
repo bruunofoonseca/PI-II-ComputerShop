@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author Alef
  */
-public class RelatorioVenda extends javax.swing.JInternalFrame {
+public class RelatorioVenda extends javax.swing.JFrame {
 
     /**
      * Creates new form RelatorioVenda
@@ -38,7 +38,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         txtDataFinal = new javax.swing.JFormattedTextField();
         txtDataInicio = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatorio de vendas");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatorios"));

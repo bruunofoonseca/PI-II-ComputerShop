@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Cadastrar Produto"/>
   </Properties>
   <SyntheticProperties>
@@ -68,12 +68,13 @@
                                   </Group>
                                   <EmptySpace pref="136" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="txtFabricante" min="-2" pref="195" max="-2" attributes="0"/>
                                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="selectQTD" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
                                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel2" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="txtFabricante" alignment="1" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -170,11 +171,6 @@
             <Property name="text" type="java.lang.String" value="* Fabricante:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFabricante">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtFabricanteActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="text" type="java.lang.String" value="* Quantidade do produto:"/>
@@ -182,7 +178,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="* Valor da venda:"/>
+            <Property name="text" type="java.lang.String" value="* Valor do Produto:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -213,6 +209,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel21">
           <Properties>
@@ -230,6 +229,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Quantidade estoque:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtFabricante">
         </Component>
       </SubComponents>
     </Container>

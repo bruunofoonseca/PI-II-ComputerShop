@@ -5,10 +5,16 @@
  */
 package com.ComputerShop.controllers;
 
+import com.ComputerShop.models.ProdutoModel;
 /**
  *
  * @author BruunoFoonseca
  */
 public class ProdutoController {
+    
+    public static void (CadastrarProduto){
+        
+    }
+    
     
 }
