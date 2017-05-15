@@ -17,15 +17,7 @@ import javax.swing.JInternalFrame;
  * @author ffreire
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-    CadastroCliente cadastrarCliente = null;
-    PesquisaCliente consultarClientes = null;
-    
-    CadastrarProduto cadastrarProduto = null;
-    PesquisaProduto consultarProdutos = null;
-    
-    CadastrarVenda cadastrarVenda = null;
-    RelatorioVenda relatorioVenda = null;
-    
+  
     /**
      * Creates new form TelaPrincipal
      */
@@ -64,15 +56,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         };
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnCadastrarCliente = new javax.swing.JMenu();
-        btnConsultarClientes = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        btnCadastrarProduto = new javax.swing.JMenu();
-        btnConsultarProdutos = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menCliente = new javax.swing.JMenu();
+        menCliCad = new javax.swing.JMenuItem();
+        menCliPesq = new javax.swing.JMenuItem();
+        menProduto = new javax.swing.JMenu();
+        menProPesq = new javax.swing.JMenuItem();
+        menProdPesq = new javax.swing.JMenuItem();
+        menVendas = new javax.swing.JMenu();
+        menVendProduto = new javax.swing.JMenuItem();
+        menVendRel = new javax.swing.JMenuItem();
 
         jMenuItem5.setText("jMenuItem5");
 
@@ -85,7 +77,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem6.setText("jMenuItem6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Hotel Master");
+        setTitle("BDAC - Sistemas");
 
         desktop.setDoubleBuffered(true);
 
@@ -93,72 +85,77 @@ public class TelaPrincipal extends javax.swing.JFrame {
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 856, Short.MAX_VALUE)
+            .addGap(0, 995, Short.MAX_VALUE)
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 527, Short.MAX_VALUE)
+            .addGap(0, 766, Short.MAX_VALUE)
         );
 
-        btnCadastrarCliente.setText("Cliente");
-
-        btnConsultarClientes.setText("Cadastrar Cliente");
-        btnConsultarClientes.addActionListener(new java.awt.event.ActionListener() {
+        menCliente.setText("Cliente");
+        menCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarClientesActionPerformed(evt);
+                menClienteActionPerformed(evt);
             }
         });
-        btnCadastrarCliente.add(btnConsultarClientes);
 
-        jMenuItem2.setText("Consultar Clientes");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menCliCad.setText("Cadastrar Cliente");
+        menCliCad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menCliCadActionPerformed(evt);
             }
         });
-        btnCadastrarCliente.add(jMenuItem2);
+        menCliente.add(menCliCad);
 
-        jMenuBar1.add(btnCadastrarCliente);
-
-        btnCadastrarProduto.setText("Produto");
-
-        btnConsultarProdutos.setText("Cadastrar Produto");
-        btnConsultarProdutos.addActionListener(new java.awt.event.ActionListener() {
+        menCliPesq.setText("Consultar Clientes");
+        menCliPesq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarProdutosActionPerformed(evt);
+                menCliPesqActionPerformed(evt);
             }
         });
-        btnCadastrarProduto.add(btnConsultarProdutos);
+        menCliente.add(menCliPesq);
 
-        jMenuItem4.setText("Consultar Produtos");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(menCliente);
+
+        menProduto.setText("Produto");
+
+        menProPesq.setText("Cadastrar Produto");
+        menProPesq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                menProPesqActionPerformed(evt);
             }
         });
-        btnCadastrarProduto.add(jMenuItem4);
+        menProduto.add(menProPesq);
 
-        jMenuBar1.add(btnCadastrarProduto);
-
-        jMenu3.setText("Vendas");
-
-        jMenuItem1.setText("Efetuar um Pedido");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menProdPesq.setText("Consultar Produtos");
+        menProdPesq.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menProdPesqActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
+        menProduto.add(menProdPesq);
 
-        jMenuItem3.setText("Gerar Relatório de Vendas");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(menProduto);
+
+        menVendas.setText("Vendas");
+
+        menVendProduto.setText("Efetuar um Pedido");
+        menVendProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menVendProdutoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        menVendas.add(menVendProduto);
 
-        jMenuBar1.add(jMenu3);
+        menVendRel.setText("Gerar Relatório de Vendas");
+        menVendRel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menVendRelActionPerformed(evt);
+            }
+        });
+        menVendas.add(menVendRel);
+
+        jMenuBar1.add(menVendas);
 
         setJMenuBar(jMenuBar1);
 
@@ -166,79 +163,62 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktop)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(865, 575));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnConsultarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarClientesActionPerformed
-        if (cadastrarCliente == null || !cadastrarCliente.isDisplayable()) {
-            cadastrarCliente = new CadastroCliente();
-            desktop.add(cadastrarCliente);
-            this.openFrameInCenter(cadastrarCliente);
-        }
-        cadastrarCliente.toFront();
-    }//GEN-LAST:event_btnConsultarClientesActionPerformed
+    private void menCliCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCliCadActionPerformed
+            CadastroCliente menCliCad = new CadastroCliente();
+            menCliCad.setVisible(true);
+            desktop.add(menCliCad);
+    }//GEN-LAST:event_menCliCadActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        if (consultarClientes == null || !consultarClientes.isDisplayable()) {
-            consultarClientes = new PesquisaCliente();
-            desktop.add(consultarClientes);
-            this.openFrameInCenter(consultarClientes);
-        }
-        consultarClientes.toFront();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void menCliPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCliPesqActionPerformed
+            PesquisaCliente menCliPesq = new PesquisaCliente();
+            menCliPesq.setVisible(true);
+            desktop.add(menCliPesq);
+    }//GEN-LAST:event_menCliPesqActionPerformed
 
-    private void btnConsultarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarProdutosActionPerformed
-       if (cadastrarProduto == null || !cadastrarProduto.isDisplayable()) {
-            cadastrarProduto = new CadastrarProduto();
-            desktop.add(cadastrarProduto);
-            this.openFrameInCenter(cadastrarProduto);
-        }
-        cadastrarProduto.toFront();
-    }//GEN-LAST:event_btnConsultarProdutosActionPerformed
+    private void menProPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProPesqActionPerformed
+            CadastrarProduto menProPesq = new CadastrarProduto();
+            menProPesq.setVisible(true);
+            desktop.add(menProPesq);
+    }//GEN-LAST:event_menProPesqActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        if (consultarProdutos == null || !consultarProdutos.isDisplayable()) {
-            consultarProdutos = new PesquisaProduto();
-            desktop.add(consultarProdutos);
-            this.openFrameInCenter(consultarProdutos);
-        }
-        consultarProdutos.toFront();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void menProdPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProdPesqActionPerformed
+            PesquisaProduto menProdPesq = new PesquisaProduto();
+            menProdPesq.setVisible(true);
+            desktop.add(menProdPesq);
+    }//GEN-LAST:event_menProdPesqActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if (cadastrarVenda == null || !cadastrarVenda.isDisplayable()) {
-            cadastrarVenda = new CadastrarVenda();
-            desktop.add(cadastrarVenda);
-            this.openFrameInCenter(cadastrarVenda);
-        }
-        cadastrarVenda.toFront();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void menVendProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menVendProdutoActionPerformed
+            CadastrarVenda menVendProd = new CadastrarVenda();
+            menVendProd.setVisible(true);
+            desktop.add(menVendProd);
+    }//GEN-LAST:event_menVendProdutoActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        if (relatorioVenda == null || !relatorioVenda.isDisplayable()) {
-            relatorioVenda = new RelatorioVenda();
-            desktop.add(relatorioVenda);
-            this.openFrameInCenter(relatorioVenda);
-        }
-        relatorioVenda.toFront();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void menVendRelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menVendRelActionPerformed
+            RelatorioVenda menVendRel = new RelatorioVenda();
+            menVendRel.setVisible(true);
+            desktop.add(menVendRel);
+    }//GEN-LAST:event_menVendRelActionPerformed
 
-    //Abre um internal frame centralizado na tela
-    public void openFrameInCenter(JInternalFrame jif) {
-        Dimension desktopSize = desktop.getSize();
-        Dimension jInternalFrameSize = jif.getSize();
-        int width = (desktopSize.width - jInternalFrameSize.width) / 2;
-        int height = (desktopSize.height - jInternalFrameSize.height) / 2;
-        jif.setLocation(width, height);
-        jif.setVisible(true);
-    }
+    private void menClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menClienteActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menClienteActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -276,20 +256,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu btnCadastrarCliente;
-    private javax.swing.JMenu btnCadastrarProduto;
-    private javax.swing.JMenuItem btnConsultarClientes;
-    private javax.swing.JMenuItem btnConsultarProdutos;
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JMenuItem menCliCad;
+    private javax.swing.JMenuItem menCliPesq;
+    private javax.swing.JMenu menCliente;
+    private javax.swing.JMenuItem menProPesq;
+    private javax.swing.JMenuItem menProdPesq;
+    private javax.swing.JMenu menProduto;
+    private javax.swing.JMenuItem menVendProduto;
+    private javax.swing.JMenuItem menVendRel;
+    private javax.swing.JMenu menVendas;
     // End of variables declaration//GEN-END:variables
 }

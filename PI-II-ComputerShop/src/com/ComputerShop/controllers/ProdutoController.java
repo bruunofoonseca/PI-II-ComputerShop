@@ -12,9 +12,7 @@ import com.ComputerShop.models.ProdutoModel;
  */
 public class ProdutoController {
     
-    public static void (CadastrarProduto){
-        
-    }
+
     
     
 }
