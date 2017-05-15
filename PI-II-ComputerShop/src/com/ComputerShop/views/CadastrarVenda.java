@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author alef.nsousa
  */
-public class CadastrarVenda extends javax.swing.JFrame {
+public class CadastrarVenda extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastrarVenda

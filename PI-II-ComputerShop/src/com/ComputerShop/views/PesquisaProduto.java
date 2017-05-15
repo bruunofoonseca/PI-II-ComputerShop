@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author alef.nsousa
  */
-public class PesquisaProduto extends javax.swing.JFrame {
+public class PesquisaProduto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form PesquisaProduto

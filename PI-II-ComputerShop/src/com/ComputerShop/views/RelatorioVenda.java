@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author Alef
  */
-public class RelatorioVenda extends javax.swing.JFrame {
+public class RelatorioVenda extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form RelatorioVenda

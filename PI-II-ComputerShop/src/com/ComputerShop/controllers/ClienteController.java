@@ -5,10 +5,25 @@
  */
 package com.ComputerShop.controllers;
 
+import java.util.List;
+
+import com.ComputerShop.models.ClienteModel;
+import java.util.ArrayList;
+
 /**
  *
  * @author BruunoFoonseca
  */
+
 public class ClienteController {
     
+    List<ClienteModel> cliente = new ArrayList<ClienteModel>();
+    
+    public void insereCliente(ClienteModel cliente) {
+        this.cliente.add(cliente);
+    }
+    
+    public List<ClienteModel> listarClientes() {
+        return this.cliente;
+    }
 }
