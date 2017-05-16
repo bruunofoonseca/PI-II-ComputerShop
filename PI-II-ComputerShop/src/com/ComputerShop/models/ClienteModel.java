@@ -21,12 +21,13 @@ public class ClienteModel {
     
     private String nome;
     private String cpf;
-    private String rg;
-    private int telefone;
+//    private String rg;
+    private String telefone;
+    private String celular;
     
-    private Sexo sexo;        
-    private EstadoCivil estadoCivil;
-    private Calendar nascimento;
+    private String sexo;        
+    private String estadoCivil;
+    private String nascimento;
     private EnderecoModel endereco;
     private String email;
     
@@ -74,67 +75,67 @@ public class ClienteModel {
         this.cpf = cpf;
     }
 
-    /**
-     * @return the rg
-     */
-    public String getRg() {
-        return rg;
-    }
-
-    /**
-     * @param rg the rg to set
-     */
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
+//    /**
+//     * @return the rg
+//     */
+//    public String getRg() {
+//        return rg;
+//    }
+//
+//    /**
+//     * @param rg the rg to set
+//     */
+//    public void setRg(String rg) {
+//        this.rg = rg;
+//    }
 
     /**
      * @return the sexo
      */
-    public Sexo getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
     /**
      * @param sexo the sexo to set
      */
-    public void setSexo(Sexo sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
     /**
      * @return the estadoCivil
      */
-    public EstadoCivil getEstadoCivil() {
+    public String getEstadoCivil() {
         return estadoCivil;
     }
 
     /**
      * @param estadoCivil the estadoCivil to set
      */
-    public void setEstadoCivil(EstadoCivil estadoCivil) {
+    public void setEstadoCivil(String estadoCivil) {
         this.estadoCivil = estadoCivil;
     }
 
     /**
      * @return the nascimento
      */
-    public Calendar getNascimento() {
+    public String getNascimento() {
         return nascimento;
     }
     
-    public String getIdade(){
-        
-        int anoNascimento = nascimento.get(Calendar.YEAR);        
-        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-        
-        return String.format("%s anos", anoAtual - anoNascimento);
-    }
+//    public String getIdade(){
+//        
+//        int anoNascimento = nascimento.get(Calendar.YEAR);        
+//        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+//        
+//        return String.format("%s anos", anoAtual - anoNascimento);
+//    }
 
     /**
      * @param nascimento the nascimento to set
      */
-    public void setNascimento(Calendar nascimento) {
+    public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
     }
 
@@ -155,15 +156,29 @@ public class ClienteModel {
     /**
      * @return the telefones
      */
-    public int getTelefones() {
+    public String getTelefone() {
         return telefone;
     }
 
     /**
      * @param telefones the telefones to set
      */
-    public void setTelefones(int telefones) {
+    public void setTelefone(String telefones) {
         this.telefone = telefones;
+    }
+    
+    /**
+     * @return the celular
+     */
+    public String getCelular() {
+        return celular;
+    }
+
+    /**
+     * @param celular the celular to set
+     */
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     /**
