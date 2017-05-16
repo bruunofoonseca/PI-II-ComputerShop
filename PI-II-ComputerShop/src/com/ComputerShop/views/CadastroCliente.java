@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author alef.nsousa
  */
-public class CadastroCliente extends javax.swing.JFrame {
+public class CadastroCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form NewJFrame
@@ -38,7 +38,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
-        selectEstadoCivil = new javax.swing.JComboBox<String>();
+        selectEstadoCivil = new javax.swing.JComboBox<>();
         radioMasc = new javax.swing.JRadioButton();
         radioFem = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
@@ -65,7 +65,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtComplemento = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
-        selectEstado = new javax.swing.JComboBox<String>();
+        selectEstado = new javax.swing.JComboBox<>();
         txtCEP = new javax.swing.JFormattedTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -78,7 +78,8 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Cadastro de Cliente");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
@@ -103,7 +104,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        selectEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Solteiro", "Casado", "Divorciado", "Viuvo(a)" }));
+        selectEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Solteiro", "Casado", "Divorciado", "Viuvo(a)" }));
 
         btngroupSexo.add(radioMasc);
         radioMasc.setText("Masculino");
@@ -278,7 +279,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel19.setText("Cidade:");
 
-        selectEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
+        selectEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
 
         try {
             txtCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));

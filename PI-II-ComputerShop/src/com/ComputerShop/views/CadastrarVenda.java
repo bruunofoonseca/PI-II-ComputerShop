@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author alef.nsousa
  */
-public class CadastrarVenda extends javax.swing.JFrame {
+public class CadastrarVenda extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastrarVenda
@@ -43,7 +43,8 @@ public class CadastrarVenda extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblVenda = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Cadastra Venda");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
