@@ -16,6 +16,7 @@ public class ProdutoModel {
     private String fabricante;
     private String tipoProduto;
     private int qtdProduto;
+    private float valorProduto;
 
     
     // Get e Setter
@@ -51,5 +52,13 @@ public class ProdutoModel {
         this.qtdProduto = qtdProduto;
     }
      
+    public void setValorProduto(float valorProd){
+        this.valorProduto = valorProd;
+    }
+    
+    public float getValorProduto (){
+        return valorProduto;
+    }
+    
     
 }

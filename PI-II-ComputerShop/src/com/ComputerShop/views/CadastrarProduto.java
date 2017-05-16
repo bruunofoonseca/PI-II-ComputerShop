@@ -6,13 +6,14 @@
 package com.ComputerShop.views;
 
 import com.ComputerShop.models.ProdutoModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author alef.nsousa
  */
 public class CadastrarProduto extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form CadastrarProduto
      */
@@ -195,7 +196,21 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         prod.setFabricante(txtFabricante.getText());
         prod.setTipoProduto(txtTipoProduto.getText());
         prod.setQtdProduto((int)selectQTD.getValue());
+        prod.setValorProduto(Float.parseFloat(txtValorProduto.getText()));
         
+        try {
+            
+            
+        } catch (Exception e) {
+            // se ocorrer algum erro na gravação do dados
+            // retorna erro
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Erro ao gravar dado", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Caso não encontre erro, chegara ate essa mensagem
+        JOptionPane.showMessageDialog(rootPane, "Produto Inserido",
+                "Cadastro realizado", JOptionPane.INFORMATION_MESSAGE);
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
