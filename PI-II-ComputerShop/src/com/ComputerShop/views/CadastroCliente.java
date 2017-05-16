@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author alef.nsousa
  */
-public class CadastroCliente extends javax.swing.JFrame {
+public class CadastroCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form NewJFrame
@@ -108,7 +108,8 @@ public class CadastroCliente extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Cadastro de Cliente");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));

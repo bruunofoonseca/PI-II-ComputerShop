@@ -9,7 +9,7 @@ package com.ComputerShop.views;
  *
  * @author alef.nsousa
  */
-public class PesquisaProduto extends javax.swing.JFrame {
+public class PesquisaProduto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form PesquisaProduto
@@ -37,7 +37,8 @@ public class PesquisaProduto extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Pesquisar Produto");
 
         jLabel1.setText("Nome do produto");

@@ -11,7 +11,7 @@ import com.ComputerShop.models.ProdutoModel;
  *
  * @author alef.nsousa
  */
-public class CadastrarProduto extends javax.swing.JFrame {
+public class CadastrarProduto extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form CadastrarProduto
@@ -47,7 +47,8 @@ public class CadastrarProduto extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtFabricante = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Cadastrar Produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
@@ -186,9 +187,9 @@ public class CadastrarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // Criando Objeto Produto
+        // Criando uma instancia do Produto e obtem
+        // seus valores dos campos da tela
         ProdutoModel prod = new ProdutoModel();
-        
         
         prod.setNome(txtFabricante.getText());
         prod.setFabricante(txtFabricante.getText());
