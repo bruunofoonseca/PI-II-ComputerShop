@@ -5,6 +5,8 @@
  */
 package com.ComputerShop.views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alef.nsousa
@@ -16,6 +18,34 @@ public class CadastroCliente extends javax.swing.JFrame {
      */
     public CadastroCliente() {
         initComponents();
+        radioMasc.setEnabled(true);
+        checkStatus.setEnabled(true);
+    }
+    
+    public boolean validaForm()
+    {
+        String nome = txtNome.getText();
+        String cpf = txtCPF.getText();
+        String telefone = txtTelefone.getText();
+        String celular = txtCelular.getText();
+        String dataNasc = txtDataNasc.getText();
+        String rua = txtRua.getText();
+        String bairro = txtBairro.getText();
+        String cep = txtCEP.getText();
+        String numero = txtNumero.getText();
+        String cidade = txtCidade.getText();
+        String estado = selectEstado.getSelectedItem().toString();
+        
+        
+        if(!nome.equals("") && !cpf.equals("") && !telefone.equals("") &&
+                !celular.equals("") && !dataNasc.equals("") && !rua.equals("") &&
+                !bairro.equals("") && !cep.equals("") && !numero.equals("") &&
+                !cidade.equals("") && !estado.equals("Selecione...") &&
+                (radioMasc.isEnabled() || radioFem.isEnabled())) {
+            return true;
+        }
+        
+        return false;
     }
 
     /**
@@ -38,7 +68,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
-        selectEstadoCivil = new javax.swing.JComboBox<String>();
+        selectEstadoCivil = new javax.swing.JComboBox<>();
         radioMasc = new javax.swing.JRadioButton();
         radioFem = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
@@ -52,6 +82,7 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -65,13 +96,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         txtComplemento = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
-        selectEstado = new javax.swing.JComboBox<String>();
+        selectEstado = new javax.swing.JComboBox<>();
         txtCEP = new javax.swing.JFormattedTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -103,7 +133,7 @@ public class CadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        selectEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Solteiro", "Casado", "Divorciado", "Viuvo(a)" }));
+        selectEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Solteiro", "Casado", "Divorciado", "Viuvo(a)" }));
 
         btngroupSexo.add(radioMasc);
         radioMasc.setText("Masculino");
@@ -149,27 +179,35 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel21.setText("*");
 
+        jLabel26.setText("*");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
-                    .addComponent(jLabel13)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtCPF, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel13)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -224,7 +262,9 @@ public class CadastroCliente extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel26)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -278,7 +318,7 @@ public class CadastroCliente extends javax.swing.JFrame {
 
         jLabel19.setText("Cidade:");
 
-        selectEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
+        selectEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
 
         try {
             txtCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -293,8 +333,6 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel24.setText("*");
 
         jLabel25.setText("*");
-
-        jLabel26.setText("*");
 
         jLabel27.setText("*");
 
@@ -322,10 +360,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel9)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -365,9 +400,7 @@ public class CadastroCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel26))
+                        .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -464,7 +497,12 @@ public class CadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        // TODO add your handling code here:
+        if(validaForm()) {
+            JOptionPane.showMessageDialog(null, "Dados Inseridos", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Insira os dados obrigatórios corretamente!!", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
