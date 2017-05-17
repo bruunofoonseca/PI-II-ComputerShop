@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ComputerShop.model.validador;
+package com.ComputerShop.validador;
 
 import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.models.ProdutoModel;

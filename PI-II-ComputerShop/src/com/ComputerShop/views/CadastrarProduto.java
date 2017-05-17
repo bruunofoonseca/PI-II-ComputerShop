@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author alef.nsousa
+ * edit diogo.sfelix
  */
 public class CadastrarProduto extends javax.swing.JInternalFrame {
     

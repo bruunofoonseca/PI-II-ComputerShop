@@ -14,7 +14,7 @@ public class memoriaProduto {
     private static List<ProdutoModel> listaProdutos = new ArrayList<ProdutoModel>();
     
     
-    // Inserindo clientes
+    // Inserindo Produto
     public static void inserir(ProdutoModel prod)
         throws Exception{
         
@@ -22,4 +22,34 @@ public class memoriaProduto {
         listaProdutos.add(prod);
         
     }
+    
+    // Localizar ou listar todos os Produto
+    public static List<ProdutoModel> listarTodosProdutos()
+            throws Exception{
+        // ira retorna a lista do objeto produto
+        return listaProdutos;
+    }
+    
+    public static List<ProdutoModel> listarSomentePalavra(String valor)
+            throws Exception {
+        
+        List<ProdutoModel> listaResultadoProdutos = new ArrayList<ProdutoModel>();
+        
+        if(valor != null && !listaProdutos.isEmpty()){
+            
+            for (ProdutoModel prodLista : listaProdutos){
+                if(prodLista != null && prodLista.getNome() != null){
+                    if(prodLista.getNome().toUpperCase().contains(valor.toUpperCase())){
+                        listaResultadoProdutos.add(prodLista);
+                    }
+                }
+            }
+            
+        }
+        
+        return listaResultadoProdutos;
+        
+    }
+    
+    
 }

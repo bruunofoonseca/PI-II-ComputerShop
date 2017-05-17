@@ -7,8 +7,9 @@ package com.ComputerShop.services;
 
 import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.models.ProdutoModel;
-import com.ComputerShop.model.validador.ValidarProduto;
+import com.ComputerShop.validador.ValidarProduto;
 import com.ComputerShop.memoria.memoriaProduto;
+import java.util.List;
 
 /**
  *
@@ -16,7 +17,7 @@ import com.ComputerShop.memoria.memoriaProduto;
  */
 public class ServicoProduto {
     
-    // Inserir cliente
+    // Inserir produto
     
     public static void inserirProduto (ProdutoModel prod)
             throws ProdutoException {
@@ -36,5 +37,26 @@ public class ServicoProduto {
         }
     }
     
+    
+    // Procura Cliente
+    public static List<ProdutoModel> localizarProduto(String nomeProd)
+                throws ProdutoException{
+                
+        try {
+            // Exceção vai verificar se houve preenchimento do campo de pesquisa
+            // caso tenha algo digitado traz resultado
+            if (nomeProd == null || "".equalsIgnoreCase(nomeProd)) {
+                return memoriaProduto.listarTodosProdutos();
+                
+            } else {
+                return memoriaProduto.listarSomentePalavra(nomeProd);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+        
+    }
     
 }
