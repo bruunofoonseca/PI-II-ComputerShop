@@ -12,14 +12,36 @@ package com.ComputerShop.models;
 public class ProdutoModel {
     
     // Atributos
+    private Integer id;
     private String nome;
     private String fabricante;
     private String tipoProduto;
     private int qtdProduto;
     private float valorProduto;
-
+    private char status;
     
+    
+    
+
     // Get e Setter
+    /*
+    public char getStatus (){
+        return status;
+    }
+    
+    public void setStatus(char status) {
+        this.status = status;
+    }
+    */
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    public Integer getId (){
+        return this.id;
+    }
+    
     public void setNome (String nome){
         this.nome = nome;
     }
