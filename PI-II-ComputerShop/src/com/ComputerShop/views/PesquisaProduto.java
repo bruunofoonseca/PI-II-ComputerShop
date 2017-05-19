@@ -28,6 +28,10 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
      */
     public PesquisaProduto() {
         initComponents();
+        
+        tblProdutos.getColumnModel().getColumn(0).setMinWidth(0);
+        tblProdutos.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblProdutos.getColumnModel().getColumn(0).setWidth(0);
     }
 
 
@@ -185,8 +189,7 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             
             // se a lista não devolver nada, caira no catch exibindo mensagem
-            JOptionPane.showMessageDialog(rootPane, e.getMessage(),"Falhou ao obter a classe memoria", JOptionPane.ERROR_MESSAGE);
-            
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(),"Falhou ao obter a classe memoria", JOptionPane.ERROR_MESSAGE);            
             return;
         }
         
@@ -199,8 +202,56 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
     // ira atualiza a lista de produtos
     public boolean refreshList() throws ProdutoException, Exception{
         
-        List<ProdutoModel> resultado = ServicoProduto.
+        List<ProdutoModel> resultado = ServicoProduto.localizarProduto(ultimaPesq);
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
+        
+        // isso vai limpar a lista, mesmo se nao encontrar resultado
+        modelo.setRowCount(0);
+        
+        if(resultado == null || resultado.size() <= 0){
+            return false;
+        }
+        
+        for (int i = 0; i < resultado.size(); i++) {
+            ProdutoModel prod = resultado.get(i);
+            if (prod != null){
+                Object[] row = new Object[6];
+                row[0] = prod.getId();
+                row[1] = prod.getNome();
+                row[2] = prod.getFabricante();
+                row[3] = prod.getTipoProduto();
+                row[4] = prod.getQtdProduto();
+                row[5] = prod.getValorProduto();
+                modelo.addRow(row);
+            } 
+        }
+        
+        return true;
     }
+    
+    
+    // aqui trata a questão do clique na tela de pesquisa de produto
+    private void tabelaResultadoMouseClicked(java.awt.event.MouseEvent evt){
+        // verificando se houve duplo clique
+        
+        if (evt.getClickCount() == 2){
+            try {
+                // ira obter a linha selecionada pelo usuario na tabela
+                final int row = tblProdutos.getSelectedRow();
+                
+                // obtem o valor do ID da coluna ID
+                Integer id = (Integer) tblProdutos.getValueAt(row, 0);
+                
+                // tendo o id da coluna, chama a classe memoria
+                ProdutoModel prod = ServicoProduto.obterProduto(id);
+            } catch (Exception e) {
+            }
+            
+            
+        }
+    }
+    
     
     
     public static void main(String args[]) {
