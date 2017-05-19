@@ -6,7 +6,7 @@ import com.ComputerShop.models.ValidarCliente;
 import java.util.Date;
 import javax.swing.JOptionPane; 
 
-public class CadastroCliente extends javax.swing.JFrame {
+public class CadastroCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form NewJFrame
