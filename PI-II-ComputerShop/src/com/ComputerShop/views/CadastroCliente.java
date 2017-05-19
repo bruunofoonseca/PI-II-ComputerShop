@@ -35,7 +35,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jLabel15 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         nome = new javax.swing.JTextField();
-        estadoCivil = new javax.swing.JComboBox<>();
+        estadoCivil = new javax.swing.JComboBox<String>();
         jradioMasc = new javax.swing.JRadioButton();
         jradioFem = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
@@ -62,7 +62,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         complemento = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         cidade = new javax.swing.JTextField();
-        estado = new javax.swing.JComboBox<>();
+        estado = new javax.swing.JComboBox<String>();
         cep = new javax.swing.JFormattedTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -74,7 +74,9 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cancelar = new javax.swing.JButton();
         salvar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
         setTitle("Cadastro de Cliente");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
@@ -99,7 +101,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        estadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Solteiro", "Casado", "Divorciado", "Viuvo(a)" }));
+        estadoCivil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Solteiro", "Casado", "Divorciado", "Viuvo(a)" }));
 
         btngroupSexo.add(jradioMasc);
         jradioMasc.setText("Masculino");
@@ -162,7 +164,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 106, Short.MAX_VALUE)
                             .addComponent(cpf))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -282,7 +284,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         jLabel19.setText("Cidade:");
 
-        estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
+        estado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
 
         try {
             cep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));

@@ -7,7 +7,7 @@ import java.util.List;
 
 // essa clase ira armazenar na memoria do java
 
-public class memoriaProduto {
+public class MemoriaProduto {
     
     private static int numProdutos = 0;
     
@@ -65,6 +65,22 @@ public class memoriaProduto {
         
         return null;
     }
+    
+    
+    // excluir
+    
+    public static void excluir(Integer id) throws Exception {
+        if(id != null && !listaProdutos.isEmpty()){
+            for(int i = 0; i < listaProdutos.size(); i++){
+                ProdutoModel prod = listaProdutos.get(i);
+                if(prod != null && prod.getId() == id){
+                    listaProdutos.remove(i);
+                    break;
+                }
+            }
+        }
+    }
+    
     
     
 }

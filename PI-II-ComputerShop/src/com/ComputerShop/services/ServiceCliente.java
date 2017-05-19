@@ -3,7 +3,7 @@ package com.ComputerShop.services;
 import com.ComputerShop.exceptions.ClienteException;
 import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.models.CadastraCliente;
-import com.ComputerShop.mock.MockCadastrarCliente;
+import com.ComputerShop.mock.MemoriaCliente;
 import com.ComputerShop.models.ValidarCliente;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class ServiceCliente {
         
         try {
             //Chama a função de mock
-            MockCadastrarCliente.inserir(cliente);
+            MemoriaCliente.inserir(cliente);
         }catch(Exception e){
             //Informar erro
             e.printStackTrace();
@@ -36,7 +36,7 @@ public class ServiceCliente {
         
         //Realizar chamada de atualização
         try {
-            MockCadastrarCliente.atualizar(cliente);
+            MemoriaCliente.atualizar(cliente);
             return; 
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
@@ -56,9 +56,9 @@ public class ServiceCliente {
             se sim, ira retorna o que foi pesquisado
             */
             if(nome == null || "".equals(nome)){
-                return MockCadastrarCliente.listar();
+                return MemoriaCliente.listar();
             }else{
-                return MockCadastrarCliente.procurar(nome);
+                return MemoriaCliente.procurar(nome);
             }
             
         }catch (Exception e){
@@ -74,7 +74,7 @@ public class ServiceCliente {
             throws ClienteException, DataSourceException{
         try{
             //Retorna o cliente obtido
-           return MockCadastrarCliente.obter(id);
+           return MemoriaCliente.obter(id);
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
@@ -87,7 +87,7 @@ public class ServiceCliente {
             throws ClienteException, DataSourceException{
         try{
             //Solicita a exlusão do cliente
-            MockCadastrarCliente.excluir(id);
+            MemoriaCliente.excluir(id);
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/

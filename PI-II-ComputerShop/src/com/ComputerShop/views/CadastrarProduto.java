@@ -225,8 +225,8 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-        
+        // Fecha a janela
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**

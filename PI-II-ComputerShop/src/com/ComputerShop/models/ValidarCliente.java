@@ -1,6 +1,7 @@
 package com.ComputerShop.models;
 
 import com.ComputerShop.exceptions.ClienteException;
+import com.ComputerShop.models.CadastraCliente;
 
 //Validar cliente
 public class ValidarCliente {

@@ -9,7 +9,7 @@ import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.models.ProdutoModel;
 import com.ComputerShop.validador.ValidarProduto;
-import com.ComputerShop.memoria.memoriaProduto;
+import com.ComputerShop.memoria.MemoriaProduto;
 import java.util.List;
 
 /**
@@ -29,7 +29,7 @@ public class ServicoProduto {
         
         try {
             // nesse momento chama o metodo que vai gravar no atributo da classe
-            memoriaProduto.inserir(prod);
+            MemoriaProduto.inserir(prod);
             
         } catch (Exception e) {
             
@@ -40,6 +40,7 @@ public class ServicoProduto {
     
     
     // Procura Cliente
+    
     public static List<ProdutoModel> localizarProduto(String nomeProd)
                 throws ProdutoException, DataSourceException{
                 
@@ -47,10 +48,10 @@ public class ServicoProduto {
             // Exceção vai verificar se houve preenchimento do campo de pesquisa
             // caso tenha algo digitado traz resultado
             if (nomeProd == null || "".equalsIgnoreCase(nomeProd)) {
-                return memoriaProduto.listarTodosProdutos();
+                return MemoriaProduto.listarTodosProdutos();
                 
             } else {
-                return memoriaProduto.listarSomentePalavra(nomeProd);
+                return MemoriaProduto.listarSomentePalavra(nomeProd);
 
             }
         } catch (Exception e) {
@@ -68,7 +69,7 @@ public class ServicoProduto {
             
         try {
             
-            return memoriaProduto.obter(id);
+            return MemoriaProduto.obter(id);
             
         } catch (Exception e) {
             
@@ -76,8 +77,26 @@ public class ServicoProduto {
             throw new DataSourceException("Erro na fonte de dados", e);
         }
         
+    }
+    
+    
+    // excluir produto
+    
+    public static void excluirProduto(Integer id) throws ProdutoException, DataSourceException{
+        
+        try {
+            // solicita a memoria a exclusão do produto
+            MemoriaProduto.excluir(id);
+        } catch (Exception e) {
+            
+            // imprimir algum erro caso não consiga excluir
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
         }
         
+        
     }
+        
+}
     
 

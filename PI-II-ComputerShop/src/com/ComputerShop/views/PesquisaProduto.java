@@ -179,7 +179,37 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        // codigo abaixo ira excluir o produto selecionado
+        
+        if(tblProdutos.getSelectedRow() >= 0){
+            
+            // obtem a linha do produto selecionado
+            final int row = tblProdutos.getSelectedRow();
+            
+            //obtem o nome do produto, para pedir a confirmaçaõ exclusão
+            String nome = (String) tblProdutos.getValueAt(row, 1);
+            // exibindo caixa de dialogo
+            int resposta = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão", "Excluir Produto", JOptionPane.YES_NO_OPTION);
+            
+            // verifica a resposta do usuario
+            if(resposta == JOptionPane.YES_OPTION){
+                try {
+                    // obtém o id do produto
+                    Integer id = (Integer) tblProdutos.getValueAt(row, 0);
+                    // chama a classe serviço para excluir o item
+                    ServicoProduto.excluirProduto(id);
+                    this.refreshList();
+                    
+                } catch (Exception e) {
+                    // se ocorre erro, mostra no console o erro,
+                    // esconde do usuario
+                    e.printStackTrace();
+                    // exibi mensagem de erro ao usuario
+                    JOptionPane.showConfirmDialog(rootPane, e.getMessage(), "Falha na exclusão", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            }
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed

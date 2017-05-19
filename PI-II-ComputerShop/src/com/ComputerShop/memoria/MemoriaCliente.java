@@ -3,7 +3,7 @@ package com.ComputerShop.mock;
 import com.ComputerShop.models.CadastraCliente;
 import java.util.*;
 
-public class MockCadastrarCliente {
+public class MemoriaCliente {
     //Armazena Clientes cadastrados
       private static int totalClientes = 0;  
       private static List<CadastraCliente> listaClientes = new ArrayList<CadastraCliente>();
