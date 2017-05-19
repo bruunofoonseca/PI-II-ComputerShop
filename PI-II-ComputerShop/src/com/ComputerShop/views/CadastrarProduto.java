@@ -66,6 +66,11 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         checkStatus.setText("Ativo");
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +194,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         // seus valores dos campos da tela
         ProdutoModel prod = new ProdutoModel();
         
-        prod.setNome(txtFabricante.getText());
+        prod.setNome(txtNomeProduto.getText());
         prod.setFabricante(txtFabricante.getText());
         prod.setTipoProduto(txtTipoProduto.getText());
         prod.setQtdProduto((int)selectQTD.getValue());
@@ -218,6 +223,11 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         selectQTD.setValue(0);
         
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

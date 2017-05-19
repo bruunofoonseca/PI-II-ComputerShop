@@ -6,6 +6,11 @@
 package com.ComputerShop.views;
 
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import com.ComputerShop.views.CadastrarProduto;
 import com.ComputerShop.views.PesquisaProduto;
@@ -44,7 +49,26 @@ public class Principall extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        desktop = new javax.swing.JDesktopPane();
+        desktop = new javax.swing.JDesktopPane(){
+
+            private Image image;
+            {
+                try {
+                    image = ImageIO.read(new File("src/com/ComputerShop/resources/fundo01.jpg"));
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+
+        };
         menu = new javax.swing.JMenuBar();
         menCliente = new javax.swing.JMenu();
         menCliCad = new javax.swing.JMenuItem();
@@ -116,15 +140,11 @@ public class Principall extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(desktop)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(desktop)
         );
 
         pack();

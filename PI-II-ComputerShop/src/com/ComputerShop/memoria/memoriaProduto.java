@@ -52,4 +52,19 @@ public class memoriaProduto {
     }
     
     
+    public static ProdutoModel obter(Integer id)
+        throws Exception{
+        
+        if(id != null && ! listaProdutos.isEmpty()){
+            for (int i = 0; i < listaProdutos.size(); i++) {
+                if(listaProdutos.get(i) != null && listaProdutos.get(i).getId() == id){
+                    return listaProdutos.get(i);
+                }
+            }
+        }
+        
+        return null;
+    }
+    
+    
 }

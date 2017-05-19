@@ -17,7 +17,7 @@ public class ValidarProduto {
         if(prod == null){ // verificar se houve algum produto cadastrado
             throw new ProdutoException("Não foi informado nenhum produto");
         }
-        
+        /*
         if(prod.getNome() == null || "".equalsIgnoreCase(prod.getNome())){
             throw new ProdutoException("É necessario informar a DESCRICAO do produto");
         }
@@ -37,7 +37,7 @@ public class ValidarProduto {
         if(prod.getTipoProduto() == null || "".equalsIgnoreCase(prod.getTipoProduto())){
             throw new ProdutoException("Não foi informado TIPO do produto");
         }
-        
+        */
     }
     
 }
