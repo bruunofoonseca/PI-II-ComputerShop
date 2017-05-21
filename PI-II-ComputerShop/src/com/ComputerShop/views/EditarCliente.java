@@ -2,9 +2,9 @@ package com.ComputerShop.views;
 
 import com.ComputerShop.models.CadastraCliente;
 import com.ComputerShop.services.ServiceCliente;
-import com.ComputerShop.views.Principall;
-import javax.swing.JOptionPane;
 import java.util.Date;
+import javax.swing.JOptionPane;
+
 
 
 //Editar cliente
@@ -113,6 +113,11 @@ public class EditarCliente extends javax.swing.JFrame {
         }
 
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Masculino", "Feminino" }));
+        sexo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sexoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -368,23 +373,19 @@ public class EditarCliente extends javax.swing.JFrame {
         do formulário, no nosso caso, o desktop) para conseguir o frame
         de consulta e daí solicitar a atualização da lista através da
         chamada de seu método público de atualização*/
-        try {
-            if (this.getDesktopPane().getTopLevelAncestor()
-                    instanceof Principall) {
-                Principall princip = (Principall) this.
-                        getDesktopPane().getTopLevelAncestor();
-                if (princip != null) {
-                    princip.get.               
-                }
+        try{
+            if(this.getDesktopPane()//.getTopLevelAncestor()
+                    instanceof Principall){
+                Principall principal = (Principall) this.
+                        getDesktopPane();//.getTopLevelAncestor()
+                if(principal != null){
+                principal.getPesquisaCliente().refreshList();
             }
-        }catch(Exception e) {
-            //Exibe erros de atualização da lista no
-            //console, mas esconde-os do usuário
+         }
+       }
+        catch(Exception e){
             e.printStackTrace();
         }
-        JOptionPane.showMessageDialog(rootPane, "Cliente atualizado com sucesso",
-                "Cadastro atualizado", JOptionPane.INFORMATION_MESSAGE);        
-        this.dispose();
     }//GEN-LAST:event_salvarActionPerformed
      
     
@@ -432,6 +433,10 @@ public class EditarCliente extends javax.swing.JFrame {
     private void complementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_complementoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_complementoActionPerformed
+
+    private void sexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sexoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -505,4 +510,7 @@ public class EditarCliente extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField telefone;
     // End of variables declaration//GEN-END:variables
 
+    private Object getDesktopPane() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

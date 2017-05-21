@@ -20,11 +20,12 @@ public class ValidarCliente {
            || cliente.getCelular() == null || "".equals(cliente.getCelular())){
                throw new ClienteException("Não foi informado nenhum telefone de contato");
            }
-           /*if(cliente.getSexo() == null || "".equals(cliente.getSexo())){
+           if(cliente.getSexo() == null || "".equals(cliente.getSexo()) 
+            || (!cliente.getSexo().equals("Masculino")) && !cliente.getSexo().equals("Feminino")){
                throw new ClienteException("Não foi informado o sexo");
-           }*/
+           }
            
-           //Validar endereço do cliente
+           //Validar endereço
            if(cliente.getLogradouro() == null || "".equals(cliente.getLogradouro())){
                throw new ClienteException("Não foi informado logradouro");
            }

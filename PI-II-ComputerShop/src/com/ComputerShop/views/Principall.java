@@ -21,14 +21,14 @@ import com.ComputerShop.views.PesquisaProduto;
  */
 public class Principall extends javax.swing.JFrame {
 
-     CadastrarProduto menProdCadastro = null;
-     PesquisaProduto menProdPesquisa = null;
+   private CadastrarProduto menProdCadastro = null;
+   private PesquisaProduto menProdPesquisa = null;
      
-     CadastroCliente menCliCadastro = null;
-     PesquisaCliente menCliPesquisa = null;
+   private CadastroCliente menCliCadastro = null;
+   private PesquisaCliente menCliPesquisa = null;
      
-     CadastrarVenda menVendProduto = null;
-     RelatorioVenda menVendRelatorio = null;
+   private CadastrarVenda menVendProduto = null;
+   private RelatorioVenda menVendRelatorio = null;
     
     /**
      * Creates new form Principall
@@ -36,6 +36,45 @@ public class Principall extends javax.swing.JFrame {
     public Principall() {
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+    //Produto
+    public CadastrarProduto getCadastrarProduto(){
+        return menProdCadastro;
+    }
+    public void setCadastrarProduto(CadastrarProduto menProdCadastro){
+        this.menProdCadastro = menProdCadastro;
+    }
+    public PesquisaProduto getPesquisaProduto(){
+        return menProdPesquisa;
+    }
+    public void setPesquisaProduto(PesquisaProduto menProdPesquisa){
+        this.menProdPesquisa = menProdPesquisa;
+    }
+    //Cliente
+    public CadastroCliente getCadastroCliente(){
+        return menCliCadastro;
+    }
+    public void setCadastroCliente(CadastroCliente menCliCadastro){
+        this.menCliCadastro = menCliCadastro;
+    }
+    public PesquisaCliente getPesquisaCliente(){
+        return menCliPesquisa;
+    }
+    public void setPesquisaCliente(PesquisaCliente menCliPesquisa){
+        this.menCliPesquisa = menCliPesquisa;
+    }
+    //Venda
+    public CadastrarVenda getCadastrarVenda(){
+        return menVendProduto;
+    }
+    public void setCadastrarVenda (CadastrarVenda menVendProduto){
+        this.menVendProduto = menVendProduto;
+    }
+    public RelatorioVenda getRelatorioVenda(){
+        return menVendRelatorio;
+    }
+    public void setRelatorioVenda(RelatorioVenda menVendRelatorio){
+        this.menVendRelatorio = menVendRelatorio;
     }
     
     
@@ -153,31 +192,31 @@ public class Principall extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menProdCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProdCadActionPerformed
-        if (menProdCadastro == null || !menProdCadastro.isDisplayable()){
-            menProdCadastro = new CadastrarProduto();
-            desktop.add(menProdCadastro);
-            this.openFrameInCenter(menProdCadastro);
+        if (getCadastrarProduto()== null || !menProdCadastro.isDisplayable()){
+            setCadastrarProduto(new CadastrarProduto());
+            desktop.add(getCadastrarProduto());
+            this.openFrameInCenter(getCadastrarProduto());
         }
-        menProdCadastro.toFront();
+        getCadastrarProduto().toFront();
     }//GEN-LAST:event_menProdCadActionPerformed
 
     private void menProdPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProdPesqActionPerformed
-        if (menProdPesquisa == null || !menProdPesquisa.isDisplayable()){
-            menProdPesquisa = new PesquisaProduto();
-            desktop.add(menProdPesquisa);
-            this.openFrameInCenter(menProdPesquisa);
+        if (getPesquisaProduto() == null || !menProdPesquisa.isDisplayable()){
+            setPesquisaProduto(new PesquisaProduto());
+            desktop.add(getPesquisaProduto());
+            this.openFrameInCenter(getPesquisaProduto());
         }
-        this.openFrameInCenter(menProdPesquisa);
+        this.openFrameInCenter(getPesquisaProduto());
         
     }//GEN-LAST:event_menProdPesqActionPerformed
 
     private void menCliCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCliCadActionPerformed
-        if (menCliCadastro == null || !menCliCadastro.isDisplayable()){
-            menCliCadastro = new CadastroCliente();
-            desktop.add(menCliCadastro);
-            this.openFrameInCenter(menCliCadastro);
+        if (getCadastroCliente() == null || !menCliCadastro.isDisplayable()){
+            setCadastroCliente(new CadastroCliente());
+            desktop.add(getCadastroCliente());
+            this.openFrameInCenter(getCadastroCliente());
         }
-        this.openFrameInCenter(menCliCadastro);
+        this.openFrameInCenter(getCadastroCliente());
     }//GEN-LAST:event_menCliCadActionPerformed
 
     private void menCliPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCliPesqActionPerformed
@@ -186,7 +225,7 @@ public class Principall extends javax.swing.JFrame {
             desktop.add(menCliPesquisa);
             this.openFrameInCenter(menCliPesquisa);
         }
-        this.openFrameInCenter(menCliPesquisa);
+        menCliPesquisa.toFront();
     }//GEN-LAST:event_menCliPesqActionPerformed
 
     
@@ -248,4 +287,9 @@ public class Principall extends javax.swing.JFrame {
     private javax.swing.JMenu menProduto;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
+
+    private void openFrameInCenter(PesquisaCliente menCliPesquisa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
