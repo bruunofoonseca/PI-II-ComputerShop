@@ -39,7 +39,9 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
         excluir = new javax.swing.JButton();
         editar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
         setTitle("Pesquisa de Cliente");
 
         jLabel1.setText("Nome:");
