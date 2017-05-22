@@ -3,7 +3,7 @@ package com.ComputerShop.services;
 import com.ComputerShop.exceptions.ClienteException;
 import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.models.CadastraCliente;
-import com.ComputerShop.mock.MemoriaCliente;
+import com.ComputerShop.memoria.MemoriaCliente;
 import com.ComputerShop.models.ValidarCliente;
 import java.util.List;
 

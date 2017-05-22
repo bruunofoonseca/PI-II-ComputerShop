@@ -220,12 +220,12 @@ public class Principall extends javax.swing.JFrame {
     }//GEN-LAST:event_menCliCadActionPerformed
 
     private void menCliPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menCliPesqActionPerformed
-        if (menCliPesquisa == null || !menCliPesquisa.isDisplayable()){
-            menCliPesquisa = new PesquisaCliente();
-            desktop.add(menCliPesquisa);
-            this.openFrameInCenter(menCliPesquisa);
+        if(getPesquisaCliente() == null || !menCliPesquisa.isDisplayable()){
+            setPesquisaCliente(new PesquisaCliente());
+            desktop.add(getPesquisaCliente());
+            this.openFrameInCenter(getPesquisaCliente());
         }
-        menCliPesquisa.toFront();
+        this.openFrameInCenter(getPesquisaCliente());
     }//GEN-LAST:event_menCliPesqActionPerformed
 
     
@@ -288,8 +288,5 @@ public class Principall extends javax.swing.JFrame {
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
 
-    private void openFrameInCenter(PesquisaCliente menCliPesquisa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
