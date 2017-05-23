@@ -90,6 +90,9 @@ public class Principall extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         desktop = new javax.swing.JDesktopPane(){
 
             private Image image;
@@ -117,10 +120,19 @@ public class Principall extends javax.swing.JFrame {
         menProduto = new javax.swing.JMenu();
         menProdCad = new javax.swing.JMenuItem();
         menProdPesq = new javax.swing.JMenuItem();
+        menVenda = new javax.swing.JMenu();
+        menVenVender = new javax.swing.JMenuItem();
+        menVenRelatorio = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem3.setText("jMenuItem3");
+
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -174,6 +186,16 @@ public class Principall extends javax.swing.JFrame {
         menProduto.add(menProdPesq);
 
         menu.add(menProduto);
+
+        menVenda.setText("Venda");
+
+        menVenVender.setText("Vender Produto");
+        menVenda.add(menVenVender);
+
+        menVenRelatorio.setText("Relatorio");
+        menVenda.add(menVenRelatorio);
+
+        menu.add(menVenda);
 
         setJMenuBar(menu);
 
@@ -277,6 +299,9 @@ public class Principall extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem menCliCad;
@@ -285,6 +310,9 @@ public class Principall extends javax.swing.JFrame {
     private javax.swing.JMenuItem menProdCad;
     private javax.swing.JMenuItem menProdPesq;
     private javax.swing.JMenu menProduto;
+    private javax.swing.JMenuItem menVenRelatorio;
+    private javax.swing.JMenuItem menVenVender;
+    private javax.swing.JMenu menVenda;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
 

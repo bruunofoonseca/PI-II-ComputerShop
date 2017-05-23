@@ -1,6 +1,6 @@
 package com.ComputerShop.views;
 
-import com.ComputerShop.models.CadastraCliente;
+import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.exceptions.ClienteException;
 import com.ComputerShop.services.ServiceCliente;
 import java.awt.Dimension;
@@ -21,9 +21,7 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     public PesquisaCliente() {
         initComponents();
         //Fazer não mostrar o ID na tela
-        tabelaResultados.getColumnModel().getColumn(0).setMinWidth(0);
-        tabelaResultados.getColumnModel().getColumn(0).setMaxWidth(0);
-        tabelaResultados.getColumnModel().getColumn(0).setWidth(0);
+        
     }
     //Código gerado do GUI Builder
     @SuppressWarnings("unchecked")
@@ -61,20 +59,20 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
 
         tabelaResultados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Nome", "CPF", "Endereço", "Número", "CEP"
+                "Nome", "CPF", "Telefone", "E-mail"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -90,7 +88,6 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             tabelaResultados.getColumnModel().getColumn(0).setMinWidth(100);
             tabelaResultados.getColumnModel().getColumn(2).setMinWidth(200);
             tabelaResultados.getColumnModel().getColumn(3).setMinWidth(50);
-            tabelaResultados.getColumnModel().getColumn(4).setMinWidth(50);
         }
 
         excluir.setText("Excluir selecionado");
@@ -234,7 +231,36 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_pesquisaNomeActionPerformed
 
     private void editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarActionPerformed
-        // TODO add your handling code here:
+        try {
+            //Obtém a linha selecionada na tabela de resultados
+            final int row = tabelaResultados.getSelectedRow();
+            //Verifica se há linha selecionada na tabela
+            if (row >= 0) {
+                //Obtém a linha selecionada na tabela
+                Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
+                
+                //Solicita ao serviço a obtenção do cliente a partir do
+                //ID selecionado na tabela
+                ClienteModel cliente = ServiceCliente.obterCliente(id);
+
+                
+                formEditarCliente.dispose();
+                formEditarCliente = new EditarCliente();
+                formEditarCliente.setCliente(cliente);
+                formEditarCliente.setTitle(cliente.getNome() + " ");
+                this.getParent().add(formEditarCliente);
+                //this.openFrameInCenter(formEditarCliente);                
+                formEditarCliente.toFront();
+            }
+        } catch (Exception e) {
+            //Se ocorrer algum erro técnico, mostra-o no console,
+            //mas esconde-o do usuário
+            e.printStackTrace();
+            //Exibe uma mensagem de erro genérica ao usuário
+            JOptionPane.showMessageDialog(rootPane, "Não é possível "
+                + "exibir os detalhes deste cliente.",
+                "Erro ao abrir detalhe", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editarActionPerformed
     //Abre um internal frame centralizado na tela
     public void opemFrameInCenter(JInternalFrame jif){
@@ -251,7 +277,7 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     public boolean refreshList() throws ClienteException, Exception {
         /*Realiza a pesquisa de clientes com o último valor de pesquisa
         para atualizar a lista*/
-        List<CadastraCliente> resultado = ServiceCliente.procurarCliente(ultimaPesquisa);
+        List<ClienteModel> resultado = ServiceCliente.procurarCliente(ultimaPesquisa);
         
         //Obtém elemento representante do conteúdo da tabela na tela
         DefaultTableModel model = (DefaultTableModel) tabelaResultados.getModel();
@@ -268,15 +294,14 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     
        //Percorre a lista de resultados e os adiciona na tabela
         for (int i = 0; i < resultado.size(); i++) {
-            CadastraCliente cli = resultado.get(i);
+            ClienteModel cli = resultado.get(i);
             if(cli != null){
-                Object[] row = new Object[5];
+                Object[] row = new Object[4];
                 row[0] = cli.getNome();
                 row[1] = cli.getCpf();
-                row[2] = cli.getLogradouro();
+                row[2] = cli.getTelefone();
                 SimpleDateFormat formatado = new SimpleDateFormat("dd/MM/yyyy");
-                row[3] = cli.getNumero();
-                row[4] = cli.getCep();
+                row[3] = cli.getEmail();
                 model.addRow(row);
             }
         }
@@ -296,7 +321,7 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             //Obtém o valor do ID da coluna
             Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
             
-            CadastraCliente cliente = ServiceCliente.obterCliente(id);
+            ClienteModel cliente = ServiceCliente.obterCliente(id);
             
             /*Cria uma nova instância da tela de edição,
             configura o cliente selecionado como elemento a
@@ -369,4 +394,10 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     private void opemFrameInCenter(EditarCliente formEditarCliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    //private void openFrameInCenter(EditarCliente formEditarCliente) {
+      //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   // }
+
+    
 }

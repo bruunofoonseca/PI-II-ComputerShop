@@ -1,6 +1,6 @@
 package com.ComputerShop.models;
 import java.util.Date;
-public class CadastraCliente {
+public class ClienteModel {
     //Atributos de dados pessoais
     private Integer id;
     private String nomeCliente;

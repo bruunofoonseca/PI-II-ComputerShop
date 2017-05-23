@@ -2,16 +2,16 @@ package com.ComputerShop.services;
 
 import com.ComputerShop.exceptions.ClienteException;
 import com.ComputerShop.exceptions.DataSourceException;
-import com.ComputerShop.models.CadastraCliente;
+import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.memoria.MemoriaCliente;
-import com.ComputerShop.models.ValidarCliente;
+import com.ComputerShop.validador.ValidarCliente;
 import java.util.List;
 
 // Classe de serviços de Clientes
 public class ServiceCliente {
     
     //Cadastra Cliente nas fonte de dados
-    public static void cadastraClien (CadastraCliente cliente)
+    public static void cadastraClien (ClienteModel cliente)
             throws ClienteException, DataSourceException {
         
         //Chamar a função pra validar cliente
@@ -28,7 +28,7 @@ public class ServiceCliente {
     }
     
     //Atualizar cliente
-    public static void atualizarCliente (CadastraCliente cliente)
+    public static void atualizarCliente (ClienteModel cliente)
             throws ClienteException, DataSourceException {
         
         //Chamar a função pra validar cliente
@@ -48,7 +48,7 @@ public class ServiceCliente {
     
     
     //Realizar pesquisa de clientes por nome
-    public static List<CadastraCliente> procurarCliente(String nome)
+    public static List<ClienteModel> procurarCliente(String nome)
             throws ClienteException, DataSourceException{
         try{
             /*Verificar se foi digite o nome na pesquisa,
@@ -70,7 +70,7 @@ public class ServiceCliente {
     }
     
     //Obtem o cliente informado pelo ID
-    public static CadastraCliente obterCliente(Integer id)
+    public static ClienteModel obterCliente(Integer id)
             throws ClienteException, DataSourceException{
         try{
             //Retorna o cliente obtido

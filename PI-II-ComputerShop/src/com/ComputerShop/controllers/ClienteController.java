@@ -7,7 +7,7 @@ package com.ComputerShop.controllers;
   
 import java.util.List;
  
-import com.ComputerShop.models.CadastraCliente;
+import com.ComputerShop.models.ClienteModel;
 import java.util.ArrayList;
  
 /**
@@ -17,13 +17,13 @@ import java.util.ArrayList;
  
 public class ClienteController {
       
-    List<CadastraCliente> cliente = new ArrayList<CadastraCliente>();
+    List<ClienteModel> cliente = new ArrayList<ClienteModel>();
      
-    public void insereCliente(CadastraCliente cliente) {
+    public void insereCliente(ClienteModel cliente) {
         this.cliente.add(cliente);
     }
     
-    public List<CadastraCliente> listarClientes() {
+    public List<ClienteModel> listarClientes() {
         return this.cliente;
     }
 }
