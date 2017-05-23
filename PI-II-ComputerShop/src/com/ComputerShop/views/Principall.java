@@ -88,8 +88,6 @@ public class Principall extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         desktop = new javax.swing.JDesktopPane(){
 
             private Image image;
@@ -117,10 +115,8 @@ public class Principall extends javax.swing.JFrame {
         menProduto = new javax.swing.JMenu();
         menProdCad = new javax.swing.JMenuItem();
         menProdPesq = new javax.swing.JMenuItem();
-
-        jMenuItem1.setText("jMenuItem1");
-
-        jMenuItem3.setText("jMenuItem3");
+        menVenda = new javax.swing.JMenu();
+        menRealizaVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,6 +171,18 @@ public class Principall extends javax.swing.JFrame {
 
         menu.add(menProduto);
 
+        menVenda.setText("Venda");
+
+        menRealizaVenda.setText("Realizar Venda");
+        menRealizaVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRealizaVendaActionPerformed(evt);
+            }
+        });
+        menVenda.add(menRealizaVenda);
+
+        menu.add(menVenda);
+
         setJMenuBar(menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -228,17 +236,22 @@ public class Principall extends javax.swing.JFrame {
         this.openFrameInCenter(getPesquisaCliente());
     }//GEN-LAST:event_menCliPesqActionPerformed
 
+    private void menRealizaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRealizaVendaActionPerformed
+        if(getCadastrarVenda() == null || !menVendProduto.isDisplayable()){
+            setCadastrarVenda(new CadastrarVenda());
+            desktop.add(getCadastrarVenda());
+            this.openFrameInCenter(getCadastrarVenda());
+        }
+        this.openFrameInCenter(getCadastrarVenda());
+    }//GEN-LAST:event_menRealizaVendaActionPerformed
     
-    
-    
-    
-        public void openFrameInCenter(JInternalFrame jif) {
-            Dimension desktopSize = desktop.getSize();
-            Dimension jInternalFrameSize = jif.getSize();
-            int width = (desktopSize.width - jInternalFrameSize.width) / 2;
-            int height = (desktopSize.height - jInternalFrameSize.height) / 2;
-            jif.setLocation(width, height);
-            jif.setVisible(true);
+    public void openFrameInCenter(JInternalFrame jif) {
+        Dimension desktopSize = desktop.getSize();
+        Dimension jInternalFrameSize = jif.getSize();
+        int width = (desktopSize.width - jInternalFrameSize.width) / 2;
+        int height = (desktopSize.height - jInternalFrameSize.height) / 2;
+        jif.setLocation(width, height);
+        jif.setVisible(true);
     }
     /**
      * @param args the command line arguments
@@ -277,14 +290,14 @@ public class Principall extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktop;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem menCliCad;
     private javax.swing.JMenuItem menCliPesq;
     private javax.swing.JMenu menCliente;
     private javax.swing.JMenuItem menProdCad;
     private javax.swing.JMenuItem menProdPesq;
     private javax.swing.JMenu menProduto;
+    private javax.swing.JMenuItem menRealizaVenda;
+    private javax.swing.JMenu menVenda;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables
 

@@ -113,7 +113,7 @@
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="estadoCivil" alignment="0" max="32767" attributes="0"/>
                                       <Component id="celular" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="telefone" alignment="0" pref="100" max="32767" attributes="0"/>
+                                      <Component id="telefone" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -128,7 +128,7 @@
                       <Group type="102" attributes="0">
                           <Component id="sexo" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel17" pref="131" max="32767" attributes="0"/>
+                          <Component id="jLabel17" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace pref="32" max="32767" attributes="0"/>

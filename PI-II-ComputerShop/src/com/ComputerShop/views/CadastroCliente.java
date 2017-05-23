@@ -462,7 +462,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cli.setEstadoCivil((String) estadoCivil.getSelectedItem());
         cli.setTelefone((String) telefone.getText());
         cli.setCelular((String) celular.getText());
-         Date data = null;       
+        Date data = null;       
         
          try{
              data = (Date)dataNasc.getValue();
