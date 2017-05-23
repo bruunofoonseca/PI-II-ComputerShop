@@ -1,6 +1,6 @@
 package com.ComputerShop.views;
 
-import com.ComputerShop.models.CadastraCliente;
+import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.services.ServiceCliente;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -10,18 +10,18 @@ import javax.swing.JOptionPane;
 //Editar cliente
 public class EditarCliente extends javax.swing.JFrame {
     //Armazena o cliente em edição
-   CadastraCliente cliente = new CadastraCliente();
+   ClienteModel cliente = new ClienteModel();
    
    //Construto e inicialização de componetes
     public EditarCliente() {
         initComponents();
     }
 
-    public CadastraCliente getCliente(){
+    public ClienteModel getCliente(){
         return cliente;
     }
     
-    public void setCliente(CadastraCliente cliente){
+    public void setCliente(ClienteModel cliente){
         this.cliente = cliente;
     }
     

@@ -5,7 +5,7 @@
  */
 package com.ComputerShop.views;
 import com.ComputerShop.exceptions.ClienteException;
-import com.ComputerShop.models.CadastraCliente;
+import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.models.ProdutoModel;
 import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.services.ServicoProduto;
@@ -22,9 +22,9 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     
     String ultimaPesquisaCli = null;
     String ultimaPesquisaProd = null;
-    List<CadastraCliente> resultadoCli = null;
+    List<ClienteModel> resultadoCli = null;
     List<ProdutoModel> resultadoProd = null;
-    CadastraCliente cliente;
+    ClienteModel cliente;
 
     /**
      * Creates new form CadastrarVenda
@@ -375,7 +375,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         }
     
         for (int i = 0; i < resultadoCli.size(); i++) {
-            CadastraCliente cli = resultadoCli.get(i);
+            ClienteModel cli = resultadoCli.get(i);
             if(cli != null){
                 Object[] row = new Object[3];
                 row[0] = cli.getNome();
@@ -426,8 +426,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             if(prod != null){
                 Object[] row = new Object[3];
                 row[0] = prod.getNome();
-                row[1] = prod.getQtdProduto();
-                row[2] = prod.getValorProduto();
+                row[1] = prod.getValorProduto();
+                row[2] = prod.getQtdProduto();
                 model.addRow(row);
             }
         }

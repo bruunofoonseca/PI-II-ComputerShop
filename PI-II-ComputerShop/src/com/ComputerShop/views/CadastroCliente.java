@@ -1,8 +1,8 @@
 package com.ComputerShop.views;
 
-import com.ComputerShop.models.CadastraCliente;
+import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.services.ServiceCliente;
-import com.ComputerShop.models.ValidarCliente;
+import com.ComputerShop.validador.ValidarCliente;
 import java.util.Date;
 import javax.swing.JOptionPane; 
 
@@ -273,6 +273,11 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         jLabel19.setText("Cidade:");
 
         estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins" }));
+        estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoActionPerformed(evt);
+            }
+        });
 
         try {
             cep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
@@ -454,7 +459,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         /*Cria uma instância dados pessoais do cliente
         e obtem os valores da tela*/
         
-        CadastraCliente cli = new CadastraCliente();
+        ClienteModel cli = new ClienteModel();
         //Dados pessoais        
         cli.setNome(nome.getText());
         cli.setCpf(cpf.getText());
@@ -523,6 +528,10 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private void cpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cpfActionPerformed
+
+    private void estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estadoActionPerformed
 
     /**
      * @param args the command line arguments

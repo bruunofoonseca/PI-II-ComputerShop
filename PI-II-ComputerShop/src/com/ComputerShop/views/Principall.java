@@ -12,8 +12,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
-import com.ComputerShop.views.CadastrarProduto;
-import com.ComputerShop.views.PesquisaProduto;
 
 /**
  *

@@ -1,24 +1,24 @@
 package com.ComputerShop.memoria;
 
-import com.ComputerShop.models.CadastraCliente;
+import com.ComputerShop.models.ClienteModel;
 import java.util.*;
 
 public class MemoriaCliente {
     //Armazena Clientes cadastrados
       private static int totalClientes = 0;  
-      private static List<CadastraCliente> listaClientes = new ArrayList<CadastraCliente>();
+      private static List<ClienteModel> listaClientes = new ArrayList<ClienteModel>();
     
     //Inserir Clientes no mock  
-    public static void inserir(CadastraCliente cliente)
+    public static void inserir(ClienteModel cliente)
         throws Exception {
         cliente.setId(totalClientes++);
         listaClientes.add(cliente);
         }
     
-    public static void atualizar (CadastraCliente clienteProcura)
+    public static void atualizar (ClienteModel clienteProcura)
             throws Exception{
         if (clienteProcura != null && clienteProcura.getId() != null && !listaClientes.isEmpty()) {
-            for (CadastraCliente listCliente : listaClientes) {
+            for (ClienteModel listCliente : listaClientes) {
                 if(listCliente != null && listCliente.getId() == clienteProcura.getId()){
                    listCliente.setNome(clienteProcura.getNome());
                    listCliente.setSexo(clienteProcura.getSexo());
@@ -38,7 +38,7 @@ public class MemoriaCliente {
     public static void excluir(Integer id) throws Exception{
         if(id != null && !listaClientes.isEmpty()){
             for(int i = 0; i<listaClientes.size(); i++){
-                CadastraCliente clienteLi = listaClientes.get(i);
+                ClienteModel clienteLi = listaClientes.get(i);
                 if(clienteLi != null && clienteLi.getId() == id){
                     listaClientes.remove(i);
                     break;
@@ -48,7 +48,7 @@ public class MemoriaCliente {
     }
     
     //Lista os clientes
-    public static List<CadastraCliente> listar()
+    public static List<ClienteModel> listar()
             throws Exception{
         //Retorna lista de clientes
         return listaClientes;
@@ -56,12 +56,12 @@ public class MemoriaCliente {
     
     
     //Procurar Clientes no mock
-    public static List<CadastraCliente> procurar (String nome)
+    public static List<ClienteModel> procurar (String nome)
         throws Exception{
-        List<CadastraCliente> listaResultado = new ArrayList<CadastraCliente>();
+        List<ClienteModel> listaResultado = new ArrayList<ClienteModel>();
         
         if(nome != null && !listaClientes.isEmpty()){
-            for(CadastraCliente clienteList : listaClientes){
+            for(ClienteModel clienteList : listaClientes){
                 if(clienteList != null && clienteList.getNome() != null){
                     if(clienteList.getNome().toUpperCase().contains(nome.toUpperCase())){
                         listaResultado.add(clienteList);
@@ -77,7 +77,7 @@ public class MemoriaCliente {
     
     
     // Obtem um cliente da lista
-    public static CadastraCliente obter(Integer id)
+    public static ClienteModel obter(Integer id)
             throws Exception{
         if(id != null && !listaClientes.isEmpty()){
             for (int i = 0; i < listaClientes.size(); i++) {
