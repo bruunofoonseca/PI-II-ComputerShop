@@ -8,10 +8,11 @@ import javax.swing.JOptionPane;
 //Validar cliente
 public class ValidarCliente {
         public static void validar (ClienteModel cliente) throws ClienteException{
-           //Validação do cadastro do cliente
-//           if(cliente == null){
-//               throw new ClienteException("Não foi informado um cliente");
-//           }
+//           Validação do cadastro do cliente
+           if(cliente == null){
+               throw new ClienteException("Não foi informado um cliente");
+           }
+           
            if(cliente.getNome() == null || "".equals(cliente.getNome())){
                throw new ClienteException("Não foi informado o NOME");
            }

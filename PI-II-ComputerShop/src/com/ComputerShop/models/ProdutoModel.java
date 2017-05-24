@@ -24,15 +24,6 @@ public class ProdutoModel {
     
 
     // Get e Setter
-    /*
-    public char getStatus (){
-        return status;
-    }
-    
-    public void setStatus(char status) {
-        this.status = status;
-    }
-    */
 
     public void setId(Integer id) {
         this.id = id;
