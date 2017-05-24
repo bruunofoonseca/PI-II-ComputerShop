@@ -5,12 +5,18 @@
  */
 package com.ComputerShop.views;
 import com.ComputerShop.exceptions.ClienteException;
+import com.ComputerShop.exceptions.DataSourceException;
+import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.models.ClienteModel;
+import com.ComputerShop.models.PedidoModel;
 import com.ComputerShop.models.ProdutoModel;
 import com.ComputerShop.services.ServiceCliente;
+import com.ComputerShop.services.ServiceVenda;
 import com.ComputerShop.services.ServicoProduto;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +31,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     List<ClienteModel> resultadoCli = null;
     List<ProdutoModel> resultadoProd = null;
     ClienteModel cliente;
+    List<ProdutoModel> produtoList = null;
+    PedidoModel pedido = new PedidoModel();
 
     /**
      * Creates new form CadastrarVenda
@@ -139,7 +147,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                         .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisarCliente)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,6 +214,11 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         });
 
         btnAdicionarProduto.setText("Adicionar");
+        btnAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -244,20 +257,20 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
 
         tblVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Código", "Nome", "Valor Unitário", "Quantidade", "Valor Total"
+                "Cliente", "Produto", "Valor Unitário", "Quantidade"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -274,7 +287,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 533, Short.MAX_VALUE)
+            .addGap(0, 539, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -283,7 +296,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
+            .addGap(0, 202, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -311,7 +324,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                         .addGap(276, 276, 276)
                         .addComponent(jButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 527, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -447,6 +460,67 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         lblClienteSelecionado.setText(cliente.getNome());
     }//GEN-LAST:event_btnAdicionarClienteActionPerformed
 
+    private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
+        int index = tblProdutos.getSelectedRow();
+        float valorTotal = 0;
+        boolean resultAdd = false;
+        
+        produtoList.add(resultadoProd.get(index));
+        
+        pedido.setCliente(cliente);
+        pedido.setProdutos(produtoList);
+        
+        for(int i = 0; i < produtoList.size(); i++) {
+            valorTotal += produtoList.get(i).getValorProduto();
+        }
+        
+        pedido.setValor(valorTotal);
+        
+        try {
+            ServiceVenda.cadastraPedido(pedido);
+        } catch (VendaException ex) {
+            Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (DataSourceException ex) {
+            Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try{
+            resultAdd = refreshListVenda();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(),
+                    "Falha ao obter lista", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if(!resultAdd){
+            JOptionPane.showMessageDialog(rootPane, "Erro na inserção!",
+                    "Sem resultados",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
+
+    public boolean refreshListVenda() throws ClienteException, Exception {        
+        DefaultTableModel model = (DefaultTableModel) tblVenda.getModel();
+        model.setRowCount(0);
+        
+        if(pedido == null){
+           return false;
+        }
+    
+        for (int i = 0; i < pedido.getProdutos().size(); i++) {
+            ProdutoModel prod = pedido.getProdutos().get(i);
+            ClienteModel cli = pedido.getCliente();
+            if(prod != null){
+                Object[] row = new Object[3];
+                row[0] = cli.getNome();
+                row[1] = prod.getNome();
+                row[2] = prod.getValorProduto();
+                model.addRow(row);
+            }
+        }
+
+       return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
