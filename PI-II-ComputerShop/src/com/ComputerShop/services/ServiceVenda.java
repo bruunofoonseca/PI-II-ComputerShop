@@ -8,7 +8,7 @@ package com.ComputerShop.services;
 import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.memoria.MemoriaVenda;
-import com.ComputerShop.models.PedidoModel;
+import com.ComputerShop.models.VendaModel;
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ServiceVenda {
     
-    public static void cadastraPedido (PedidoModel pedido) throws VendaException, DataSourceException {
+    public static void cadastraPedido (VendaModel pedido) throws VendaException, DataSourceException {
         
         try {
             MemoriaVenda.inserir(pedido);
@@ -28,7 +28,7 @@ public class ServiceVenda {
         }
     }
     
-    public static List<PedidoModel> listarPedidos() throws VendaException, DataSourceException {
+    public static List<VendaModel> listarPedidos() throws VendaException, DataSourceException {
         try{
             return MemoriaVenda.listar();
         } catch (Exception e){

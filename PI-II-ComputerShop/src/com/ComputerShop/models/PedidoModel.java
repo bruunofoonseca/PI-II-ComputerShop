@@ -5,19 +5,54 @@
  */
 package com.ComputerShop.models;
 
+import java.util.Date;
 import java.util.List;
 
 /**
  *
  * @author BruunoFoonseca
  */
+
 public class PedidoModel {
     
     // Atributos
     private Integer id;
-    private ClienteModel cliente;
-    private List<ProdutoModel> produtos;
-    private double valor;
+    private ProdutoModel produto;
+    private double valorParcial;
+    private Date dataPedido;
+    private int qtd;
+
+    public ProdutoModel getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoModel produto) {
+        this.produto = produto;
+    }
+
+    public double getValorParcial() {
+        return valorParcial;
+    }
+
+    public void setValorParcial(double valorParcial) {
+        this.valorParcial = valorParcial;
+    }
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+
+    public Date getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
+    }
 
     public Integer getId() {
         return id;
@@ -25,29 +60,5 @@ public class PedidoModel {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public ClienteModel getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(ClienteModel cliente) {
-        this.cliente = cliente;
-    }
-
-    public List<ProdutoModel> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<ProdutoModel> produtos) {
-        this.produtos = produtos;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 }
