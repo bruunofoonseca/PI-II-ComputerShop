@@ -35,11 +35,11 @@ public class MemoriaCliente {
     }
     
     //Excluir o cliente com ID fornecido
-    public static void excluir(Integer id) throws Exception{
-        if(id != null && !listaClientes.isEmpty()){
+    public static void excluir(String cpf) throws Exception{
+        if(cpf != null && !listaClientes.isEmpty()){
             for(int i = 0; i<listaClientes.size(); i++){
                 ClienteModel clienteLi = listaClientes.get(i);
-                if(clienteLi != null && clienteLi.getId() == id){
+                if(clienteLi != null && clienteLi.getCpf() == cpf){
                     listaClientes.remove(i);
                     break;
                 }
@@ -77,11 +77,11 @@ public class MemoriaCliente {
     
     
     // Obtem um cliente da lista
-    public static ClienteModel obter(Integer id)
+    public static ClienteModel obter(String cpf)
             throws Exception{
-        if(id != null && !listaClientes.isEmpty()){
+        if(cpf != null && !listaClientes.isEmpty()){
             for (int i = 0; i < listaClientes.size(); i++) {
-                if(listaClientes.get(i) != null && listaClientes.get(i).getId() == id){
+                if(listaClientes.get(i) != null && listaClientes.get(i).getCpf() == cpf){
                     return listaClientes.get(i);
                 }
             }

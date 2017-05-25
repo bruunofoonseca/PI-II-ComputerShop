@@ -110,23 +110,21 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pesquisar)
+                .addGap(33, 33, 33))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(editar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(excluir)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(excluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pesquisaNome, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pesquisar)
-                        .addGap(33, 33, 33))))
+                        .addComponent(editar)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,10 +136,11 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
                     .addComponent(pesquisar))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(excluir)
-                    .addComponent(editar)))
+                    .addComponent(editar))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,34 +167,35 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
         //Trata o botão excluir
         //Verifica se há itens selecionados para exclusão.
         //Caso negativo, ignora o comando
-        if (tabelaResultados.getSelectedRow() >= 0) {
+        if(tabelaResultados.getSelectedRow() >= 0){
             
-            //Obtém a linha do item selecionado
+            // obtem a linha do cliente selecionado
             final int row = tabelaResultados.getSelectedRow();
-            //Obtém o nome do cliente da linha indicada para exibição
-            //de mensagem de confirmação de exclusão utilizando seu nome
-            String nome = (String) tabelaResultados.getValueAt(row, 1);
-            //Mostra o diálogo de confirmação de exclusão
-            int resposta = JOptionPane.showConfirmDialog(rootPane,
-                "Excluir o cliente \"" + nome + "\"?",
-                "Confirmar exclusão", JOptionPane.YES_NO_OPTION);
-            //Se o valor de resposta for "Sim" para a exclusão
-            if (resposta == JOptionPane.YES_OPTION) {
+            
+            //obtem o nome do cliente, para pedir a confirmaçaõ exclusão
+            String nome = (String) tabelaResultados.getValueAt(row, 0);
+            // exibindo caixa de dialogo
+            int resposta = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão", "Excluir Cliente", JOptionPane.YES_NO_OPTION);
+            
+            // verifica a resposta do usuario
+            if(resposta == JOptionPane.YES_OPTION){
                 try {
-                    //Obtém o ID do cliente
-                    Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
-                    //Solicita ao serviço a inativação do cliente com o ID
-                    ServiceCliente.excluirCliente(id);
+                    // obtém o id do cliente
+                    String cpf = (String) tabelaResultados.getValueAt(row, 1);
+                    // chama a classe serviço para excluir o item
+                    ServiceCliente.excluirCliente(cpf);
                     //Atualiza a lista após a "exclusão"
                     this.refreshList();
+                    
+                    
                 } catch (Exception e) {
-                    //Se ocorrer algum erro técnico, mostra-o no console,
-                    //mas esconde-o do usuário
+                    // se ocorre erro, mostra no console o erro,
+                    // esconde do usuario
                     e.printStackTrace();
-                    //Exibe uma mensagem de erro genérica ao usuário
-                    JOptionPane.showMessageDialog(rootPane, e.getMessage(),
-                            "Falha na Exclusão", JOptionPane.ERROR_MESSAGE);
+                    // exibi mensagem de erro ao usuario
+                    JOptionPane.showConfirmDialog(rootPane, e.getMessage(), "Falha na exclusão", JOptionPane.ERROR_MESSAGE);
                 }
+                
             }
         }
     }//GEN-LAST:event_excluirActionPerformed
@@ -237,11 +237,11 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             //Verifica se há linha selecionada na tabela
             if (row >= 0) {
                 //Obtém a linha selecionada na tabela
-                Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
+                String cpf = (String) tabelaResultados.getValueAt(row, 0);
                 
                 //Solicita ao serviço a obtenção do cliente a partir do
                 //ID selecionado na tabela
-                ClienteModel cliente = ServiceCliente.obterCliente(id);
+                ClienteModel cliente = ServiceCliente.obterCliente(cpf);
 
                 
                 formEditarCliente.dispose();
@@ -249,7 +249,8 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
                 formEditarCliente.setCliente(cliente);
                 formEditarCliente.setTitle(cliente.getNome() + " ");
                 this.getParent().add(formEditarCliente);
-                //this.openFrameInCenter(formEditarCliente);                
+                this.opemFrameInCenter(formEditarCliente);
+              
                 formEditarCliente.toFront();
             }
         } catch (Exception e) {
@@ -319,9 +320,9 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             //Obtém a linha selecionado da tabela de resultados
             final int row = tabelaResultados.getSelectedRow();
             //Obtém o valor do ID da coluna
-            Integer id = (Integer) tabelaResultados.getValueAt(row, 0);
+            String cpf = (String) tabelaResultados.getValueAt(row, 0);
             
-            ClienteModel cliente = ServiceCliente.obterCliente(id);
+            ClienteModel cliente = ServiceCliente.obterCliente(cpf);
             
             /*Cria uma nova instância da tela de edição,
             configura o cliente selecionado como elemento a

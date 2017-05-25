@@ -70,11 +70,11 @@ public class ServiceCliente {
     }
     
     //Obtem o cliente informado pelo ID
-    public static ClienteModel obterCliente(Integer id)
+    public static ClienteModel obterCliente(String cpf)
             throws ClienteException, DataSourceException{
         try{
             //Retorna o cliente obtido
-           return MemoriaCliente.obter(id);
+           return MemoriaCliente.obter(cpf);
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
@@ -83,11 +83,11 @@ public class ServiceCliente {
         }
     }
     
-    public static void excluirCliente(Integer id)
+    public static void excluirCliente(String cpf)
             throws ClienteException, DataSourceException{
         try{
             //Solicita a exlusão do cliente
-            MemoriaCliente.excluir(id);
+            MemoriaCliente.excluir(cpf);
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
