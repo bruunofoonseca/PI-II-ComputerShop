@@ -9,6 +9,7 @@ package com.ComputerShop.models;
  *
  * @author BruunoFoonseca
  */
+
 public class ProdutoModel {
     
     // Atributos
@@ -19,9 +20,6 @@ public class ProdutoModel {
     private int qtdProduto;
     private float valorProduto;
     private char status;
-    
-    
-    
 
     // Get e Setter
 

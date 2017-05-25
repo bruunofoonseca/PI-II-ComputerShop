@@ -10,15 +10,21 @@ import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.models.PedidoModel;
 import com.ComputerShop.models.ProdutoModel;
+import com.ComputerShop.models.VendaModel;
 import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.services.ServiceVenda;
 import com.ComputerShop.services.ServicoProduto;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -31,8 +37,9 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     List<ClienteModel> resultadoCli = null;
     List<ProdutoModel> resultadoProd = null;
     ClienteModel cliente;
-    List<ProdutoModel> produtoList = null;
-    PedidoModel pedido = new PedidoModel();
+    List<PedidoModel> pedidos = new ArrayList<PedidoModel>();
+    float valorTotal = 0;
+    VendaModel venda = new VendaModel();
 
     /**
      * Creates new form CadastrarVenda
@@ -66,12 +73,14 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         tblProdutos = new javax.swing.JTable();
         btnPesquisarProduto = new javax.swing.JButton();
         btnAdicionarProduto = new javax.swing.JButton();
+        txtQuantidade = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblVenda = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         lblValorTotal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -147,7 +156,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                         .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisarCliente)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,6 +229,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Quantidade");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -228,12 +239,21 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
-                    .addComponent(txtNomeProduto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtNomeProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPesquisarProduto)
-                    .addComponent(btnAdicionarProduto))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnPesquisarProduto)
+                            .addComponent(btnAdicionarProduto)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -245,14 +265,18 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisarProduto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(14, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(btnAdicionarProduto)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdicionarProduto)
+                        .addGap(25, 25, 25))))
         );
 
         tblVenda.setModel(new javax.swing.table.DefaultTableModel(
@@ -270,7 +294,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -308,7 +332,12 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
 
         lblValorTotal.setText("0");
 
-        jButton1.setText("Finalizar Compra");
+        btnFinalizar.setText("Finalizar Compra");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -322,7 +351,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblValorTotal)
                         .addGap(276, 276, 276)
-                        .addComponent(jButton1))
+                        .addComponent(btnFinalizar))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -344,7 +373,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblValorTotal)
-                    .addComponent(jButton1))
+                    .addComponent(btnFinalizar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -462,27 +491,30 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
 
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
         int index = tblProdutos.getSelectedRow();
-        float valorTotal = 0;
         boolean resultAdd = false;
+        int quantidade = (int)txtQuantidade.getValue();
+        ProdutoModel produto;
+        PedidoModel pedido = new PedidoModel();
         
-        produtoList.add(resultadoProd.get(index));
-        
-        pedido.setCliente(cliente);
-        pedido.setProdutos(produtoList);
-        
-        for(int i = 0; i < produtoList.size(); i++) {
-            valorTotal += produtoList.get(i).getValorProduto();
+        if(resultadoProd.get(index).getQtdProduto() < quantidade) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao Adicionar!", "Quantidade desejada não bate com a quantidade de produtos em estoque!", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+
+        produto = resultadoProd.get(index);
+
+        pedido.setProduto(produto);
+        pedido.setDataPedido(new Date());
+        pedido.setQtd(quantidade);
         
-        pedido.setValor(valorTotal);
+        float valorParcial = produto.getValorProduto() * quantidade;
+        pedido.setValorParcial(valorParcial);
         
-        try {
-            ServiceVenda.cadastraPedido(pedido);
-        } catch (VendaException ex) {
-            Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DataSourceException ex) {
-            Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        valorTotal += valorParcial;
+        
+        lblValorTotal.setText(Float.toString(valorTotal));
+        
+        pedidos.add(pedido);
         
         try{
             resultAdd = refreshListVenda();
@@ -498,22 +530,41 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        venda.setCliente(cliente);
+        venda.setPedidos(pedidos);
+        venda.setValorTotal(valorTotal);
+        
+        try {
+            ServiceVenda.cadastraPedido(venda);
+        } catch (VendaException ex) {
+            Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        } catch (DataSourceException ex) {
+            Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(rootPane, "Venda Realizada!!", "" ,JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
     public boolean refreshListVenda() throws ClienteException, Exception {        
         DefaultTableModel model = (DefaultTableModel) tblVenda.getModel();
         model.setRowCount(0);
         
-        if(pedido == null){
+        if(pedidos == null){
            return false;
         }
     
-        for (int i = 0; i < pedido.getProdutos().size(); i++) {
-            ProdutoModel prod = pedido.getProdutos().get(i);
-            ClienteModel cli = pedido.getCliente();
+        for (int i = 0; i < pedidos.size(); i++) {
+            ProdutoModel prod = pedidos.get(i).getProduto();
+            ClienteModel cli = cliente;
             if(prod != null){
-                Object[] row = new Object[3];
+                Object[] row = new Object[4];
                 row[0] = cli.getNome();
                 row[1] = prod.getNome();
                 row[2] = prod.getValorProduto();
+                row[3] = pedidos.get(i).getQtd();
                 model.addRow(row);
             }
         }
@@ -529,9 +580,10 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarCliente;
     private javax.swing.JButton btnAdicionarProduto;
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnPesquisarProduto;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -549,5 +601,6 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblVenda;
     private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JSpinner txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }
