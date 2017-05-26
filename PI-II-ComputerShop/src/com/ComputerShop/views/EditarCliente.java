@@ -2,21 +2,22 @@ package com.ComputerShop.views;
 
 import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.services.ServiceCliente;
+import com.ComputerShop.memoria.MemoriaCliente;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
 
-
 //Editar cliente
 public class EditarCliente extends javax.swing.JInternalFrame {
-    //Armazena o cliente em edição
+   //Armazena o cliente em edição
    ClienteModel cliente = new ClienteModel();
-   
+   MemoriaCliente mermoriaCliente = new MemoriaCliente();
+  
    //Construto e inicialização de componetes
     public EditarCliente() {
         initComponents();
-    }
-
+       }
+    
     public ClienteModel getCliente(){
         return cliente;
     }
@@ -65,12 +66,18 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         salvar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Cliente");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
         jLabel1.setText("Nome completo:");
+
+        nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Data de Nascimento:");
 
@@ -310,10 +317,11 @@ public class EditarCliente extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salvar)
-                    .addComponent(cancelar)))
+                    .addComponent(cancelar))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         pack();
@@ -437,6 +445,10 @@ public class EditarCliente extends javax.swing.JInternalFrame {
     private void sexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sexoActionPerformed
+
+    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeActionPerformed
 
     /**
      * @param args the command line arguments

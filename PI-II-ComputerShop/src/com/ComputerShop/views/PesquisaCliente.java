@@ -237,7 +237,7 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             //Verifica se há linha selecionada na tabela
             if (row >= 0) {
                 //Obtém a linha selecionada na tabela
-                String cpf = (String) tabelaResultados.getValueAt(row, 0);
+                String cpf = (String) tabelaResultados.getValueAt(row, 1);
                 
                 //Solicita ao serviço a obtenção do cliente a partir do
                 //ID selecionado na tabela
@@ -247,7 +247,7 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
                 formEditarCliente.dispose();
                 formEditarCliente = new EditarCliente();
                 formEditarCliente.setCliente(cliente);
-                formEditarCliente.setTitle(cliente.getNome() + " ");
+                formEditarCliente.cliente.setCpf(cliente.getCpf() + " ");
                 this.getParent().add(formEditarCliente);
                 this.opemFrameInCenter(formEditarCliente);
               
@@ -361,9 +361,9 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTable tabelaResultados;
     // End of variables declaration//GEN-END:variables
 
-    private void opemFrameInCenter(EditarCliente formEditarCliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    private void opemFrameInCenter(EditarCliente formEditarCliente) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     //private void openFrameInCenter(EditarCliente formEditarCliente) {
       //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

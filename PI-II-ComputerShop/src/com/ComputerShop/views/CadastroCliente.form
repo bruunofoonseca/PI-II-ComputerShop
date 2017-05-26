@@ -247,6 +247,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="nome">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="estadoCivil">
           <Properties>
