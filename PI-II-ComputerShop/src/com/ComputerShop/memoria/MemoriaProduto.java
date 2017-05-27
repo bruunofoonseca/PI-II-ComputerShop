@@ -22,6 +22,25 @@ public class MemoriaProduto {
         listaProdutos.add(prod);
         
     }
+
+    // realiza a atualização do produto , com id e dados
+    public static void atualiza(ProdutoModel produtoProcura)
+            throws Exception{
+        
+        if(produtoProcura != null && produtoProcura.getId() != null && !listaProdutos.isEmpty()){
+            for(ProdutoModel produtoLi : listaProdutos){
+                if (produtoLi != null && produtoLi.getId() == produtoProcura.getId()){
+                    produtoLi.setNome(produtoProcura.getNome());
+                    produtoLi.setFabricante(produtoProcura.getFabricante());
+                    produtoLi.setTipoProduto(produtoProcura.getTipoProduto());
+                    produtoLi.setQtdProduto(produtoProcura.getQtdProduto());
+                    produtoLi.setValorProduto(produtoProcura.getValorProduto());
+                    break;
+                }
+            }
+        }
+    }
+    
     
     // Localizar ou listar todos os Produto
     public static List<ProdutoModel> listarTodosProdutos()

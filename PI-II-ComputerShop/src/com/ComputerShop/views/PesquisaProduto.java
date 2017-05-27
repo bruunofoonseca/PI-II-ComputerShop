@@ -22,6 +22,10 @@ import java.util.List;
  */
 public class PesquisaProduto extends javax.swing.JInternalFrame {
     
+    // instânci da tela de editar o produto
+    EditarProduto formEditarProduto = new EditarProduto();
+
+    // pega o ultimo resultado
     String ultimaPesq = null;
     /**
      * Creates new form PesquisaProduto
@@ -214,6 +218,36 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        
+        try {
+            // obtem a linha selecionada na tabela
+            final int row = tblProdutos.getSelectedRow();
+            // verifica se ha linha selecionada
+            if (row >= 0){
+                // obtem a linha selecionada na tabela
+                Integer id = (Integer) tblProdutos.getValueAt(row, 0);
+                
+                // solicita ao services obter o produto
+                ProdutoModel produto = ServicoProduto.obterProduto(id);
+                
+                
+                formEditarProduto.dispose();
+                formEditarProduto = new EditarProduto();
+                formEditarProduto.setProduto(produto);
+                formEditarProduto.setTitle(produto.getNome());
+                this.getParent().add(formEditarProduto);
+                this.openFrameInCenter(formEditarProduto);
+                formEditarProduto.toFront();
+            }
+            
+        } catch (Exception e) {
+            // se ocorrer algum erro tecnico mostra no console
+            e.printStackTrace();
+            // exibe mensagem de erro generica para usuario
+            JOptionPane.showMessageDialog(rootPane, "Não é possivel" 
+                    + "exibir os dados do produto", 
+                    "Erro ao abrir detalhes",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -297,6 +331,15 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
         }
     }
     
+    // abre um internal frame centralizdo na tela
+    public void openFrameInCenter(JInternalFrame jif){
+        Dimension desktopSize = this.getParent().getSize();
+        Dimension jInternalFrameSize = jif.getSize();
+        int width = (desktopSize.width - jInternalFrameSize.width) / 2;
+        int height = (desktopSize.height - jInternalFrameSize.height) / 2;
+        jif.setLocation(width, height);
+        jif.setVisible(true);
+    }
     
     
 

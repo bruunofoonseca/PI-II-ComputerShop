@@ -39,6 +39,25 @@ public class ServicoProduto {
     }
     
     
+    public static void atualizarProduto(ProdutoModel prod)
+    throws ProdutoException, DataSourceException{
+        
+        // chama o validado para verificar o produto
+        
+        try {
+            // realiza a chamada de atualizar o produto
+            MemoriaProduto.atualiza(prod);
+            return;
+            
+        } catch (Exception e) {
+            // imprimir erro tecnico no consile
+            e.printStackTrace();
+            throw new DataSourceException("Erro na fonte de dados", e);
+        }
+        
+    }
+    
+    
     // Procura Cliente
     
     public static List<ProdutoModel> localizarProduto(String nomeProd)
