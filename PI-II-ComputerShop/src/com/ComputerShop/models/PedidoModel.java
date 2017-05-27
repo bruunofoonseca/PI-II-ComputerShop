@@ -19,7 +19,6 @@ public class PedidoModel {
     private Integer id;
     private ProdutoModel produto;
     private double valorParcial;
-    private Date dataPedido;
     private int qtd;
 
     public ProdutoModel getProduto() {
@@ -44,14 +43,6 @@ public class PedidoModel {
 
     public void setQtd(int qtd) {
         this.qtd = qtd;
-    }
-
-    public Date getDataPedido() {
-        return dataPedido;
-    }
-
-    public void setDataPedido(Date dataPedido) {
-        this.dataPedido = dataPedido;
     }
 
     public Integer getId() {

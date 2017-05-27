@@ -115,6 +115,7 @@ public class Principall extends javax.swing.JFrame {
         menProdPesq = new javax.swing.JMenuItem();
         menVenda = new javax.swing.JMenu();
         menRealizaVenda = new javax.swing.JMenuItem();
+        menRelatorioVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,6 +180,14 @@ public class Principall extends javax.swing.JFrame {
         });
         menVenda.add(menRealizaVenda);
 
+        menRelatorioVenda.setText("Relatório");
+        menRelatorioVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menRelatorioVendaActionPerformed(evt);
+            }
+        });
+        menVenda.add(menRelatorioVenda);
+
         menu.add(menVenda);
 
         setJMenuBar(menu);
@@ -242,6 +251,15 @@ public class Principall extends javax.swing.JFrame {
         }
         this.openFrameInCenter(getCadastrarVenda());
     }//GEN-LAST:event_menRealizaVendaActionPerformed
+
+    private void menRelatorioVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menRelatorioVendaActionPerformed
+        if(getRelatorioVenda()== null || !menVendRelatorio.isDisplayable()){
+            setRelatorioVenda(new RelatorioVenda());
+            desktop.add(getRelatorioVenda());
+            this.openFrameInCenter(getRelatorioVenda());
+        }
+        this.openFrameInCenter(getCadastrarVenda());
+    }//GEN-LAST:event_menRelatorioVendaActionPerformed
     
     public void openFrameInCenter(JInternalFrame jif) {
         Dimension desktopSize = desktop.getSize();
@@ -295,6 +313,7 @@ public class Principall extends javax.swing.JFrame {
     private javax.swing.JMenuItem menProdPesq;
     private javax.swing.JMenu menProduto;
     private javax.swing.JMenuItem menRealizaVenda;
+    private javax.swing.JMenuItem menRelatorioVenda;
     private javax.swing.JMenu menVenda;
     private javax.swing.JMenuBar menu;
     // End of variables declaration//GEN-END:variables

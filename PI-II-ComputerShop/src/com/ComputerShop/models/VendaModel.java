@@ -5,6 +5,7 @@
  */
 package com.ComputerShop.models;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +17,15 @@ public class VendaModel {
     private ClienteModel cliente;
     private List<PedidoModel> pedidos;
     private float valorTotal;
+    private Date dataVenda;
+
+    public Date getDataVenda() {
+        return dataVenda;
+    }
+
+    public void setDataVenda(Date dataVenda) {
+        this.dataVenda = dataVenda;
+    }
 
     public float getValorTotal() {
         return valorTotal;

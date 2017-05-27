@@ -5,12 +5,32 @@
  */
 package com.ComputerShop.views;
 
+import com.ComputerShop.exceptions.DataSourceException;
+import com.ComputerShop.exceptions.VendaException;
+import com.ComputerShop.models.ClienteModel;
+import com.ComputerShop.models.PedidoModel;
+import com.ComputerShop.models.ProdutoModel;
+import com.ComputerShop.models.RelatorioModel;
+import com.ComputerShop.models.VendaModel;
+import com.ComputerShop.services.ServiceVenda;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Alef
  */
 public class RelatorioVenda extends javax.swing.JInternalFrame {
 
+//    RelatorioModel relatorio = new RelatorioModel();
+    
     /**
      * Creates new form RelatorioVenda
      */
@@ -30,7 +50,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblRelatorio = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
@@ -48,7 +68,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setText("Total R$ ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblRelatorio.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -56,11 +76,11 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nome do cliente", "Desc produto", "Tipo do produto", "Qnt", "Valor unitário", "Valor total ", "Data da compra"
+                "Código", "Cliente", "Produto", "Tipo do produto", "Quantidade", "Valor unitário", "Data da compra"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
@@ -74,12 +94,12 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jScrollPane1.setViewportView(tblRelatorio);
+        if (tblRelatorio.getColumnModel().getColumnCount() > 0) {
+            tblRelatorio.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tblRelatorio.getColumnModel().getColumn(3).setPreferredWidth(50);
+            tblRelatorio.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tblRelatorio.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         jLabel22.setText("* campos obrigatorios");
@@ -112,9 +132,14 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("* Data inicio:");
+        jLabel1.setText("* Data inicial:");
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("* Data final:");
 
@@ -182,6 +207,75 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDataInicioActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        if (!txtDataInicio.getText().equals("") && !txtDataFinal.getText().equals("")){
+             try {
+                refreshListRelatorio();
+            } catch (VendaException ex) {
+                Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            } catch (DataSourceException ex) {
+                Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            } catch (ParseException ex) {
+                Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Erro!",
+                    "É obrigatório o preenchimento da Data Inicial e Data Final!",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    public boolean refreshListRelatorio() throws VendaException, DataSourceException, ParseException {
+        List<VendaModel> vendas = ServiceVenda.listarPedidos();
+        
+        DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
+        model.setRowCount(0);
+        
+        if(vendas == null || vendas.size() <= 0){
+           return false;
+        }
+        
+        List<VendaModel> vendasNoPeriodo = new ArrayList<VendaModel>();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataInicio = format.parse(txtDataInicio.getText());
+        Date dataFim = format.parse(txtDataFinal.getText());
+        
+        for (VendaModel venda : vendas) {
+//            String aux = Integer.toString(venda.getDataVenda().getDay()) + "/" + 
+//                    Integer.toString(venda.getDataVenda().getMonth()) + "/" +
+//                    Integer.toString(venda.getDataVenda().getYear());
+            String aux = new SimpleDateFormat("dd/MM/yyy").format(venda.getDataVenda());
+            Date dataVenda = format.parse(aux);
+            if(dataVenda.after(dataInicio) && dataVenda.before(dataFim) 
+                    || dataVenda.equals(dataInicio) || dataVenda.equals(dataFim)) {
+                vendasNoPeriodo.add(venda);
+            }
+        }
+    
+        for (int i = 0; i < vendasNoPeriodo.size(); i++) {
+            ClienteModel cli = vendasNoPeriodo.get(i).getCliente();
+            
+            for(PedidoModel pedido : vendasNoPeriodo.get(i).getPedidos()) {
+                ProdutoModel produto = pedido.getProduto();
+                if(cli != null && produto != null){
+                    Object[] row = new Object[7];
+                    row[0] = vendasNoPeriodo.get(i).getId();
+                    row[1] = cli.getNome();
+                    row[2] = produto.getNome();
+                    row[3] = produto.getTipoProduto();
+                    row[4] = pedido.getQtd();
+                    row[5] = produto.getValorProduto();
+                    row[6] = vendasNoPeriodo.get(i).getDataVenda();
+                    model.addRow(row);
+                }
+            }
+        }
+
+       return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -195,7 +289,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblRelatorio;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicio;
     // End of variables declaration//GEN-END:variables

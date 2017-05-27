@@ -5,10 +5,22 @@
  */
 package com.ComputerShop.models;
 
+import java.util.List;
+
 /**
  *
  * @author BruunoFoonseca
  */
 public class RelatorioModel {
+    
+    private List<VendaModel> vendas;
+
+    public List<VendaModel> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(List<VendaModel> vendas) {
+        this.vendas = vendas;
+    }
     
 }

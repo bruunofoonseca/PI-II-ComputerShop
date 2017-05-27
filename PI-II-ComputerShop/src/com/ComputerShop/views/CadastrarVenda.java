@@ -504,7 +504,6 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         produto = resultadoProd.get(index);
 
         pedido.setProduto(produto);
-        pedido.setDataPedido(new Date());
         pedido.setQtd(quantidade);
         
         float valorParcial = produto.getValorProduto() * quantidade;
@@ -534,6 +533,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         venda.setCliente(cliente);
         venda.setPedidos(pedidos);
         venda.setValorTotal(valorTotal);
+        venda.setDataVenda(new Date());
         
         try {
             ServiceVenda.cadastraPedido(venda);
