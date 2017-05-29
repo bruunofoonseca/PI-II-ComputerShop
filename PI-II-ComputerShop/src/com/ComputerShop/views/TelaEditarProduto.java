@@ -10,11 +10,11 @@ import javax.swing.JOptionPane;
  * @author alef.nsousa
  * edit diogo.sfelix
  */
-public class EditarProduto extends javax.swing.JInternalFrame {
+public class TelaEditarProduto extends javax.swing.JInternalFrame {
     
     ProdutoModel produto = new ProdutoModel();
 
-    public EditarProduto() {
+    public TelaEditarProduto() {
         initComponents();
         
     }
@@ -248,7 +248,9 @@ public class EditarProduto extends javax.swing.JInternalFrame {
         txtNomeProduto.setText(produto.getNome());
         txtFabricante.setText(produto.getFabricante());
         txtTipoProduto.setText(produto.getTipoProduto());
-        
+        System.out.println("Produto");
+        System.out.println(produto.getNome());
+        System.out.println(produto.getFabricante());
     }
     
     
