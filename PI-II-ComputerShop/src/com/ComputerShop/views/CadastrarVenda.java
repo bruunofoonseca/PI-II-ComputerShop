@@ -14,6 +14,7 @@ import com.ComputerShop.models.VendaModel;
 import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.services.ServiceVenda;
 import com.ComputerShop.services.ServicoProduto;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -385,10 +386,10 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         de última pesquisa válida é utilizado na atualização da lista*/
         ultimaPesquisaCli = txtNomeCliente.getText();
         
-        try{
+        try {
             //Solicita atualização da lista
             resultSearch = refreshListCli();
-        }catch (Exception e){
+        } catch (Exception e){
             //Exibir mensagens de erro na fonte de dados
             JOptionPane.showMessageDialog(rootPane, e.getMessage(),
                     "Falha ao obter lista", JOptionPane.ERROR_MESSAGE);
@@ -418,7 +419,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 Object[] row = new Object[3];
                 row[0] = cli.getNome();
                 row[1] = cli.getCpf();
-//                row[2] = cli.getDataNascimento();
+                row[2] = cli.getDataNascimento();
                 model.addRow(row);
             }
         }
@@ -538,7 +539,16 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             return;
         }
         
-        JOptionPane.showMessageDialog(rootPane, "Venda Realizada!!", "" ,JOptionPane.INFORMATION_MESSAGE);
+        int aux = JOptionPane.showOptionDialog(rootPane, "Venda Realizada!!", "Sucesso!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        
+        if (aux == JOptionPane.OK_OPTION) {
+            try {
+                //            int EXIT_ON_CLOSE1 = CadastrarVenda.EXIT_ON_CLOSE;
+                super.setClosed(true);
+            } catch (PropertyVetoException ex) {
+                Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     public boolean refreshListVenda() throws ClienteException, Exception {        

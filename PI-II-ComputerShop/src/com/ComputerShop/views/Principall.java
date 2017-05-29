@@ -259,7 +259,7 @@ public class Principall extends javax.swing.JFrame {
             desktop.add(getRelatorioVenda());
             this.openFrameInCenter(getRelatorioVenda());
         }
-        this.openFrameInCenter(getCadastrarVenda());
+        this.openFrameInCenter(getRelatorioVenda());
     }//GEN-LAST:event_menRelatorioVendaActionPerformed
     
     public void openFrameInCenter(JInternalFrame jif) {
