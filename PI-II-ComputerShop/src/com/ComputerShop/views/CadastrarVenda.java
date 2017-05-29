@@ -14,17 +14,13 @@ import com.ComputerShop.models.VendaModel;
 import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.services.ServiceVenda;
 import com.ComputerShop.services.ServicoProduto;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -37,7 +33,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     List<ClienteModel> resultadoCli = null;
     List<ProdutoModel> resultadoProd = null;
     ClienteModel cliente;
-    List<PedidoModel> pedidos = new ArrayList<PedidoModel>();
+    List<PedidoModel> pedidos = new ArrayList<>();
     float valorTotal = 0;
     VendaModel venda = new VendaModel();
 
@@ -84,7 +80,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Cadastra Venda");
+        setTitle("Realizar Venda");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         txtNomeCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +265,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(14, Short.MAX_VALUE))
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -537,10 +533,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         
         try {
             ServiceVenda.cadastraPedido(venda);
-        } catch (VendaException ex) {
-            Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
-            return;
-        } catch (DataSourceException ex) {
+        } catch (VendaException | DataSourceException ex) {
             Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
@@ -575,7 +568,6 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarCliente;
