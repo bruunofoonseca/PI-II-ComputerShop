@@ -10,9 +10,9 @@ import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.models.PedidoModel;
 import com.ComputerShop.models.ProdutoModel;
-import com.ComputerShop.models.RelatorioModel;
 import com.ComputerShop.models.VendaModel;
 import com.ComputerShop.services.ServiceVenda;
+import java.beans.PropertyVetoException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +28,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Alef
  */
 public class RelatorioVenda extends javax.swing.JInternalFrame {
-
-//    RelatorioModel relatorio = new RelatorioModel();
     
     /**
      * Creates new form RelatorioVenda
@@ -52,6 +50,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRelatorio = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -60,7 +59,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Relatorio de vendas");
+        setTitle("Relatorio de Vendas");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatorios"));
 
@@ -104,6 +103,9 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
 
         jLabel22.setText("* campos obrigatorios");
 
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(255, 0, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -112,9 +114,11 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(79, 79, 79))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTotal)
+                .addGap(39, 39, 39))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -125,7 +129,9 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel3))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lblTotal)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel22)))
@@ -177,11 +183,8 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                         .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(449, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,27 +211,30 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDataInicioActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        if (!txtDataInicio.getText().equals("") && !txtDataFinal.getText().equals("")){
+        if (!txtDataInicio.getText().equals("  /  /    ") && !txtDataFinal.getText().equals("  /  /   ")){
              try {
                 refreshListRelatorio();
-            } catch (VendaException ex) {
+            } catch (VendaException | DataSourceException | ParseException ex) {
                 Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            } catch (DataSourceException ex) {
-                Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
-                return;
-            } catch (ParseException ex) {
-                Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
-                return;
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Erro!",
-                    "É obrigatório o preenchimento da Data Inicial e Data Final!",JOptionPane.ERROR_MESSAGE);
+            int aux = JOptionPane.showOptionDialog(rootPane, "É obrigatório o preenchimento da Data Inicial e Data Final!", 
+                    "Atenção!", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        
+            if (aux == JOptionPane.OK_OPTION) {
+               
+                try {
+                    super.setClosed(true);
+                } catch (PropertyVetoException ex) {
+                    Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     public boolean refreshListRelatorio() throws VendaException, DataSourceException, ParseException {
         List<VendaModel> vendas = ServiceVenda.listarPedidos();
+        float totalVendas = 0;
         
         DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
         model.setRowCount(0);
@@ -237,23 +243,23 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
            return false;
         }
         
-        List<VendaModel> vendasNoPeriodo = new ArrayList<VendaModel>();
+        List<VendaModel> vendasNoPeriodo = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date dataInicio = format.parse(txtDataInicio.getText());
         Date dataFim = format.parse(txtDataFinal.getText());
         
         for (VendaModel venda : vendas) {
-//            String aux = Integer.toString(venda.getDataVenda().getDay()) + "/" + 
-//                    Integer.toString(venda.getDataVenda().getMonth()) + "/" +
-//                    Integer.toString(venda.getDataVenda().getYear());
             String aux = new SimpleDateFormat("dd/MM/yyy").format(venda.getDataVenda());
             Date dataVenda = format.parse(aux);
             if(dataVenda.after(dataInicio) && dataVenda.before(dataFim) 
                     || dataVenda.equals(dataInicio) || dataVenda.equals(dataFim)) {
                 vendasNoPeriodo.add(venda);
+                totalVendas += venda.getValorTotal();
             }
         }
-    
+
+        lblTotal.setText(Float.toString(totalVendas));
+
         for (int i = 0; i < vendasNoPeriodo.size(); i++) {
             ClienteModel cli = vendasNoPeriodo.get(i).getCliente();
             
@@ -279,7 +285,6 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
     /**
      * @param args the command line arguments
      */
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
@@ -289,6 +294,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JTable tblRelatorio;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicio;
