@@ -3,6 +3,7 @@ package com.ComputerShop.views;
 import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.validador.ValidarCliente;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane; 
 
@@ -473,14 +474,16 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cli.setEstadoCivil((String) estadoCivil.getSelectedItem());
         cli.setTelefone((String) telefone.getText());
         cli.setCelular((String) celular.getText());
+        cli.setEmail((String) email.getText());
         Date data = null;       
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         
          try{
-             data = (Date)dataNasc.getValue();
+             data = format.parse(dataNasc.getText());
          }catch (Exception e){
              
          }
-         cli.setDataNascimento(data);
+         cli.setDataNasc(data);
          
          //Dados do endereço
          cli.setLogradouro((String)logradouro.getText());
@@ -488,7 +491,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
          cli.setComplemento((String) complemento.getText());
          cli.setCep((String) cep.getText());
          cli.setBairro((String) bairro.getText());
-         cli.setEstado((String) estado.getActionCommand());
+         cli.setEstado((String) estado.getSelectedItem());
          cli.setCidade((String) cidade.getText());
          
          try{

@@ -2,35 +2,40 @@ package com.ComputerShop.views;
 
 import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.services.ServiceCliente;
-import com.ComputerShop.memoria.MemoriaCliente;
+import com.ComputerShop.views.Principall;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-
-//Editar cliente
+/**
+ * Tela de edição de detalhes de cliente
+ */
 public class EditarCliente extends javax.swing.JInternalFrame {
-   //Armazena o cliente em edição
-   ClienteModel cliente = new ClienteModel();
-   MemoriaCliente mermoriaCliente = new MemoriaCliente();
-  
-   //Construto e inicialização de componetes
+    //Armazena o cliente em edição
+    ClienteModel cliente = new ClienteModel();
+
+    //Construtor e inicialização de componentes
     public EditarCliente() {
         initComponents();
-       }
-    
-    public ClienteModel getCliente(){
+    }
+
+    public ClienteModel getCliente() {
         return cliente;
     }
-    
-    public void setCliente(ClienteModel cliente){
+
+    public void setCliente(ClienteModel cliente) {
         this.cliente = cliente;
     }
-    
-    
+
+    /**
+     * Método de construção da tela gerado pelo GUI Builder
+     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cancelar = new javax.swing.JButton();
+        botaoSalvar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         nome = new javax.swing.JTextField();
@@ -63,11 +68,41 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         cep = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         estado = new javax.swing.JComboBox<>();
-        salvar = new javax.swing.JButton();
-        cancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Editar Cliente");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
+
+        cancelar.setText("Cancelar");
+        cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarActionPerformed(evt);
+            }
+        });
+
+        botaoSalvar.setText("Salvar");
+        botaoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSalvarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
@@ -136,11 +171,11 @@ public class EditarCliente extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addComponent(dataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
@@ -235,7 +270,7 @@ public class EditarCliente extends javax.swing.JInternalFrame {
                         .addComponent(cidade, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                         .addComponent(bairro, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(complemento, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel13)
@@ -280,63 +315,43 @@ public class EditarCliente extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        salvar.setText("Salvar");
-        salvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarActionPerformed(evt);
-            }
-        });
-
-        cancelar.setText("Cancelar");
-        cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(salvar)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cancelar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoSalvar)
+                .addGap(10, 10, 10))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(salvar)
+                    .addComponent(botaoSalvar)
                     .addComponent(cancelar))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cepActionPerformed
-
+    //Listener do botão cancelar
     private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
     //Listener do botão salvar
-    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+    private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
         /*Configura os novos valores dos campos de edição da tela
         para o objeto de cliente, a fim de passá-lo para o serviço
         e realizar as atualizações no mock*/
@@ -351,7 +366,7 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         }catch(Exception e){
             
         }
-        cliente.setDataNascimento(data);
+        cliente.setDataNasc(data);
         cliente.setSexo((String)sexo.getSelectedItem());
         cliente.setEstadoCivil((String)estadoCivil.getSelectedItem());
         cliente.setTelefone(telefone.getText());
@@ -394,11 +409,13 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         catch(Exception e){
             e.printStackTrace();
         }
-    }//GEN-LAST:event_salvarActionPerformed
-     
-    
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt){
-       //Dados Pessoais
+        
+    }//GEN-LAST:event_botaoSalvarActionPerformed
+
+    //Listener de abertura da janela. Aproveita o evento para obter os valores
+    //do cliente em edição e passa-os para os campos de edição da tela
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        //Dados Pessoais
         nome.setText(cliente.getNome());
         for (int i = 0; i < sexo.getItemCount(); i++) {
             if (sexo.getItemAt(i).equals(cliente.getSexo())) {
@@ -406,57 +423,53 @@ public class EditarCliente extends javax.swing.JInternalFrame {
                 break;
             }
         }
-        dataNasc.setText(dataNasc.getText());
+        dataNasc.setText(new SimpleDateFormat("dd/MM/yyyy").format(cliente.getDataNasc()));
         for (int i = 0; i < estadoCivil.getItemCount(); i++) {
-            if(estadoCivil.getItemAt(i).equals(cliente.getSexo())){
-                sexo.setSelectedIndex(i);
+            if(estadoCivil.getItemAt(i).equals(cliente.getEstadoCivil())){
+                estadoCivil.setSelectedIndex(i);
                 break;
             }
                 
         }
-        cpf.setText(cpf.getText());
-        telefone.setText(telefone.getText());
-        celular.setText(celular.getText());
-        email.setText(telefone.getText());
+        cpf.setText(cliente.getCpf());
+        telefone.setText(cliente.getTelefone());
+        celular.setText(cliente.getCelular());
+        email.setText(cliente.getEmail());
         //Dados do endereço
-        logradouro.setText(logradouro.getText());
-        numero.setText(numero.getText());
-        complemento.setText(complemento.getText());
-        cep.setText(cep.getText());
-        bairro.setText(bairro.getText());
-        cidade.setText(cidade.getText());
+        logradouro.setText(cliente.getLogradouro());
+        numero.setText(cliente.getNumero());
+        complemento.setText(cliente.getComplemento());
+        cep.setText(cliente.getCep());
+        bairro.setText(cliente.getBairro());
+        cidade.setText(cliente.getCidade());
         for (int i = 0; i < estado.getItemCount(); i++) {
             if(estado.getItemAt(i).equals(cliente.getEstado())){
                 estado.setSelectedIndex(i);
                 break;
             }
         }
-        
-        
-    }
-    
-    
-    
-    
-    private void complementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_complementoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_complementoActionPerformed
-
-    private void sexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sexoActionPerformed
+    }//GEN-LAST:event_formInternalFrameOpened
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void sexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sexoActionPerformed
+
+    private void complementoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_complementoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_complementoActionPerformed
+
+    private void cepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cepActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cepActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bairro;
+    private javax.swing.JButton botaoSalvar;
     private javax.swing.JButton cancelar;
     private javax.swing.JFormattedTextField celular;
     private javax.swing.JTextField cep;
@@ -487,10 +500,7 @@ public class EditarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField logradouro;
     private javax.swing.JTextField nome;
     private javax.swing.JTextField numero;
-    private javax.swing.JButton salvar;
     private javax.swing.JComboBox<String> sexo;
     private javax.swing.JFormattedTextField telefone;
     // End of variables declaration//GEN-END:variables
-
-    
 }

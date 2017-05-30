@@ -22,7 +22,7 @@ public class MemoriaCliente {
                 if(listCliente != null && listCliente.getId() == clienteProcura.getId()){
                    listCliente.setNome(clienteProcura.getNome());
                    listCliente.setSexo(clienteProcura.getSexo());
-                   listCliente.setDataNascimento(clienteProcura.getDataNascimento());
+                   listCliente.setDataNasc(clienteProcura.getDataNasc());
                    listCliente.setEstadoCivil(clienteProcura.getEstadoCivil());
                    listCliente.setCpf(clienteProcura.getCpf());
                    listCliente.setTelefone(clienteProcura.getTelefone());
