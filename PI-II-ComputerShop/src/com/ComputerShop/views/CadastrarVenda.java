@@ -15,6 +15,7 @@ import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.services.ServiceVenda;
 import com.ComputerShop.services.ServicoProduto;
 import java.beans.PropertyVetoException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -419,7 +420,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 Object[] row = new Object[3];
                 row[0] = cli.getNome();
                 row[1] = cli.getCpf();
-                row[2] = cli.getDataNascimento();
+                row[2] = new SimpleDateFormat().format(cli.getDataNascimento());
                 model.addRow(row);
             }
         }

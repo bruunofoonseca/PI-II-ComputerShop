@@ -11,6 +11,7 @@ public class ClienteModel {
     private String telefone;
     private String celular;
     private String email;
+    private boolean ativo;
     //Atributo de endereço
     private String logradouro;
     private String numero;
@@ -148,5 +149,11 @@ public class ClienteModel {
         this.cidade = cidade;
     }
     
-    
+     public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 }
