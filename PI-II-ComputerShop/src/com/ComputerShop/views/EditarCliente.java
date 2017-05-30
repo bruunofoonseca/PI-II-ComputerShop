@@ -361,11 +361,14 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         cliente.setCpf(cpf.getText());
         
         Date data = null;
-        try{
-            data = (Date)dataNasc.getValue();
-        }catch(Exception e){
-            
-        }
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        
+         try{
+             data = format.parse(dataNasc.getText());
+         }catch (Exception e){
+             
+         }
         cliente.setDataNasc(data);
         cliente.setSexo((String)sexo.getSelectedItem());
         cliente.setEstadoCivil((String)estadoCivil.getSelectedItem());
@@ -409,7 +412,7 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         catch(Exception e){
             e.printStackTrace();
         }
-        
+        this.dispose();
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     //Listener de abertura da janela. Aproveita o evento para obter os valores

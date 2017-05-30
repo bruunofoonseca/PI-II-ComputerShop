@@ -123,7 +123,7 @@
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="ativo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="sexo" min="-2" pref="100" max="-2" attributes="0"/>
@@ -139,7 +139,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="ativo" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -272,7 +272,7 @@
             <Property name="text" type="java.lang.String" value="Celular"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="ativo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ativo"/>
           </Properties>

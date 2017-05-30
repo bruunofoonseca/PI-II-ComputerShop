@@ -19,7 +19,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
 
     public CadastrarProduto() {
         initComponents();
-        
+        checkStatus.setSelected(true);
     }
 
     
@@ -199,6 +199,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         prod.setTipoProduto(txtTipoProduto.getText());
         prod.setQtdProduto((int)selectQTD.getValue());
         prod.setValorProduto(Float.parseFloat(txtValorProduto.getText()));
+        prod.setStatus(checkStatus.isSelected());
         
         try {
                 ServicoProduto.inserirProduto(prod);
@@ -221,7 +222,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         txtTipoProduto.setText("");
         txtValorProduto.setText("");
         selectQTD.setValue(0);
-        
+        checkStatus.setSelected(false);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

@@ -14,6 +14,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
      */
     public CadastroCliente() {
         initComponents();
+        ativo.setSelected(true);
     }
     
     /**
@@ -38,7 +39,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         nome = new javax.swing.JTextField();
         estadoCivil = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        ativo = new javax.swing.JCheckBox();
         dataNasc = new javax.swing.JFormattedTextField();
         cpf = new javax.swing.JFormattedTextField();
         telefone = new javax.swing.JFormattedTextField();
@@ -111,7 +112,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Celular");
 
-        jCheckBox1.setText("Ativo");
+        ativo.setText("Ativo");
 
         try {
             dataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -196,7 +197,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(47, 47, 47)
-                        .addComponent(jCheckBox1))
+                        .addComponent(ativo))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -207,7 +208,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
+                    .addComponent(ativo)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -474,16 +475,22 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cli.setEstadoCivil((String) estadoCivil.getSelectedItem());
         cli.setTelefone((String) telefone.getText());
         cli.setCelular((String) celular.getText());
+
         cli.setEmail((String) email.getText());
         Date data = null;       
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
         
          try{
              data = format.parse(dataNasc.getText());
          }catch (Exception e){
              
          }
+
+
          cli.setDataNasc(data);
+         cli.setAtivo(ativo.isSelected());
+
          
          //Dados do endereço
          cli.setLogradouro((String)logradouro.getText());
@@ -552,6 +559,7 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox ativo;
     private javax.swing.JTextField bairro;
     private javax.swing.ButtonGroup btngroupSexo;
     private javax.swing.JButton cancelar;
@@ -564,7 +572,6 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField email;
     private javax.swing.JComboBox<String> estado;
     private javax.swing.JComboBox<String> estadoCivil;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

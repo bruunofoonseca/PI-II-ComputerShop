@@ -14,6 +14,7 @@ import javax.swing.JInternalFrame; // verificar
 import javax.swing.JOptionPane; // verificar
 import javax.swing.table.DefaultTableModel; // verificar
 import java.util.List;
+import testeProduto.TelaEditarProduto;
 
 /**
  *
@@ -23,7 +24,7 @@ import java.util.List;
 public class PesquisaProduto extends javax.swing.JInternalFrame {
     
     // instânci da tela de editar o produto
-    EditarProduto formEditarProduto = new EditarProduto();
+    TelaEditarProduto formEditarProduto = new TelaEditarProduto();
 
     // pega o ultimo resultado
     String ultimaPesq = null;
@@ -232,8 +233,8 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
                 
                 
                 formEditarProduto.dispose();
-                formEditarProduto = new EditarProduto();
-                formEditarProduto.setProduto(produto);
+                formEditarProduto = new TelaEditarProduto();
+                formEditarProduto.setCliente(produto);
                 formEditarProduto.setTitle(produto.getNome());
                 this.getParent().add(formEditarProduto);
                 this.openFrameInCenter(formEditarProduto);
