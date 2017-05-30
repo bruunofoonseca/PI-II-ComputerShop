@@ -46,6 +46,8 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         txtTipoProduto = new javax.swing.JTextField();
         txtValor = new javax.swing.JFormattedTextField();
+        txtQtd = new javax.swing.JSpinner();
+        jLabel4 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,6 +92,8 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Valor Produto");
 
+        jLabel4.setText("Quantidade:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,6 +121,10 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTipoProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                                     .addComponent(txtValor))
+                                .addGap(93, 93, 93)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
@@ -138,7 +146,9 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoSalvar)
@@ -161,7 +171,9 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         //e realizar as atualizações no mock
         cliente.setNome(txtNomeProduto.getText());
         cliente.setFabricante(txtFabricante.getText());
-
+        cliente.setTipoProduto(txtTipoProduto.getText());
+        cliente.setValorProduto(Float.parseFloat(txtValor.getText()));
+        cliente.setQtdProduto((int)txtQtd.getValue());
         
         try {
             //Chama o serviço para realizar as alterações necessárias
@@ -208,6 +220,7 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         txtNomeProduto.setText(cliente.getNome());
         txtTipoProduto.setText(cliente.getTipoProduto());
         txtValor.setValue(cliente.getValorProduto());
+        txtQtd.setValue(cliente.getQtdProduto());
         //txtFabricante.setText(cliente.getSobrenome());
         //txtTipoProduto.setValue(cliente.getDataNascimento());
         
@@ -220,9 +233,11 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtFabricante;
     private javax.swing.JTextField txtNomeProduto;
+    private javax.swing.JSpinner txtQtd;
     private javax.swing.JTextField txtTipoProduto;
     private javax.swing.JFormattedTextField txtValor;
     // End of variables declaration//GEN-END:variables
