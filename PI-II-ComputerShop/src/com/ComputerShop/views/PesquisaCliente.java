@@ -247,7 +247,7 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
                 formEditarCliente.dispose();
                 formEditarCliente = new EditarCliente();
                 formEditarCliente.setCliente(cliente);
-                formEditarCliente.cliente.setCpf(cliente.getCpf() + " ");
+                formEditarCliente.setTitle(cliente.getNome());
                 this.getParent().add(formEditarCliente);
                 this.opemFrameInCenter(formEditarCliente);
               

@@ -19,9 +19,17 @@ public class ProdutoModel {
     private String tipoProduto;
     private int qtdProduto;
     private float valorProduto;
-    private char status;
+    private boolean status;
+
+    public boolean isStatus() {
+        return status;
+    }
 
     // Get e Setter
+    
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -70,6 +78,4 @@ public class ProdutoModel {
     public float getValorProduto (){
         return valorProduto;
     }
-    
-    
 }

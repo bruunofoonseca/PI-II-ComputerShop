@@ -101,10 +101,8 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
             tblRelatorio.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel22.setText("* campos obrigatorios");
-
-        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblTotal.setForeground(new java.awt.Color(255, 0, 51));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

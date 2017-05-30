@@ -5,12 +5,13 @@ public class ClienteModel {
     private Integer id;
     private String nomeCliente;
     private String sexo;
-    private Date dataNascimento;
+    private Date dataNasc;
     private String estadoCivil;
     private String cpf;
     private String telefone;
     private String celular;
     private String email;
+    private boolean ativo;
     //Atributo de endereço
     private String logradouro;
     private String numero;
@@ -44,12 +45,12 @@ public class ClienteModel {
         this.sexo = sexo;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
+    public Date getDataNasc() {
+        return dataNasc;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setDataNasc(Date dataNasc) {
+        this.dataNasc = dataNasc;
     }
 
     public String getEstadoCivil() {
@@ -148,5 +149,11 @@ public class ClienteModel {
         this.cidade = cidade;
     }
     
-    
+     public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 }
