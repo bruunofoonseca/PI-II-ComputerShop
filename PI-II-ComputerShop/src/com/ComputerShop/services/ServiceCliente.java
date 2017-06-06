@@ -22,7 +22,6 @@ public class ServiceCliente {
             MemoriaCliente.inserir(cliente);
         }catch(Exception e){
             //Informar erro
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
         }
     }
@@ -37,15 +36,12 @@ public class ServiceCliente {
         //Realizar chamada de atualização
         try {
             MemoriaCliente.atualizar(cliente);
-            return; 
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
         }
     }
-    
     
     //Realizar pesquisa de clientes por nome
     public static List<ClienteModel> procurarCliente(String nome)
@@ -64,7 +60,6 @@ public class ServiceCliente {
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
         }
     }
@@ -78,7 +73,6 @@ public class ServiceCliente {
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
         }
     }
@@ -91,9 +85,7 @@ public class ServiceCliente {
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
         }
     }
-    
 }

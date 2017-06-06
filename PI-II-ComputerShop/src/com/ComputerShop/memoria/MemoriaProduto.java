@@ -3,6 +3,7 @@ package com.ComputerShop.memoria;
 import com.ComputerShop.models.ProdutoModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 // essa clase ira armazenar na memoria do java
@@ -29,7 +30,7 @@ public class MemoriaProduto {
         
         if(produtoProcura != null && produtoProcura.getId() != null && !listaProdutos.isEmpty()){
             for(ProdutoModel produtoLi : listaProdutos){
-                if (produtoLi != null && produtoLi.getId() == produtoProcura.getId()){
+                if (produtoLi != null && Objects.equals(produtoLi.getId(), produtoProcura.getId())){
                     produtoLi.setNome(produtoProcura.getNome());
                     produtoLi.setFabricante(produtoProcura.getFabricante());
                     produtoLi.setTipoProduto(produtoProcura.getTipoProduto());

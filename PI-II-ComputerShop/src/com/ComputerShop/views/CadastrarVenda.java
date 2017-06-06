@@ -6,6 +6,7 @@
 package com.ComputerShop.views;
 import com.ComputerShop.exceptions.ClienteException;
 import com.ComputerShop.exceptions.DataSourceException;
+import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.models.PedidoModel;
@@ -14,7 +15,6 @@ import com.ComputerShop.models.VendaModel;
 import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.services.ServiceVenda;
 import com.ComputerShop.services.ServicoProduto;
-import java.beans.PropertyVetoException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,6 +79,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         lblValorTotal = new javax.swing.JLabel();
         btnFinalizar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -318,7 +319,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 202, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addContainerGap()
@@ -337,26 +338,38 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             }
         });
 
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblValorTotal)
-                        .addGap(276, 276, 276)
-                        .addComponent(btnFinalizar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnFinalizar)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 20, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblValorTotal))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
+                        .addComponent(btnRemover)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,13 +379,15 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRemover)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblValorTotal)
                     .addComponent(btnFinalizar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -494,12 +509,19 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         ProdutoModel produto;
         PedidoModel pedido = new PedidoModel();
         
-        if(resultadoProd.get(index).getQtdProduto() < quantidade) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao Adicionar!", "Quantidade desejada não bate com a quantidade de produtos em estoque!", JOptionPane.ERROR_MESSAGE);
+        if(quantidade > 0 && resultadoProd.get(index).getQtdProduto() < quantidade) {
+            JOptionPane.showMessageDialog(rootPane, "Nâo possuimos está quantidade em estoque!", 
+                    "Erro ao Adicionar!", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         produto = resultadoProd.get(index);
+        
+        if(!validar(produto)) {
+            JOptionPane.showMessageDialog(rootPane, 
+                    "Produto já adicionado ao carrinho!", "Erro ao Adicionar!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         pedido.setProduto(produto);
         pedido.setQtd(quantidade);
@@ -527,6 +549,16 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
+    public boolean validar (ProdutoModel produto) {
+        for(int i = 0; i < pedidos.size(); i++) {
+            if(pedidos.get(i).getProduto().getId().equals(produto.getId())) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         venda.setCliente(cliente);
         venda.setPedidos(pedidos);
@@ -543,14 +575,58 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         int aux = JOptionPane.showOptionDialog(rootPane, "Venda Realizada!!", "Sucesso!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         
         if (aux == JOptionPane.OK_OPTION) {
-            try {
-                //            int EXIT_ON_CLOSE1 = CadastrarVenda.EXIT_ON_CLOSE;
-                super.setClosed(true);
-            } catch (PropertyVetoException ex) {
-                Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
+            //                super.setClosed(true);
+            for(int i = 0; i < pedidos.size(); i++) {
+                ProdutoModel prod = pedidos.get(i).getProduto();
+                prod.setQtdProduto(prod.getQtdProduto() - pedidos.get(i).getQtd());
+                try {
+                    ServicoProduto.atualizarProduto(prod);
+                } catch (ProdutoException | DataSourceException ex) {
+                    Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+            
+            limpar();
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void limpar() {
+        DefaultTableModel modelVenda = (DefaultTableModel) tblVenda.getModel();
+        for(int i = 0; i < modelVenda.getRowCount(); i++) {
+            modelVenda.removeRow(i);
+        }
+        
+        DefaultTableModel modelProd = (DefaultTableModel) tblProdutos.getModel();
+        for(int i = 0; i < modelProd.getRowCount(); i++) {
+            modelProd.removeRow(i);
+        }
+        
+        DefaultTableModel modelCli = (DefaultTableModel) tblCliente.getModel();
+        for(int i = 0; i < modelCli.getRowCount(); i++) {
+            modelCli.removeRow(i);
+        }
+        
+        txtNomeCliente.setText("");
+        txtNomeProduto.setText("");
+        txtQuantidade.setValue(new Integer(0));
+        lblClienteSelecionado.setText("");
+        lblValorTotal.setText("");
+        
+        ultimaPesquisaCli = null;
+        ultimaPesquisaProd = null;
+        resultadoCli = null;
+        resultadoProd = null;
+        cliente = null;
+        pedidos.clear();
+        pedidos = new ArrayList<>();
+        valorTotal = 0;
+        venda = new VendaModel();
+    }
+    
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tblVenda.getModel();
+        model.removeRow(tblVenda.getSelectedRow());
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     public boolean refreshListVenda() throws ClienteException, Exception {        
         DefaultTableModel model = (DefaultTableModel) tblVenda.getModel();
@@ -586,6 +662,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnPesquisarCliente;
     private javax.swing.JButton btnPesquisarProduto;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
