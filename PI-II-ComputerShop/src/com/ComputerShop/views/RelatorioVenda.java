@@ -209,7 +209,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDataInicioActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        if (!txtDataInicio.getText().equals("  /  /    ") && !txtDataFinal.getText().equals("  /  /   ")){
+        if (!(txtDataInicio.getText().equals("  /  /    ")) && !(txtDataFinal.getText().equals("  /  /   "))){
              try {
                 refreshListRelatorio();
             } catch (VendaException | DataSourceException | ParseException ex) {
@@ -220,12 +220,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                     "Atenção!", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         
             if (aux == JOptionPane.OK_OPTION) {
-               
-                try {
-                    super.setClosed(true);
-                } catch (PropertyVetoException ex) {
-                    Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
             }
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed

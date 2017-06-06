@@ -440,17 +440,18 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblCliente.getModel();
         model.setRowCount(0);
         
-        if(resultadoCli == null || resultadoCli.size() <= 0){
+        if(resultadoCli == null || resultadoCli.size() <= 0) {
            return false;
         }
-    
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         for (int i = 0; i < resultadoCli.size(); i++) {
             ClienteModel cli = resultadoCli.get(i);
             if(cli != null){
                 Object[] row = new Object[3];
                 row[0] = cli.getNome();
                 row[1] = cli.getCpf();
-                row[2] = new SimpleDateFormat().format(cli.getDataNasc());
+                row[2] = format.format(cli.getDataNasc());
                 model.addRow(row);
             }
         }
