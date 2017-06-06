@@ -44,6 +44,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
      */
     public CadastrarVenda() {
         initComponents();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        lblDataVenda.setText(format.format(new Date()));
     }
 
     /**
@@ -80,6 +82,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         lblValorTotal = new javax.swing.JLabel();
         btnFinalizar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        lblDataVenda = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -345,6 +349,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setText("Data: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -368,7 +374,12 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                                 .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(216, 216, 216)
-                        .addComponent(btnRemover)))
+                        .addComponent(btnRemover))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -382,7 +393,11 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRemover)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblValorTotal)
@@ -665,6 +680,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
@@ -675,6 +691,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lblClienteSelecionado;
+    private javax.swing.JLabel lblDataVenda;
     private javax.swing.JLabel lblValorTotal;
     private javax.swing.JTable tblCliente;
     private javax.swing.JTable tblProdutos;
