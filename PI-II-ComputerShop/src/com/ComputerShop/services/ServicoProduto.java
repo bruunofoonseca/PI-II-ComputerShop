@@ -33,8 +33,7 @@ public class ServicoProduto {
             
         } catch (Exception e) {
             
-            e.printStackTrace();
-            System.out.println("Verifique a classe ProdutoModel");
+            throw new DataSourceException("Erro na fonte de dados", e);
         }
     }
     
@@ -51,7 +50,6 @@ public class ServicoProduto {
             
         } catch (Exception e) {
             // imprimir erro tecnico no consile
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
         }
         
@@ -66,7 +64,7 @@ public class ServicoProduto {
         try {
             // Exceção vai verificar se houve preenchimento do campo de pesquisa
             // caso tenha algo digitado traz resultado
-            if (nomeProd == null || "".equalsIgnoreCase(nomeProd)) {
+            if (nomeProd == null || "".equals(nomeProd)) {
                 return MemoriaProduto.listarTodosProdutos();
                 
             } else {
@@ -75,7 +73,6 @@ public class ServicoProduto {
             }
         } catch (Exception e) {
             
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados, e");
             
         }
@@ -92,7 +89,6 @@ public class ServicoProduto {
             
         } catch (Exception e) {
             
-            e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
         }
         

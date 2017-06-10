@@ -36,10 +36,10 @@ public class Principall extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     //Produto
-    public CadastrarProduto getCadastrarProduto(){
+    public CadastrarProduto getTesteProduto(){
         return menProdCadastro;
     }
-    public void setCadastrarProduto(CadastrarProduto menProdCadastro){
+    public void setTesteProduto(CadastrarProduto menProdCadastro){
         this.menProdCadastro = menProdCadastro;
     }
     public PesquisaProduto getPesquisaProduto(){
@@ -208,12 +208,12 @@ public class Principall extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menProdCadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProdCadActionPerformed
-        if (getCadastrarProduto()== null || !menProdCadastro.isDisplayable()){
-            setCadastrarProduto(new CadastrarProduto());
-            desktop.add(getCadastrarProduto());
-            this.openFrameInCenter(getCadastrarProduto());
+        if (getTesteProduto()== null || !menProdCadastro.isDisplayable()){
+            setTesteProduto(new CadastrarProduto());
+            desktop.add(getTesteProduto());
+            this.openFrameInCenter(getTesteProduto());
         }
-        getCadastrarProduto().toFront();
+        getTesteProduto().toFront();
     }//GEN-LAST:event_menProdCadActionPerformed
 
     private void menProdPesqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menProdPesqActionPerformed

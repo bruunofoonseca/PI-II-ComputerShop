@@ -32,12 +32,6 @@ public class ValidarCliente {
             throw new ClienteException("Informe um TELEFONE");
         }
         
-//        if(cliente.getEmail() != null || !cliente.getEmail().equals("")) {
-//            if(!cliente.getEmail().contains("@") && !cliente.getEmail().contains(".")) {
-//                throw new ClienteException("Email Inválido!");
-//            }
-//        }
-
         //Validar endereço
         if(cliente.getLogradouro() == null || "".equals(cliente.getLogradouro())) {
             throw new ClienteException("Não foi informado logradouro");

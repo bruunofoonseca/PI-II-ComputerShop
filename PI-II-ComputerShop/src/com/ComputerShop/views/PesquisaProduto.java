@@ -9,12 +9,13 @@ package com.ComputerShop.views;
 import com.ComputerShop.models.ProdutoModel;
 import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.services.ServicoProduto;
+import com.ComputerShop.views.TelaEditarProduto;
 import java.awt.Dimension; // verificar
 import javax.swing.JInternalFrame; // verificar
 import javax.swing.JOptionPane; // verificar
 import javax.swing.table.DefaultTableModel; // verificar
 import java.util.List;
-import testeProduto.TelaEditarProduto;
+
 
 /**
  *
@@ -234,7 +235,7 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
                 
                 formEditarProduto.dispose();
                 formEditarProduto = new TelaEditarProduto();
-                formEditarProduto.setCliente(produto);
+                formEditarProduto.setProduto(produto);
                 formEditarProduto.setTitle(produto.getNome());
                 this.getParent().add(formEditarProduto);
                 this.openFrameInCenter(formEditarProduto);

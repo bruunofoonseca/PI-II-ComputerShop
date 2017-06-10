@@ -471,8 +471,8 @@ public class CadastroCliente extends javax.swing.JInternalFrame {
         cli.setEstadoCivil((String) estadoCivil.getSelectedItem());
         cli.setTelefone((String) telefone.getText());
         cli.setCelular((String) celular.getText());
-
         cli.setEmail((String) email.getText());
+        
         Date data = null;       
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         

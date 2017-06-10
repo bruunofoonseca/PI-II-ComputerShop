@@ -18,7 +18,7 @@ public class ProdutoModel {
     private String fabricante;
     private String tipoProduto;
     private int qtdProduto;
-    private float valorProduto;
+    private Float ValorProduto;
     private boolean status;
 
     public boolean isStatus() {
@@ -71,11 +71,11 @@ public class ProdutoModel {
         this.qtdProduto = qtdProduto;
     }
      
-    public void setValorProduto(float valorProd){
-        this.valorProduto = valorProd;
+    public void setValorProduto(Float ValorProd){
+        this.ValorProduto = ValorProd;
     }
     
-    public float getValorProduto (){
-        return valorProduto;
+    public Float getValorProduto (){
+        return ValorProduto;
     }
 }
