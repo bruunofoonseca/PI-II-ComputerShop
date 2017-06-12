@@ -45,7 +45,7 @@ public class ValidarCliente {
         if(cliente.getBairro() == null || "".equals(cliente.getBairro())) {
             throw new ClienteException("Não foi informado nenhum bairro");
         }
-        if(cliente.getEstado() == null || cliente.getEstado().equals("")) {
+        if(cliente.getEstado().equals("Selecione...") ) {
             throw new ClienteException("Não foi informado o estado");
         }
         if (cliente.getCidade() == null || "".equals(cliente.getCidade())) {

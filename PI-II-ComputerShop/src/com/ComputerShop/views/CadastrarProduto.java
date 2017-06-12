@@ -74,8 +74,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
 
         jLabel21.setText("* campos obrigatorios");
 
-        ValorProd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
-        ValorProd.setText("0");
+        ValorProd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -178,8 +177,14 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         prod.setFabricante(Fabricante.getText());
         prod.setTipoProduto(TipoProd.getText());
         prod.setQtdProduto((int)QtdProd.getValue());
-        float valor = (float) ValorProd.getValue();
+        if(ValorProd.getValue() != null){
+        Number num = (Number) ValorProd.getValue();
+        float valor = num.floatValue();
         prod.setValorProduto(valor);
+        }
+        else{
+            prod.setValorProduto(null);
+        }
         //prod.setValorProduto(Float.parseFloat(ValorProd.getText()));
         
         
