@@ -30,7 +30,6 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         TipoProd = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        ValorProd = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         Fabricante = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -38,6 +37,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         Salvar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
+        ValorProd = new javax.swing.JFormattedTextField();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -74,6 +74,9 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
 
         jLabel21.setText("* campos obrigatorios");
 
+        ValorProd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
+        ValorProd.setText("0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,13 +85,13 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ValorProd))
+                                .addComponent(ValorProd, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(415, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
@@ -137,7 +140,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(ValorProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,7 +161,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -175,7 +178,9 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         prod.setFabricante(Fabricante.getText());
         prod.setTipoProduto(TipoProd.getText());
         prod.setQtdProduto((int)QtdProd.getValue());
-        //prod.setValorProduto(ValorProd.getAlignmentX());
+        float valor = (float) ValorProd.getValue();
+        prod.setValorProduto(valor);
+        //prod.setValorProduto(Float.parseFloat(ValorProd.getText()));
         
         
         try {
@@ -222,7 +227,7 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner QtdProd;
     private javax.swing.JButton Salvar;
     private javax.swing.JTextField TipoProd;
-    private javax.swing.JTextField ValorProd;
+    private javax.swing.JFormattedTextField ValorProd;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;

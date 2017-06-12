@@ -30,7 +30,7 @@ public class ValidarProduto {
             throw new ProdutoException("Não foi informado QUANTIDADE do produto");
         }
         
-        if(prod.getValorProduto() == 0 || "".equals(prod.getValorProduto())){
+        if(prod.getValorProduto() == 0.0 || "".equals(prod.getValorProduto())){
            throw new ProdutoException("O VALOR do produto não pode estar vazio ou zero");
         }
         

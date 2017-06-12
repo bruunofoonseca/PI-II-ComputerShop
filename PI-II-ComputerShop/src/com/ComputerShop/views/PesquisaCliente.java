@@ -267,8 +267,8 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     public void opemFrameInCenter(JInternalFrame jif){
         Dimension desktopSize = this.getParent().getSize();
         Dimension jInternelFrameSize = jif.getSize();
-        int width = (desktopSize.width - jInternelFrameSize.width);
-        int height = (desktopSize.height - jInternelFrameSize.height);
+        int width = (desktopSize.width - jInternelFrameSize.width) / 2;
+        int height = (desktopSize.height - jInternelFrameSize.height) / 2;
         jif.setLocation(width, height);
         jif.setVisible(true);
     }
