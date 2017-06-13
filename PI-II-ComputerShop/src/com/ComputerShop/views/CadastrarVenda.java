@@ -96,7 +96,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setText("Nome do Cliente:");
+        jLabel4.setText("* Nome do Cliente:");
 
         btnPesquisarCliente.setText("Pesquisar");
         btnPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setText("Produto:");
+        jLabel5.setText("* Produto:");
 
         tblProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

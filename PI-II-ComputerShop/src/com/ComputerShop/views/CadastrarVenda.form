@@ -159,7 +159,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Nome do Cliente:"/>
+            <Property name="text" type="java.lang.String" value="* Nome do Cliente:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnPesquisarCliente">
@@ -274,7 +274,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Produto:"/>
+            <Property name="text" type="java.lang.String" value="* Produto:"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
