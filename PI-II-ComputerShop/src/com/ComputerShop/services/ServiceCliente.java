@@ -5,6 +5,7 @@ import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.models.ClienteModel;
 import com.ComputerShop.memoria.MemoriaCliente;
 import com.ComputerShop.validador.ValidarCliente;
+import com.ComputerShop.memoria.DBCliente;
 import java.util.List;
 
 // Classe de serviços de Clientes
@@ -18,8 +19,11 @@ public class ServiceCliente {
         ValidarCliente.validar(cliente);
         
         try {
-            //Chama a função de mock
-            MemoriaCliente.inserir(cliente);
+//            //Chama a função de mock
+//            MemoriaCliente.inserir(cliente);
+            
+            //Chama a função do DB
+            DBCliente.inserir(cliente);
         }catch(Exception e){
             //Informar erro
             throw new DataSourceException("Erro na fonte de dados", e);

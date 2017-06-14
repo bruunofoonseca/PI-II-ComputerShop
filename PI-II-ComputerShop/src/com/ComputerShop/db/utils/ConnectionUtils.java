@@ -17,22 +17,22 @@ public class ConnectionUtils {
     //Obtem uma conexao
     public static Connection getConnection(){
     
-    // Conexao para abertura e fechamento
-    Connection connection = null;
-    try {
-        // Só tenta abrir conecao caso nao exista nenhuma aberta
-        String dbURL = MainConstants.DB_ADRESS;
-        //Propriedades para guarda usuario e senha
-        Properties properties = new Properties();
-        properties.put("user", MainConstants.DB_USER);
-        properties.put("password", MainConstants.DB_PASS);
-        // realiza conexao com banco
-        connection = DriverManager.getConnection(dbURL, properties);
-        
-    } catch(SQLException ex){
-        ex.printStackTrace();
-    }
-    
-    return connection;
+        // Conexao para abertura e fechamento
+        Connection connection = null;
+        try {
+            // Só tenta abrir conecao caso nao exista nenhuma aberta
+            String dbURL = MainConstants.DB_ADRESS;
+            //Propriedades para guarda usuario e senha
+            Properties properties = new Properties();
+            properties.put("user", MainConstants.DB_USER);
+            properties.put("password", MainConstants.DB_PASS);
+            // realiza conexao com banco
+            connection = DriverManager.getConnection(dbURL, properties);
+
+        } catch(SQLException ex){
+            ex.printStackTrace();
+        }
+
+        return connection;
     }
 }

@@ -10,11 +10,11 @@ public class MainConstants {
     
     // URL de conexão
     public static final String DB_ADRESS = 
-            "jdbc:derby://localhost:1527/badc";
+            "jdbc:derby://localhost:1527/Gr5_Informatica";
     // usuario do banco
-    public static final String DB_USER = "badc";
+    public static final String DB_USER = "gr5";
     // senha do banco
-    public static final String DB_PASS = "badc";
+    public static final String DB_PASS = "gr5";
     
     
 }
