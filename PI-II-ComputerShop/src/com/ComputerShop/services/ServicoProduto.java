@@ -41,7 +41,6 @@ public class ServicoProduto {
         }
     }
     
-    
     public static void atualizarProduto(ProdutoModel prod)
     throws ProdutoException, DataSourceException{
         
@@ -49,18 +48,15 @@ public class ServicoProduto {
         
         try {
             // realiza a chamada de atualizar o produto
-            MemoriaProduto.atualiza(prod);
-            return;
+//            MemoriaProduto.atualiza(prod);
             
+            //Chama função do BD
+            DBProduto.atualizar(prod);
         } catch (Exception e) {
             // imprimir erro tecnico no consile
             throw new DataSourceException("Erro na fonte de dados", e);
         }
-        
     }
-    
-    
-    // Procura Cliente
     
     public static List<ProdutoModel> localizarProduto(String nomeProd)
                 throws ProdutoException, DataSourceException{
@@ -69,11 +65,16 @@ public class ServicoProduto {
             // Exceção vai verificar se houve preenchimento do campo de pesquisa
             // caso tenha algo digitado traz resultado
             if (nomeProd == null || "".equals(nomeProd)) {
-                return MemoriaProduto.listarTodosProdutos();
+//                return MemoriaProduto.listarTodosProdutos();
+                
+                //Chama função do DB
+                return DBProduto.listar();
                 
             } else {
-                return MemoriaProduto.listarSomentePalavra(nomeProd);
+//                return MemoriaProduto.listarSomentePalavra(nomeProd);
 
+                //Chama função do DB
+                return DBProduto.procurar(nomeProd);
             }
         } catch (Exception e) {
             

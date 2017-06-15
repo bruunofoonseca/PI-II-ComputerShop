@@ -62,19 +62,23 @@ public class DBProduto {
     public static void atualizar(ProdutoModel produto)
             throws SQLException, Exception {
         // String de update no BD
-        String sql = "UPDATE produto SET NomeProd=?, Fabricante=?, TipoProd=?, Quantidade=?, Status=?, Valor=?"
-                + "WHERE (produto_id=?)";
+        String sql = "UPDATE produto SET NOMEPROD=?, FABRICANTE=?, TIPOPROD=?, "
+                + "QUANTIDADE=?, STATUS=?, VALOR=?"
+                + "WHERE IDPROD=?";
         
         //Conexão para abertura e fechamento
         Connection connection = null;
+        
         //Statement para obtenção através da conexão, execução de
         //comandos SQL e fechamentos
         PreparedStatement preparedStatement = null;
         try {
             // abrindo conexão
             connection = ConnectionUtils.getConnection();
+            
             // Criar um preparedStatement para executar instruções SQL
             preparedStatement = connection.prepareStatement(sql);
+            
             // configurando os parametros para update
             preparedStatement.setString(1, produto.getNome());
             preparedStatement.setString(2, produto.getFabricante());
@@ -100,17 +104,21 @@ public class DBProduto {
     // produto em todas as tela de pesquisa
     public static void excluir(Integer id) throws SQLException, Exception{
         // String de exclusão, a partir de um ID
-        String sql = "UPDATE produto SET enable=? WHERE (quarto_id)";
+        String sql = "UPDATE produto SET STATUS=? WHERE IDPROD=?";
+        
         // conexão para abertura e fechamento no BD
          Connection connection = null;
+         
         //Statement para obtenção através da conexão, execução de
         //comandos SQL e fechamentos
         PreparedStatement preparedStatement = null;
         try {
             //Abre uma conexão com o banco de dados
             connection = ConnectionUtils.getConnection();
+            
             //Cria um preparedStatement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
+            
             //Configura os parâmetros do prepared preparedStatement
             preparedStatement.setBoolean(1, false);
             preparedStatement.setInt(2, id);
@@ -129,7 +137,136 @@ public class DBProduto {
         }
     }
     
+    public static List<ProdutoModel> listar()
+            throws SQLException, Exception {
+
+        String sql = "SELECT * FROM produto WHERE (STATUS=?)";
+
+        List<ProdutoModel> listaProdutos = null;
+
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+
+        //Armazenará os resultados do banco de dados
+        ResultSet result = null;
+        try {
+            //Abre uma conexão com o banco de dados
+            connection = ConnectionUtils.getConnection();
+
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setBoolean(1, true);
+            
+            //Executa a consulta SQL no banco de dados
+            result = preparedStatement.executeQuery();
+            
+            //Itera por cada item do resultado
+            while (result.next()) {
+                //Se a lista não foi inicializada, a inicializa
+                if (listaProdutos == null) {
+                    listaProdutos = new ArrayList<>();
+                }
+                
+                ProdutoModel produto = new ProdutoModel();
+                produto.setId(result.getInt("IDPROD"));
+                produto.setNome(result.getString("NOMEPROD"));
+                produto.setFabricante(result.getString("FABRICANTE"));
+                produto.setTipoProduto(result.getString("TIPOPROD"));
+                produto.setQtdProduto(result.getInt("QUANTIDADE"));
+                produto.setStatus(result.getBoolean("STATUS"));
+                produto.setValorProduto(result.getFloat("VALOR"));
+                
+                //Adiciona a instância na lista
+                listaProdutos.add(produto);
+            }
+        } finally {
+            //Se o result ainda estiver aberto, realiza seu fechamento
+            if (result != null && !result.isClosed()) {
+                result.close();
+            }
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+        
+        //Retorna a lista de clientes do banco de dados
+        return listaProdutos;
+    }
     
-    
-    
+    public static List<ProdutoModel> procurar(String nome)
+            throws SQLException, Exception {
+
+        String sql = "SELECT * FROM produto "
+                + "WHERE UPPER(NOME) LIKE UPPER(?) AND STATUS=?";
+        
+        List<ProdutoModel> listaProdutos = null;
+        
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+        
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+        
+        //Armazenará os resultados do banco de dados
+        ResultSet result = null;
+        try {
+            //Abre uma conexão com o banco de dados
+            connection = ConnectionUtils.getConnection();
+            
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            
+            //Configura os parâmetros do "PreparedStatement"
+            preparedStatement.setString(1, "%" + nome + "%");
+            preparedStatement.setBoolean(2, true);
+            
+            //Executa a consulta SQL no banco de dados
+            result = preparedStatement.executeQuery();
+            
+            //Itera por cada item do resultado
+            while (result.next()) {
+                //Se a lista não foi inicializada, a inicializa
+                if (listaProdutos == null) {
+                    listaProdutos = new ArrayList<>();
+                }
+                
+                ProdutoModel produto = new ProdutoModel();
+                produto.setId(result.getInt("IDPROD"));
+                produto.setNome(result.getString("NOMEPROD"));
+                produto.setFabricante(result.getString("FABRICANTE"));
+                produto.setTipoProduto(result.getString("TIPOPROD"));
+                produto.setQtdProduto(result.getInt("QUANTIDADE"));
+                produto.setStatus(result.getBoolean("STATUS"));
+                produto.setValorProduto(result.getFloat("VALOR"));
+                
+                //Adiciona a instância na lista
+                listaProdutos.add(produto);
+            }
+        } finally {
+            //Se o result ainda estiver aberto, realiza seu fechamento
+            if (result != null && !result.isClosed()) {
+                result.close();
+            }
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+        
+        return listaProdutos;        
+    }
 }
