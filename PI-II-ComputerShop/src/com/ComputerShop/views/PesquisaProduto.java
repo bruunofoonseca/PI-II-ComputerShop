@@ -15,7 +15,6 @@ import javax.swing.JOptionPane; // verificar
 import javax.swing.table.DefaultTableModel; // verificar
 import java.util.List;
 
-
 /**
  *
  * @author alef.nsousa
@@ -36,9 +35,8 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
     public PesquisaProduto() {
         initComponents();
         
-        tblProdutos.getColumnModel().getColumn(0).setMinWidth(0);
-        tblProdutos.getColumnModel().getColumn(0).setMaxWidth(0);
-        tblProdutos.getColumnModel().getColumn(0).setWidth(0);
+        DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
+        modelo.setRowCount(0);
     }
 
     @SuppressWarnings("unchecked")

@@ -5,7 +5,7 @@
  */
 package com.ComputerShop.memoria;
 
-import com.ComputerShop.models.VendaModel;
+import com.ComputerShop.models.PedidoModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +17,19 @@ import java.util.List;
 public class MemoriaVenda {
     
     private static int totalPedidos = 0;  
-    private static List<VendaModel> listaPedidos = new ArrayList<VendaModel>();
+    private static List<PedidoModel> listaPedidos = new ArrayList<PedidoModel>();
     
-    public static void inserir(VendaModel pedido) throws Exception {
+    public static void inserir(PedidoModel pedido) throws Exception {
         pedido.setId(totalPedidos++);
         listaPedidos.add(pedido);
     }
 
-    public static void atualizar (VendaModel pedidoProcura) throws Exception {
+    public static void atualizar (PedidoModel pedidoProcura) throws Exception {
         if (pedidoProcura != null && pedidoProcura.getId() != null && !listaPedidos.isEmpty()) {
-            for (VendaModel listPedidos : listaPedidos) {
+            for (PedidoModel listPedidos : listaPedidos) {
                 if(listPedidos != null && listPedidos.getId() == pedidoProcura.getId()){
                     listPedidos.setCliente(pedidoProcura.getCliente());
-                    listPedidos.setPedidos(pedidoProcura.getPedidos());
+                    listPedidos.setItens(pedidoProcura.getItens());
                     listPedidos.setValorTotal(pedidoProcura.getValorTotal());
                     break;
                 }
@@ -40,7 +40,7 @@ public class MemoriaVenda {
     public static void excluir(Integer id) throws Exception {
         if(id != null && !listaPedidos.isEmpty()){
             for(int i = 0; i<listaPedidos.size(); i++){
-                VendaModel pedido = listaPedidos.get(i);
+                PedidoModel pedido = listaPedidos.get(i);
                 if(pedido != null && pedido.getId() == id){
                     listaPedidos.remove(i);
                     break;
@@ -49,7 +49,7 @@ public class MemoriaVenda {
         }
     }
     
-    public static List<VendaModel> listar() throws Exception {
+    public static List<PedidoModel> listar() throws Exception {
         return listaPedidos;
     }
 
@@ -69,7 +69,7 @@ public class MemoriaVenda {
 //        return listaResultado;
 //    }
 
-    public static VendaModel obter(Integer id) throws Exception {
+    public static PedidoModel obter(Integer id) throws Exception {
         if(id != null && !listaPedidos.isEmpty()){
             for (int i = 0; i < listaPedidos.size(); i++) {
                 if(listaPedidos.get(i) != null && listaPedidos.get(i).getId() == id){

@@ -9,9 +9,9 @@ import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.models.ClienteModel;
-import com.ComputerShop.models.PedidoModel;
+import com.ComputerShop.models.ItemPedidoModel;
 import com.ComputerShop.models.ProdutoModel;
-import com.ComputerShop.models.VendaModel;
+import com.ComputerShop.models.PedidoModel;
 import com.ComputerShop.services.ServiceCliente;
 import com.ComputerShop.services.ServiceVenda;
 import com.ComputerShop.services.ServicoProduto;
@@ -35,17 +35,27 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     List<ClienteModel> resultadoCli = null;
     List<ProdutoModel> resultadoProd = null;
     ClienteModel cliente;
-    List<PedidoModel> pedidos = new ArrayList<>();
+    List<ItemPedidoModel> itens = new ArrayList<>();
     float valorTotal = 0;
-    VendaModel venda = new VendaModel();
+    PedidoModel venda = new PedidoModel();
 
     /**
      * Creates new form CadastrarVenda
      */
     public CadastrarVenda() {
         initComponents();
+        
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         lblDataVenda.setText(format.format(new Date()));
+        
+        DefaultTableModel modelVenda = (DefaultTableModel) tblVenda.getModel();
+        modelVenda.setRowCount(0);
+        
+        DefaultTableModel modelProd = (DefaultTableModel) tblProdutos.getModel();
+        modelProd.setRowCount(0);
+        
+        DefaultTableModel modelCli = (DefaultTableModel) tblCliente.getModel();
+        modelCli.setRowCount(0);
     }
 
     /**
@@ -133,6 +143,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblCliente);
 
+        lblClienteSelecionado.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblClienteSelecionado.setForeground(new java.awt.Color(255, 51, 51));
         lblClienteSelecionado.setText("Nome do cliente escolhido");
 
         btnAdicionarCliente.setText("Adicionar");
@@ -331,8 +343,12 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("Valor Total: R$ ");
 
+        lblValorTotal.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblValorTotal.setForeground(new java.awt.Color(255, 51, 51));
         lblValorTotal.setText("0");
 
         btnFinalizar.setText("Finalizar Compra");
@@ -523,7 +539,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         boolean resultAdd = false;
         int quantidade = (int)txtQuantidade.getValue();
         ProdutoModel produto;
-        PedidoModel pedido = new PedidoModel();
+        ItemPedidoModel pedido = new ItemPedidoModel();
         
         if(quantidade > 0 && resultadoProd.get(index).getQtdProduto() < quantidade) {
             JOptionPane.showMessageDialog(rootPane, "Nâo possuimos está quantidade em estoque!", 
@@ -549,7 +565,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         
         lblValorTotal.setText(Float.toString(valorTotal));
         
-        pedidos.add(pedido);
+        itens.add(pedido);
         
         try{
             resultAdd = refreshListVenda();
@@ -566,8 +582,8 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
     public boolean validar (ProdutoModel produto) {
-        for(int i = 0; i < pedidos.size(); i++) {
-            if(pedidos.get(i).getProduto().getId().equals(produto.getId())) {
+        for(int i = 0; i < itens.size(); i++) {
+            if(itens.get(i).getProduto().getId().equals(produto.getId())) {
                 return false;
             }
         }
@@ -577,7 +593,7 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         venda.setCliente(cliente);
-        venda.setPedidos(pedidos);
+        venda.setItens(itens);
         venda.setValorTotal(valorTotal);
         venda.setDataVenda(new Date());
         
@@ -592,9 +608,9 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         
         if (aux == JOptionPane.OK_OPTION) {
             //                super.setClosed(true);
-            for(int i = 0; i < pedidos.size(); i++) {
-                ProdutoModel prod = pedidos.get(i).getProduto();
-                prod.setQtdProduto(prod.getQtdProduto() - pedidos.get(i).getQtd());
+            for(int i = 0; i < itens.size(); i++) {
+                ProdutoModel prod = itens.get(i).getProduto();
+                prod.setQtdProduto(prod.getQtdProduto() - itens.get(i).getQtd());
                 try {
                     ServicoProduto.atualizarProduto(prod);
                 } catch (ProdutoException | DataSourceException ex) {
@@ -608,23 +624,17 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
 
     private void limpar() {
         DefaultTableModel modelVenda = (DefaultTableModel) tblVenda.getModel();
-        for(int i = 0; i < modelVenda.getRowCount(); i++) {
-            modelVenda.removeRow(i);
-        }
+        modelVenda.setRowCount(0);
         
         DefaultTableModel modelProd = (DefaultTableModel) tblProdutos.getModel();
-        for(int i = 0; i < modelProd.getRowCount(); i++) {
-            modelProd.removeRow(i);
-        }
+        modelProd.setRowCount(0);
         
         DefaultTableModel modelCli = (DefaultTableModel) tblCliente.getModel();
-        for(int i = 0; i < modelCli.getRowCount(); i++) {
-            modelCli.removeRow(i);
-        }
+        modelCli.setRowCount(0);
         
         txtNomeCliente.setText("");
         txtNomeProduto.setText("");
-        txtQuantidade.setValue(new Integer(0));
+        txtQuantidade.setValue(0);
         lblClienteSelecionado.setText("");
         lblValorTotal.setText("");
         
@@ -633,10 +643,10 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         resultadoCli = null;
         resultadoProd = null;
         cliente = null;
-        pedidos.clear();
-        pedidos = new ArrayList<>();
+        itens.clear();
+        itens = new ArrayList<>();
         valorTotal = 0;
-        venda = new VendaModel();
+        venda = new PedidoModel();
     }
     
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
@@ -648,19 +658,19 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tblVenda.getModel();
         model.setRowCount(0);
         
-        if(pedidos == null){
+        if(itens == null){
            return false;
         }
     
-        for (int i = 0; i < pedidos.size(); i++) {
-            ProdutoModel prod = pedidos.get(i).getProduto();
+        for (int i = 0; i < itens.size(); i++) {
+            ProdutoModel prod = itens.get(i).getProduto();
             ClienteModel cli = cliente;
             if(prod != null){
                 Object[] row = new Object[4];
                 row[0] = cli.getNome();
                 row[1] = prod.getNome();
                 row[2] = prod.getValorProduto();
-                row[3] = pedidos.get(i).getQtd();
+                row[3] = itens.get(i).getQtd();
                 model.addRow(row);
             }
         }

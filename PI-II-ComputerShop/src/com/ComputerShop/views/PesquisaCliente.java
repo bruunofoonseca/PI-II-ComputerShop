@@ -22,8 +22,9 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     //Contrutor e inicializaçãode componetes
     public PesquisaCliente() {
         initComponents();
-        //Fazer não mostrar o ID na tela
         
+        DefaultTableModel model = (DefaultTableModel) tabelaResultados.getModel();
+        model.setRowCount(0);
     }
     //Código gerado do GUI Builder
     @SuppressWarnings("unchecked")

@@ -8,9 +8,9 @@ package com.ComputerShop.views;
 import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.models.ClienteModel;
-import com.ComputerShop.models.PedidoModel;
+import com.ComputerShop.models.ItemPedidoModel;
 import com.ComputerShop.models.ProdutoModel;
-import com.ComputerShop.models.VendaModel;
+import com.ComputerShop.models.PedidoModel;
 import com.ComputerShop.services.ServiceVenda;
 import java.beans.PropertyVetoException;
 import java.text.ParseException;
@@ -226,7 +226,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     public boolean refreshListRelatorio() throws VendaException, DataSourceException, ParseException {
-        List<VendaModel> vendas = ServiceVenda.listarPedidos();
+        List<PedidoModel> vendas = ServiceVenda.listarPedidos();
         float totalVendas = 0;
         
         DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
@@ -236,12 +236,12 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
            return false;
         }
         
-        List<VendaModel> vendasNoPeriodo = new ArrayList<>();
+        List<PedidoModel> vendasNoPeriodo = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date dataInicio = format.parse(txtDataInicio.getText());
         Date dataFim = format.parse(txtDataFinal.getText());
         
-        for (VendaModel venda : vendas) {
+        for (PedidoModel venda : vendas) {
             String aux = new SimpleDateFormat("dd/MM/yyy").format(venda.getDataVenda());
             Date dataVenda = format.parse(aux);
             if(dataVenda.after(dataInicio) && dataVenda.before(dataFim) 
@@ -256,7 +256,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         for (int i = 0; i < vendasNoPeriodo.size(); i++) {
             ClienteModel cli = vendasNoPeriodo.get(i).getCliente();
             
-            for(PedidoModel pedido : vendasNoPeriodo.get(i).getPedidos()) {
+            for(ItemPedidoModel pedido : vendasNoPeriodo.get(i).getItens()) {
                 ProdutoModel produto = pedido.getProduto();
                 if(cli != null && produto != null){
                     Object[] row = new Object[7];

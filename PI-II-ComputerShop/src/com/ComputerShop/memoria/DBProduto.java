@@ -206,7 +206,7 @@ public class DBProduto {
             throws SQLException, Exception {
 
         String sql = "SELECT * FROM produto "
-                + "WHERE UPPER(NOME) LIKE UPPER(?) AND STATUS=?";
+                + "WHERE UPPER(NOMEPROD) LIKE UPPER(?) AND STATUS=?";
         
         List<ProdutoModel> listaProdutos = null;
         

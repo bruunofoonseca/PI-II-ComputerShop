@@ -13,13 +13,13 @@ import java.util.List;
  */
 public class RelatorioModel {
     
-    private List<VendaModel> vendas;
+    private List<PedidoModel> vendas;
 
-    public List<VendaModel> getVendas() {
+    public List<PedidoModel> getVendas() {
         return vendas;
     }
 
-    public void setVendas(List<VendaModel> vendas) {
+    public void setVendas(List<PedidoModel> vendas) {
         this.vendas = vendas;
     }
     

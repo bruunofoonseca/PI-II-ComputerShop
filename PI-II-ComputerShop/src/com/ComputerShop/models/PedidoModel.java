@@ -12,37 +12,27 @@ import java.util.List;
  *
  * @author BruunoFoonseca
  */
-
 public class PedidoModel {
-    
-    // Atributos
     private Integer id;
-    private ProdutoModel produto;
-    private float valorParcial;
-    private int qtd;
+    private ClienteModel cliente;
+    private List<ItemPedidoModel> itens;
+    private float valorTotal;
+    private Date dataVenda;
 
-    public ProdutoModel getProduto() {
-        return produto;
+    public Date getDataVenda() {
+        return dataVenda;
     }
 
-    public void setProduto(ProdutoModel produto) {
-        this.produto = produto;
+    public void setDataVenda(Date dataVenda) {
+        this.dataVenda = dataVenda;
     }
 
-    public float getValorParcial() {
-        return valorParcial;
+    public float getValorTotal() {
+        return valorTotal;
     }
 
-    public void setValorParcial(float valorParcial) {
-        this.valorParcial = valorParcial;
-    }
-
-    public int getQtd() {
-        return qtd;
-    }
-
-    public void setQtd(int qtd) {
-        this.qtd = qtd;
+    public void setValorTotal(float valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public Integer getId() {
@@ -51,5 +41,21 @@ public class PedidoModel {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public ClienteModel getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteModel cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ItemPedidoModel> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedidoModel> itens) {
+        this.itens = itens;
     }
 }
