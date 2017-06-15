@@ -9,7 +9,6 @@ package com.ComputerShop.views;
 import com.ComputerShop.models.ProdutoModel;
 import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.services.ServicoProduto;
-import com.ComputerShop.views.TelaEditarProduto;
 import java.awt.Dimension; // verificar
 import javax.swing.JInternalFrame; // verificar
 import javax.swing.JOptionPane; // verificar
@@ -29,6 +28,8 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
 
     // pega o ultimo resultado
     String ultimaPesq = null;
+    List<ProdutoModel> resultado;
+
     /**
      * Creates new form PesquisaProduto
      */
@@ -39,7 +40,6 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
         tblProdutos.getColumnModel().getColumn(0).setMaxWidth(0);
         tblProdutos.getColumnModel().getColumn(0).setWidth(0);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -194,6 +194,7 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
             
             //obtem o nome do produto, para pedir a confirmaçaõ exclusão
             String nome = (String) tblProdutos.getValueAt(row, 1);
+            
             // exibindo caixa de dialogo
             int resposta = JOptionPane.showConfirmDialog(rootPane, "Confirmar Exclusão", "Excluir Produto", JOptionPane.YES_NO_OPTION);
             
@@ -201,7 +202,8 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
             if(resposta == JOptionPane.YES_OPTION){
                 try {
                     // obtém o id do produto
-                    Integer id = (Integer) tblProdutos.getValueAt(row, 0);
+                    int id = resultado.get(row).getId();
+                    
                     // chama a classe serviço para excluir o item
                     ServicoProduto.excluirProduto(id);
                     this.refreshList();
@@ -213,7 +215,6 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
                     // exibi mensagem de erro ao usuario
                     JOptionPane.showConfirmDialog(rootPane, e.getMessage(), "Falha na exclusão", JOptionPane.ERROR_MESSAGE);
                 }
-                
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -224,15 +225,15 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
         try {
             // obtem a linha selecionada na tabela
             final int row = tblProdutos.getSelectedRow();
+            
             // verifica se ha linha selecionada
             if (row >= 0){
                 // obtem a linha selecionada na tabela
-                Integer id = (Integer) tblProdutos.getValueAt(row, 0);
+                int id = resultado.get(row).getId();
                 
                 // solicita ao services obter o produto
                 ProdutoModel produto = ServicoProduto.obterProduto(id);
-                
-                
+
                 formEditarProduto.dispose();
                 formEditarProduto = new TelaEditarProduto();
                 formEditarProduto.setProduto(produto);
@@ -247,7 +248,7 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
             e.printStackTrace();
             // exibe mensagem de erro generica para usuario
             JOptionPane.showMessageDialog(rootPane, "Não é possivel" 
-                    + "exibir os dados do produto", 
+                    + " exibir os dados do produto", 
                     "Erro ao abrir detalhes",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -281,7 +282,7 @@ public class PesquisaProduto extends javax.swing.JInternalFrame {
     // ira atualiza a lista de produtos
     public boolean refreshList() throws ProdutoException, Exception{
         
-        List<ProdutoModel> resultado = ServicoProduto.localizarProduto(ultimaPesq);
+        resultado = ServicoProduto.localizarProduto(ultimaPesq);
         
         DefaultTableModel modelo = (DefaultTableModel) tblProdutos.getModel();
         

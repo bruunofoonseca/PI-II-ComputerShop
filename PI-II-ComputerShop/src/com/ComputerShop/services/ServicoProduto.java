@@ -77,46 +77,37 @@ public class ServicoProduto {
                 return DBProduto.procurar(nomeProd);
             }
         } catch (Exception e) {
-            
             throw new DataSourceException("Erro na fonte de dados, e");
-            
         }
-        
     }
-    
     
     public static ProdutoModel obterProduto (Integer id)
         throws ProdutoException, DataSourceException {
             
         try {
+//            return MemoriaProduto.obter(id);
             
-            return MemoriaProduto.obter(id);
-            
+            //Chama Função do DB
+            return DBProduto.obter(id);
         } catch (Exception e) {
-            
             throw new DataSourceException("Erro na fonte de dados", e);
         }
-        
     }
-    
-    
+
     // excluir produto
-    
     public static void excluirProduto(Integer id) throws ProdutoException, DataSourceException{
         
         try {
             // solicita a memoria a exclusão do produto
-            MemoriaProduto.excluir(id);
+//            MemoriaProduto.excluir(id);
+            
+            //Chama Função do DB
+            DBProduto.excluir(id);
         } catch (Exception e) {
             
             // imprimir algum erro caso não consiga excluir
             e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);
-        }
-        
-        
-    }
-        
+        }   
+    }       
 }
-    
-

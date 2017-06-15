@@ -16,7 +16,6 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
 
     public TelaEditarProduto() {
         initComponents();
-        
     }
 
     public ProdutoModel getProduto(){
@@ -51,6 +50,23 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Cadastrar Produto");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Produtos"));
 
@@ -225,19 +241,6 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    
-    // Listener de abertura da janela, aproveitando o evento para obter os valores
-    // do produto em edição e passa-os para os campos de edição da tela
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt){
-        txtNomeProduto.setText(produto.getNome());
-        txtFabricante.setText(produto.getFabricante());
-        txtTipoProduto.setText(produto.getTipoProduto());
-        System.out.println("Produto");
-        System.out.println(produto.getNome());
-        System.out.println(produto.getFabricante());
-    }
-    
-    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // Fecha a janela
         this.dispose();
@@ -246,6 +249,15 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
     private void txtFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFabricanteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFabricanteActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        txtNomeProduto.setText(produto.getNome());
+        txtFabricante.setText(produto.getFabricante());
+        txtTipoProduto.setText(produto.getTipoProduto());
+        System.out.println("Produto");
+        System.out.println(produto.getNome());
+        System.out.println(produto.getFabricante());
+    }//GEN-LAST:event_formInternalFrameOpened
 
     /**
      * @param args the command line arguments
