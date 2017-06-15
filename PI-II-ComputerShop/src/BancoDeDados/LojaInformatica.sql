@@ -1,4 +1,4 @@
-create table cliente(
+create table cliente (
     IdCli int generated always as identity (start with 1, increment by 1) primary key,
     Nome varchar(50) not null,
     Sexo varchar (20),
@@ -18,7 +18,7 @@ create table cliente(
     Estado varchar(30) not null
 );
 
-create table produto(
+create table produto (
     IdProd int generated always as identity (start with 5000, increment by 5) primary key,
     NomeProd varchar(30) not null,
     Fabricante varchar(30) not null,
@@ -28,7 +28,15 @@ create table produto(
     Valor float
 );
 
-create table ItensPedidos(
+create table pedido (
+    IdPedido int generated always as identity (start with 1300, increment by 3) primary key,
+    IdCli int,
+    DataComp Date,
+    Valor float,
+    foreign key (IdCli) references cliente(IdCli)
+);
+
+create table ItensPedidos (
     IdItem int generated always as identity (start with 2000, increment by 2) primary key,
     IdProd int,
     IdPedido int,
@@ -36,14 +44,4 @@ create table ItensPedidos(
     SubTotal float,
     foreign key (IdProd) references produto(IdProd),
     foreign key (idPedido) references pedido(IdPedido)
-);
-
-create table pedido(
-    IdPedido int generated always as identity (start with 1300, increment by 3) primary key,
-    IdCli int,
-    DataComp Date,
-    Nome varchar (50),
-    NomeProd varchar(30),
-    Valor float,
-    foreign key (IdCli) references cliente(IdCli)
 );

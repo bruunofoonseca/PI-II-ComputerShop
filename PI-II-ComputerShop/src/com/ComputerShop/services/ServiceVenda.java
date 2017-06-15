@@ -9,6 +9,7 @@ import com.ComputerShop.exceptions.VendaException;
 import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.memoria.MemoriaVenda;
 import com.ComputerShop.models.VendaModel;
+import com.ComputerShop.memoria.DBVenda;
 import java.util.List;
 
 /**
@@ -20,7 +21,9 @@ public class ServiceVenda {
     public static void cadastraPedido (VendaModel pedido) throws VendaException, DataSourceException {
         
         try {
-            MemoriaVenda.inserir(pedido);
+//            MemoriaVenda.inserir(pedido);
+            
+            DBVenda.inserir(pedido);
         }catch(Exception e){
             //Informar erro
             e.printStackTrace();

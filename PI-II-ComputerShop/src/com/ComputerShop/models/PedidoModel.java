@@ -18,7 +18,7 @@ public class PedidoModel {
     // Atributos
     private Integer id;
     private ProdutoModel produto;
-    private double valorParcial;
+    private float valorParcial;
     private int qtd;
 
     public ProdutoModel getProduto() {
@@ -29,11 +29,11 @@ public class PedidoModel {
         this.produto = produto;
     }
 
-    public double getValorParcial() {
+    public float getValorParcial() {
         return valorParcial;
     }
 
-    public void setValorParcial(double valorParcial) {
+    public void setValorParcial(float valorParcial) {
         this.valorParcial = valorParcial;
     }
 
