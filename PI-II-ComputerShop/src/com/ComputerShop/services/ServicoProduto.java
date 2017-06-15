@@ -10,6 +10,7 @@ import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.models.ProdutoModel;
 import com.ComputerShop.validador.ValidarProduto;
 import com.ComputerShop.memoria.MemoriaProduto;
+import com.ComputerShop.memoria.DBProduto;
 import java.util.List;
 
 /**
@@ -29,7 +30,10 @@ public class ServicoProduto {
         
         try {
             // nesse momento chama o metodo que vai gravar no atributo da classe
-            MemoriaProduto.inserir(prod);
+//            MemoriaProduto.inserir(prod);
+            
+            //Chama Função do DB
+            DBProduto.inserir(prod);
             
         } catch (Exception e) {
             

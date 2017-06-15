@@ -19,26 +19,30 @@ public class DBProduto {
             throws SQLException, Exception{
         
         // construindo a strin de inserção no BD na tabela produto
-        String sql = "INSERT INTO PRODUTO (IdProd, NomeProd, Fabricante, TipoProd, Quantidade, Status, Valor)" 
-                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (NOMEPROD, FABRICANTE, TIPOPROD, "
+                + "QUANTIDADE, STATUS, VALOR)" 
+                + " VALUES (?, ?, ?, ?, ?, ?)";
+        
         // conexao para abertura e fechamento do BD
         Connection connection = null;
+        
         // Statement para obtenção atraves da conexão, execuçao
         // comandos SQL
         PreparedStatement preparedStatement = null;
         try {
             // abrindo conexão
             connection = ConnectionUtils.getConnection();
+            
             // criar um preparedStatement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
+            
             // configura os parametros do preparedStatement
-            preparedStatement.setInt(1, produto.getId());
-            preparedStatement.setString(2, produto.getNome());
-            preparedStatement.setString(3, produto.getFabricante());
-            preparedStatement.setString(4, produto.getTipoProduto());
-            preparedStatement.setInt(5, produto.getQtdProduto());
-            preparedStatement.setBoolean(6, true);
-            preparedStatement.setFloat(7, produto.getValorProduto());
+            preparedStatement.setString(1, produto.getNome());
+            preparedStatement.setString(2, produto.getFabricante());
+            preparedStatement.setString(3, produto.getTipoProduto());
+            preparedStatement.setInt(4, produto.getQtdProduto());
+            preparedStatement.setBoolean(5, true);
+            preparedStatement.setFloat(6, produto.getValorProduto());
             
             // executa o comando SQL
             preparedStatement.execute();
