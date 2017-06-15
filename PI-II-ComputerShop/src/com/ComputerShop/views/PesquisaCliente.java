@@ -17,6 +17,8 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     // Armazena a última pesquisa
     String ultimaPesquisa = null;
     
+    List<ClienteModel> resultado;
+    
     //Contrutor e inicializaçãode componetes
     public PesquisaCliente() {
         initComponents();
@@ -181,9 +183,12 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             if(resposta == JOptionPane.YES_OPTION){
                 try {
                     // obtém o id do cliente
-                    String cpf = (String) tabelaResultados.getValueAt(row, 1);
+//                    String cpf = (String) tabelaResultados.getValueAt(row, 1);
+                    
+                    int id = resultado.get(row).getId();
+                    
                     // chama a classe serviço para excluir o item
-                    ServiceCliente.excluirCliente(cpf);
+                    ServiceCliente.excluirCliente(id);
                     //Atualiza a lista após a "exclusão"
                     this.refreshList();
                     
@@ -237,13 +242,14 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             //Verifica se há linha selecionada na tabela
             if (row >= 0) {
                 //Obtém a linha selecionada na tabela
-                String cpf = (String) tabelaResultados.getValueAt(row, 1);
+//                String cpf = (String) tabelaResultados.getValueAt(row, 1);
+                
+                int id = resultado.get(row).getId();
                 
                 //Solicita ao serviço a obtenção do cliente a partir do
                 //ID selecionado na tabela
-                ClienteModel cliente = ServiceCliente.obterCliente(cpf);
+                ClienteModel cliente = ServiceCliente.obterCliente(id);
 
-                
                 formEditarCliente.dispose();
                 formEditarCliente = new EditarCliente();
                 formEditarCliente.setCliente(cliente);
@@ -278,7 +284,7 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
     public boolean refreshList() throws ClienteException, Exception {
         /*Realiza a pesquisa de clientes com o último valor de pesquisa
         para atualizar a lista*/
-        List<ClienteModel> resultado = ServiceCliente.procurarCliente(ultimaPesquisa);
+        resultado = ServiceCliente.procurarCliente(ultimaPesquisa);
         
         //Obtém elemento representante do conteúdo da tabela na tela
         DefaultTableModel model = (DefaultTableModel) tabelaResultados.getModel();
@@ -320,9 +326,11 @@ public class PesquisaCliente extends javax.swing.JInternalFrame {
             //Obtém a linha selecionado da tabela de resultados
             final int row = tabelaResultados.getSelectedRow();
             //Obtém o valor do ID da coluna
-            String cpf = (String) tabelaResultados.getValueAt(row, 0);
+//            String cpf = (String) tabelaResultados.getValueAt(row, 0);
             
-            ClienteModel cliente = ServiceCliente.obterCliente(cpf);
+            int id = resultado.get(row).getId();
+            
+            ClienteModel cliente = ServiceCliente.obterCliente(id);
             
             /*Cria uma nova instância da tela de edição,
             configura o cliente selecionado como elemento a
