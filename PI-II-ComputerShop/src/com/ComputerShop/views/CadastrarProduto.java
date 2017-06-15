@@ -1,7 +1,7 @@
 package com.ComputerShop.views;
 
-import com.ComputerShop.exceptions.DataSourceException;
-import com.ComputerShop.exceptions.ProdutoException;
+//import com.ComputerShop.exceptions.DataSourceException;
+//import com.ComputerShop.exceptions.ProdutoException;
 import com.ComputerShop.models.ProdutoModel;
 import com.ComputerShop.services.ServicoProduto;
 import javax.swing.JOptionPane;
@@ -189,9 +189,10 @@ public class CadastrarProduto extends javax.swing.JInternalFrame {
         
         
         try {
-                ServicoProduto.inserirProduto(prod);
+            // chama o servico para cadsatrar o produto
+            ServicoProduto.inserirProduto(prod);
             
-        } catch (ProdutoException | DataSourceException e) {
+        } catch (Exception e) {
             // se ocorrer algum erro na gravação do dados
             // retorna erro
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Erro ao gravar dado", JOptionPane.ERROR_MESSAGE);
