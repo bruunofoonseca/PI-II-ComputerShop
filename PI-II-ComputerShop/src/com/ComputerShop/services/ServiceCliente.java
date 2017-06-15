@@ -39,7 +39,10 @@ public class ServiceCliente {
         
         //Realizar chamada de atualização
         try {
-            MemoriaCliente.atualizar(cliente);
+//            MemoriaCliente.atualizar(cliente);
+            
+            //Chama função do DB
+            DBCliente.atualizar(cliente);
         }catch (Exception e){
             /*Imprime qualquer erro técnico no console e devolve
             uma exceção e uma mensagem amigável a camada de visão*/
@@ -56,9 +59,15 @@ public class ServiceCliente {
             se sim, ira retorna o que foi pesquisado
             */
             if(nome == null || "".equals(nome)){
-                return MemoriaCliente.listar();
+//                return MemoriaCliente.listar();
+                
+                //Chama função do DB
+                return DBCliente.listar();
             }else{
-                return MemoriaCliente.procurar(nome);
+//                return MemoriaCliente.procurar(nome);
+                
+                //Chama função do DB
+                return DBCliente.procurar(nome);
             }
             
         }catch (Exception e){
