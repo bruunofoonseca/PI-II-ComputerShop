@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,6 +31,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Alef
  */
 public class RelatorioVenda extends javax.swing.JInternalFrame {
+    
+    int flagIndex;
+    boolean flag = true;
     
     /**
      * Creates new form RelatorioVenda
@@ -72,10 +77,14 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblRelatorio = new javax.swing.JTable();
         jLabel22 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblItens = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblRelatorio = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -94,22 +103,60 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
         jLabel3.setText("Total R$ ");
 
-        tblRelatorio.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jLabel22.setText("* campos obrigatorios");
+
+        lblTotal.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(204, 0, 0));
+
+        tblItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Código", "Cliente", "Produto", "Tipo do produto", "Quantidade", "Valor unitário", "Data da compra"
+                "Produto", "Tipo do Produto", "Valor Unitário", "Quantidade", "Sub-Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblItens);
+
+        jLabel4.setText("Pedidos:");
+
+        jLabel5.setText("Itens:");
+
+        tblRelatorio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código", "Cliente", "Data da Compra", "Valor Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -121,46 +168,48 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblRelatorio);
-        if (tblRelatorio.getColumnModel().getColumnCount() > 0) {
-            tblRelatorio.getColumnModel().getColumn(0).setPreferredWidth(100);
-            tblRelatorio.getColumnModel().getColumn(3).setPreferredWidth(50);
-            tblRelatorio.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tblRelatorio.getColumnModel().getColumn(5).setPreferredWidth(50);
-        }
-
-        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jLabel22.setText("* campos obrigatorios");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel22)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotal)
-                .addGap(39, 39, 39))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(lblTotal)))
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel3)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel22)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
 
         jLabel1.setText("* Data inicial:");
@@ -208,7 +257,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                         .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisar)))
-                .addContainerGap(416, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -287,20 +336,52 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < vendasNoPeriodo.size(); i++) {
             ClienteModel cli = vendasNoPeriodo.get(i).getCliente();
+            if(cli != null){
+                Object[] row = new Object[4];
+                row[0] = vendasNoPeriodo.get(i).getId();
+                row[1] = cli.getNome();
+                row[2] = vendasNoPeriodo.get(i).getDataVenda();
+                row[3] = vendasNoPeriodo.get(i).getValorTotal();
+                model.addRow(row);
+            }
+        }
+        
+        tblRelatorio.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
+            // do some actions here, for example
+            // print first column value from selected row
             
-            for(ItemPedidoModel pedido : vendasNoPeriodo.get(i).getItens()) {
-                ProdutoModel produto = pedido.getProduto();
-                if(cli != null && produto != null){
-                    Object[] row = new Object[7];
-                    row[0] = vendasNoPeriodo.get(i).getId();
-                    row[1] = cli.getNome();
-                    row[2] = produto.getNome();
-                    row[3] = produto.getTipoProduto();
-                    row[4] = pedido.getQtd();
-                    row[5] = produto.getValorProduto();
-                    row[6] = vendasNoPeriodo.get(i).getDataVenda();
-                    model.addRow(row);
+            if(flag) {
+                try {
+                    refreshListRelatorioItens(vendasNoPeriodo.get(tblRelatorio.getSelectedRow()));
+                } catch (VendaException | DataSourceException | ParseException ex) {
+                    Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+        });
+
+       return true;
+    }
+    
+    public boolean refreshListRelatorioItens(PedidoModel pedido) throws VendaException, DataSourceException, ParseException {
+        List<ItemPedidoModel> itens = pedido.getItens();
+        
+        DefaultTableModel model = (DefaultTableModel) tblItens.getModel();
+        model.setRowCount(0);
+        
+        if(itens == null || itens.size() <= 0){
+           return false;
+        }
+        
+        for(ItemPedidoModel itemPedido : itens) {
+            ProdutoModel produto = itemPedido.getProduto();
+            if(produto != null){
+                Object[] row = new Object[5];
+                row[0] = produto.getNome();
+                row[1] = produto.getTipoProduto();
+                row[2] = produto.getValorProduto();
+                row[3] = itemPedido.getQtd();
+                row[4] = itemPedido.getValorParcial();
+                model.addRow(row);
             }
         }
 
@@ -317,9 +398,13 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JTable tblItens;
     private javax.swing.JTable tblRelatorio;
     private javax.swing.JFormattedTextField txtDataFinal;
     private javax.swing.JFormattedTextField txtDataInicio;
