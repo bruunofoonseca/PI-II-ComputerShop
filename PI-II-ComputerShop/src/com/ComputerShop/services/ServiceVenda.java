@@ -33,7 +33,10 @@ public class ServiceVenda {
     
     public static List<PedidoModel> listarPedidos() throws VendaException, DataSourceException {
         try{
-            return MemoriaVenda.listar();
+//            return MemoriaVenda.listar();
+            
+            //Chama função do DB
+            return DBVenda.listar();
         } catch (Exception e){
             e.printStackTrace();
             throw new DataSourceException("Erro na fonte de dados", e);

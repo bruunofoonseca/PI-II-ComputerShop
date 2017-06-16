@@ -118,12 +118,12 @@ public class DBVenda {
         }
     }
     
-    public static List<ClienteModel> listar()
+    public static List<PedidoModel> listar()
             throws SQLException, Exception {
 
-        String sql = "SELECT * FROM cliente WHERE (STATUS=?)";
+        String sql = "SELECT * FROM pedido";
 
-        List<ClienteModel> listaClientes = null;
+        List<PedidoModel> listaPedidos = null;
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -140,7 +140,6 @@ public class DBVenda {
 
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setBoolean(1, true);
             
             //Executa a consulta SQL no banco de dados
             result = preparedStatement.executeQuery();
@@ -148,33 +147,20 @@ public class DBVenda {
             //Itera por cada item do resultado
             while (result.next()) {
                 //Se a lista não foi inicializada, a inicializa
-                if (listaClientes == null) {
-                    listaClientes = new ArrayList<>();
+                if (listaPedidos == null) {
+                    listaPedidos = new ArrayList<>();
                 }
-                
-                //Cria uma instância de Cliente e popula com os valores do BD
-                ClienteModel cliente = new ClienteModel();
-                cliente.setId(result.getInt("IDCLI"));
-                cliente.setNome(result.getString("NOME"));
-                cliente.setSexo(result.getString("SEXO"));
-                Date d = new Date(result.getTimestamp("DATANASC").getTime());
-                cliente.setDataNasc(d);
-                cliente.setAtivo(result.getBoolean("STATUS"));
-                cliente.setEstadoCivil(result.getString("ESTADOCIVIL"));
-                cliente.setCpf(result.getString("CPF"));
-                cliente.setTelefone(result.getString("TEL"));
-                cliente.setCelular(result.getString("CEL"));
-                cliente.setEmail(result.getString("EMAIL"));
-                cliente.setLogradouro(result.getString("LOGRADOURO"));
-                cliente.setNumero(result.getString("NUMERO"));
-                cliente.setComplemento(result.getString("COMPLEMENTO"));
-                cliente.setCep(result.getString("CEP"));
-                cliente.setBairro(result.getString("BAIRRO"));
-                cliente.setCidade(result.getString("CIDADE"));
-                cliente.setEstado(result.getString("ESTADO"));
+
+                PedidoModel pedido = new PedidoModel();
+                pedido.setId(result.getInt("IDPEDIDO"));
+                pedido.setCliente(DBCliente.obter(result.getInt("IDCLI")));
+                Date d = new Date(result.getTimestamp("DATACOMP").getTime());
+                pedido.setDataVenda(d);
+                pedido.setValorTotal(result.getFloat("VALOR"));
+                pedido.setItens(listarItem(result.getInt("IDPEDIDO")));
                 
                 //Adiciona a instância na lista
-                listaClientes.add(cliente);
+                listaPedidos.add(pedido);
             }
         } finally {
             //Se o result ainda estiver aberto, realiza seu fechamento
@@ -190,7 +176,68 @@ public class DBVenda {
                 connection.close();
             }
         }
-        //Retorna a lista de clientes do banco de dados
-        return listaClientes;
+
+        return listaPedidos;
+    }
+    
+    private static List<ItemPedidoModel> listarItem(int idPedido)
+            throws SQLException, Exception {
+
+        String sql = "SELECT * FROM itenspedidos WHERE IDPEDIDO=?";
+
+        List<ItemPedidoModel> listaItens = null;
+
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+
+        //Armazenará os resultados do banco de dados
+        ResultSet result = null;
+        try {
+            //Abre uma conexão com o banco de dados
+            connection = ConnectionUtils.getConnection();
+
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, idPedido);
+            
+            //Executa a consulta SQL no banco de dados
+            result = preparedStatement.executeQuery();
+            
+            //Itera por cada item do resultado
+            while (result.next()) {
+                //Se a lista não foi inicializada, a inicializa
+                if (listaItens == null) {
+                    listaItens = new ArrayList<>();
+                }
+
+                ItemPedidoModel item = new ItemPedidoModel();
+                item.setId(result.getInt("IDITEM"));
+                item.setQtd(result.getInt("QUANTIDADE"));
+                item.setValorParcial(result.getInt("SUBTOTAL"));
+                item.setProduto(DBProduto.obter(result.getInt("IDPROD")));
+                
+                //Adiciona a instância na lista
+                listaItens.add(item);
+            }
+        } finally {
+            //Se o result ainda estiver aberto, realiza seu fechamento
+            if (result != null && !result.isClosed()) {
+                result.close();
+            }
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+        
+        return listaItens;
     }
 }

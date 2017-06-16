@@ -34,6 +34,9 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
      */
     public RelatorioVenda() {
         initComponents();
+        
+        DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
+        model.setRowCount(0);
     }
 
     /**
@@ -62,6 +65,8 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         setTitle("Relatorio de Vendas");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatorios"));
+        jPanel1.setForeground(new java.awt.Color(255, 51, 51));
+        jPanel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
