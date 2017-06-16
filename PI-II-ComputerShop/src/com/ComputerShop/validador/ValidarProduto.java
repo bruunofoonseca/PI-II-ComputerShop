@@ -32,8 +32,6 @@ public class ValidarProduto {
         
         if(prod.getValorProduto() == null || "".equals(prod.getValorProduto())){
            throw new ProdutoException("O VALOR do produto não pode estar vazio ou zero");
-        }
-        
+        }   
     }
-    
 }

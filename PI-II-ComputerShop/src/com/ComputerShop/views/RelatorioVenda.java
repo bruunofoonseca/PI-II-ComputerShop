@@ -16,6 +16,7 @@ import java.beans.PropertyVetoException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -37,6 +38,27 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         
         DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
         model.setRowCount(0);
+        
+        inicializarDatas();
+    }
+    
+    //Inicializa as datas padrão do relatório (hoje + 30 dias)
+    private void inicializarDatas() {
+        //Define um formatador de datas
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+              
+        Date hoje = new Date();
+        String hojeFormatado = formatador.format(hoje);
+        txtDataInicio.setText(hojeFormatado);
+
+        Date dataFinal = new Date();
+        Calendar calendario = Calendar.getInstance();
+        calendario.setTime(dataFinal);
+        calendario.add(Calendar.DAY_OF_MONTH, 30);
+        dataFinal = calendario.getTime();
+
+        String dataFinalFormatada = formatador.format(dataFinal);
+        txtDataFinal.setText(dataFinalFormatada);
     }
 
     /**
@@ -143,7 +165,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
 
         jLabel1.setText("* Data inicial:");
 
-        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.setText("Gerar Relatório");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarActionPerformed(evt);
@@ -175,18 +197,18 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDataInicio))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(txtDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisar)))
-                .addContainerGap(449, Short.MAX_VALUE))
+                .addContainerGap(416, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -221,12 +243,8 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                 Logger.getLogger(RelatorioVenda.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            int aux = JOptionPane.showOptionDialog(rootPane, "É obrigatório o preenchimento da Data Inicial e Data Final!", 
+            JOptionPane.showOptionDialog(rootPane, "É obrigatório o preenchimento da Data Inicial e Data Final!", 
                     "Atenção!", JOptionPane.CLOSED_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-        
-            if (aux == JOptionPane.OK_OPTION) {
-                
-            }
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -242,9 +260,18 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         }
         
         List<PedidoModel> vendasNoPeriodo = new ArrayList<>();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        Date dataInicio = format.parse(txtDataInicio.getText());
-        Date dataFim = format.parse(txtDataFinal.getText());
+        SimpleDateFormat format = null;
+        Date dataInicio = null;
+        Date dataFim = null;
+        
+        try {
+            format = new SimpleDateFormat("dd/MM/yyyy");
+            dataInicio = format.parse(txtDataInicio.getText());
+            dataFim = format.parse(txtDataFinal.getText());
+        } catch (ParseException ex) {
+            JOptionPane.showOptionDialog(rootPane, "Preencha as datas corretamente!", 
+                    "Atenção!", JOptionPane.CLOSED_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null);
+        }
         
         for (PedidoModel venda : vendas) {
             String aux = new SimpleDateFormat("dd/MM/yyy").format(venda.getDataVenda());

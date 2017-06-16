@@ -1,0 +1,3 @@
+Nome do Banco de Dados: Gr5_Informatica
+Usuário: gr5
+Senha: gr5

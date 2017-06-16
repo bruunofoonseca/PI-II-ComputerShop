@@ -10,6 +10,7 @@ import com.ComputerShop.exceptions.DataSourceException;
 import com.ComputerShop.memoria.MemoriaVenda;
 import com.ComputerShop.models.PedidoModel;
 import com.ComputerShop.memoria.DBVenda;
+import com.ComputerShop.validador.ValidarVenda;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ import java.util.List;
 public class ServiceVenda {
     
     public static void cadastraPedido (PedidoModel pedido) throws VendaException, DataSourceException {
+        
+        ValidarVenda.validar(pedido);
         
         try {
 //            MemoriaVenda.inserir(pedido);

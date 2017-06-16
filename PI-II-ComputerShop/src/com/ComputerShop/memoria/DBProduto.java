@@ -87,7 +87,15 @@ public class DBProduto {
             preparedStatement.setBoolean(5, true);
             preparedStatement.setFloat(6, produto.getValorProduto());
             preparedStatement.setInt(7, produto.getId());
-        } finally {
+            
+             //Executa o comando no banco de dados
+            preparedStatement.execute();
+        } 
+        catch (Exception e) {
+            // imprimir erro tecnico no consile
+            e.printStackTrace();
+        }
+        finally {
             //Se o preparedStatement ainda estiver aberto, realiza seu fechamento
             if (preparedStatement != null && !preparedStatement.isClosed()) {
                 preparedStatement.close();

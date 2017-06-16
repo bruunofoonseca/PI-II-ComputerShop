@@ -601,25 +601,24 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
             ServiceVenda.cadastraPedido(venda);
         } catch (VendaException | DataSourceException ex) {
             Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
-            return;
         }
         
-        int aux = JOptionPane.showOptionDialog(rootPane, "Venda Realizada!!", "Sucesso!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
-        
-        if (aux == JOptionPane.OK_OPTION) {
-            //                super.setClosed(true);
-            for(int i = 0; i < itens.size(); i++) {
-                ProdutoModel prod = itens.get(i).getProduto();
-                prod.setQtdProduto(prod.getQtdProduto() - itens.get(i).getQtd());
-                try {
-                    ServicoProduto.atualizarProduto(prod);
-                } catch (ProdutoException | DataSourceException ex) {
-                    Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        int aux = JOptionPane.showOptionDialog(rootPane, "Venda Realizada!!", "Sucesso!", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+
+        for(int i = 0; i < itens.size(); i++) {
+            ProdutoModel prod = itens.get(i).getProduto();
+            int qtdAtual = prod.getQtdProduto() - itens.get(i).getQtd();
+
+            prod.setQtdProduto(qtdAtual);
+
+            try {
+                ServicoProduto.atualizarProduto(prod);
+            } catch (ProdutoException | DataSourceException ex) {
+                Logger.getLogger(CadastrarVenda.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            limpar();
         }
+
+        limpar();
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void limpar() {
@@ -652,6 +651,9 @@ public class CadastrarVenda extends javax.swing.JInternalFrame {
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         DefaultTableModel model = (DefaultTableModel) tblVenda.getModel();
         model.removeRow(tblVenda.getSelectedRow());
+        
+        itens.clear();
+        itens = new ArrayList<>();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     public boolean refreshListVenda() throws ClienteException, Exception {        
