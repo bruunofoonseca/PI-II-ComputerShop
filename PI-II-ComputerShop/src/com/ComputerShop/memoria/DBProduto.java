@@ -6,7 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 /**
  *
@@ -20,8 +22,8 @@ public class DBProduto {
         
         // construindo a strin de inserção no BD na tabela produto
         String sql = "INSERT INTO produto (NOMEPROD, FABRICANTE, TIPOPROD, "
-                + "QUANTIDADE, STATUS, VALOR)" 
-                + " VALUES (?, ?, ?, ?, ?, ?)";
+                + "QUANTIDADE, STATUS, VALOR, GARANTIA, DATAFAB)" 
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         
         // conexao para abertura e fechamento do BD
         Connection connection = null;
@@ -43,6 +45,9 @@ public class DBProduto {
             preparedStatement.setInt(4, produto.getQtdProduto());
             preparedStatement.setBoolean(5, true);
             preparedStatement.setFloat(6, produto.getValorProduto());
+            preparedStatement.setInt(7, produto.getGarantia());
+            Timestamp t = new Timestamp(produto.getDtFabricacao().getTime());
+            preparedStatement.setTimestamp(8, t);
             
             // executa o comando SQL
             preparedStatement.execute();
@@ -63,7 +68,7 @@ public class DBProduto {
             throws SQLException, Exception {
         // String de update no BD
         String sql = "UPDATE produto SET NOMEPROD=?, FABRICANTE=?, TIPOPROD=?, "
-                + "QUANTIDADE=?, STATUS=?, VALOR=?"
+                + "QUANTIDADE=?, STATUS=?, VALOR=?, GARANTIA=?, DATAFAB=?"
                 + "WHERE IDPROD=?";
         
         //Conexão para abertura e fechamento
@@ -87,6 +92,9 @@ public class DBProduto {
             preparedStatement.setBoolean(5, true);
             preparedStatement.setFloat(6, produto.getValorProduto());
             preparedStatement.setInt(7, produto.getId());
+            preparedStatement.setInt(7, produto.getGarantia());
+            Timestamp t = new Timestamp(produto.getDtFabricacao().getTime());
+            preparedStatement.setTimestamp(8, t);
             
              //Executa o comando no banco de dados
             preparedStatement.execute();
@@ -187,6 +195,9 @@ public class DBProduto {
                 produto.setQtdProduto(result.getInt("QUANTIDADE"));
                 produto.setStatus(result.getBoolean("STATUS"));
                 produto.setValorProduto(result.getFloat("VALOR"));
+                produto.setGarantia(result.getInt("GARANTIA"));
+                Date d = new Date(result.getTimestamp("DATAFAB").getTime());
+                produto.setDtFabricacao(d);
                 
                 //Adiciona a instância na lista
                 listaProdutos.add(produto);
@@ -256,6 +267,9 @@ public class DBProduto {
                 produto.setQtdProduto(result.getInt("QUANTIDADE"));
                 produto.setStatus(result.getBoolean("STATUS"));
                 produto.setValorProduto(result.getFloat("VALOR"));
+                produto.setGarantia(result.getInt("GARANTIA"));
+                Date d = new Date(result.getTimestamp("DATAFAB").getTime());
+                produto.setDtFabricacao(d);
                 
                 //Adiciona a instância na lista
                 listaProdutos.add(produto);
@@ -316,6 +330,9 @@ public class DBProduto {
                 produto.setTipoProduto(result.getString("TIPOPROD"));
                 produto.setQtdProduto(result.getInt("QUANTIDADE"));
                 produto.setValorProduto(result.getFloat("VALOR"));
+                produto.setGarantia(result.getInt("GARANTIA"));
+                Date d = new Date(result.getTimestamp("DATAFAB").getTime());
+                produto.setDtFabricacao(d);
                 
                 //Retorna o resultado
                 return produto;

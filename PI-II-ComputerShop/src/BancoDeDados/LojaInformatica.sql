@@ -25,7 +25,9 @@ create table produto (
     TipoProd varchar(30) not null,
     Quantidade int,
     Status boolean,
-    Valor float
+    Valor float,
+    Garantia int,
+    DataFab Date
 );
 
 create table pedido (

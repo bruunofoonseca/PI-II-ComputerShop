@@ -5,6 +5,8 @@
  */
 package com.ComputerShop.models;
 
+import java.util.Date;
+
 /**
  *
  * @author BruunoFoonseca
@@ -20,12 +22,30 @@ public class ProdutoModel {
     private int qtdProduto;
     private Float ValorProduto;
     private boolean status;
+    private Date dtFabricacao;
+    private int garantia;
+
+    // Get e Setter
+
+    public Date getDtFabricacao() {
+        return dtFabricacao;
+    }
+
+    public void setDtFabricacao(Date dtFabricacao) {
+        this.dtFabricacao = dtFabricacao;
+    }
+
+    public int getGarantia() {
+        return garantia;
+    }
+
+    public void setGarantia(int garantia) {
+        this.garantia = garantia;
+    }
 
     public boolean isStatus() {
         return status;
     }
-
-    // Get e Setter
     
     public void setStatus(boolean status) {
         this.status = status;

@@ -377,11 +377,12 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         
-         try{
-             data = format.parse(dataNasc.getText());
-         }catch (Exception e){
+        try{
+            data = format.parse(dataNasc.getText());
+        }catch (Exception e){
              
-         }
+        }
+        
         cliente.setDataNasc(data);
         cliente.setSexo((String)sexo.getSelectedItem());
         cliente.setEstadoCivil((String)estadoCivil.getSelectedItem());
@@ -414,17 +415,20 @@ public class EditarCliente extends javax.swing.JInternalFrame {
         chamada de seu método público de atualização*/
         try{
             if(this.getDesktopPane().getTopLevelAncestor()
-                    instanceof Principall){
+                    instanceof Principall) {
                 Principall principal = (Principall) this.
-                        getDesktopPane().getTopLevelAncestor();
-                if(principal != null){
-                principal.getPesquisaCliente().refreshList();
+                    getDesktopPane().getTopLevelAncestor();
+                if(principal != null) {
+                    principal.getPesquisaCliente().refreshList();
+                }
             }
-         }
-       }
+        }
         catch(Exception e){
             e.printStackTrace();
         }
+        
+        // Caso não encontre erro, chegara ate essa mensagem
+        JOptionPane.showMessageDialog(rootPane, "Cliente atualizado!", "Atenção!" ,JOptionPane.INFORMATION_MESSAGE);
         this.dispose();
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
