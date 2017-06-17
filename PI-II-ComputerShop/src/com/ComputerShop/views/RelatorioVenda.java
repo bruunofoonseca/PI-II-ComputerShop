@@ -32,8 +32,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RelatorioVenda extends javax.swing.JInternalFrame {
     
-    int flagIndex;
-    boolean flag = true;
+    int flagIndex = -1;
     
     /**
      * Creates new form RelatorioVenda
@@ -43,6 +42,9 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         
         DefaultTableModel model = (DefaultTableModel) tblRelatorio.getModel();
         model.setRowCount(0);
+        
+        DefaultTableModel modelItens = (DefaultTableModel) tblItens.getModel();
+        modelItens.setRowCount(0);
         
         inicializarDatas();
     }
@@ -349,8 +351,9 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
         tblRelatorio.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
             // do some actions here, for example
             // print first column value from selected row
-            
-            if(flag) {
+
+            if(flagIndex != tblRelatorio.getSelectedRow()) {
+                flagIndex = tblRelatorio.getSelectedRow();
                 try {
                     refreshListRelatorioItens(vendasNoPeriodo.get(tblRelatorio.getSelectedRow()));
                 } catch (VendaException | DataSourceException | ParseException ex) {
