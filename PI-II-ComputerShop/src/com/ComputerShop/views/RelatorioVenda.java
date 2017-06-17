@@ -342,7 +342,7 @@ public class RelatorioVenda extends javax.swing.JInternalFrame {
                 Object[] row = new Object[4];
                 row[0] = vendasNoPeriodo.get(i).getId();
                 row[1] = cli.getNome();
-                row[2] = vendasNoPeriodo.get(i).getDataVenda();
+                row[2] = format.format(vendasNoPeriodo.get(i).getDataVenda());
                 row[3] = vendasNoPeriodo.get(i).getValorTotal();
                 model.addRow(row);
             }
