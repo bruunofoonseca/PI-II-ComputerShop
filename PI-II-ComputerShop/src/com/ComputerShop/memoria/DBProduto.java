@@ -91,10 +91,10 @@ public class DBProduto {
             preparedStatement.setInt(4, produto.getQtdProduto());
             preparedStatement.setBoolean(5, true);
             preparedStatement.setFloat(6, produto.getValorProduto());
-            preparedStatement.setInt(7, produto.getId());
             preparedStatement.setInt(7, produto.getGarantia());
             Timestamp t = new Timestamp(produto.getDtFabricacao().getTime());
             preparedStatement.setTimestamp(8, t);
+            preparedStatement.setInt(9, produto.getId());
             
              //Executa o comando no banco de dados
             preparedStatement.execute();

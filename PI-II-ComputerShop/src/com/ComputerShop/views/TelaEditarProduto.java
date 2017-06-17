@@ -307,6 +307,7 @@ public class TelaEditarProduto extends javax.swing.JInternalFrame {
         txtTipoProduto.setText(produto.getTipoProduto());
         selectQTD.setValue(produto.getQtdProduto());
         ValorProd.setText(Float.toString(produto.getValorProduto()));
+        ValorProd.setValue((Number)(produto.getValorProduto()));
         txtDataFab.setText(new SimpleDateFormat("dd/MM/yyyy").format(produto.getDtFabricacao()));
         selectGarantia.setValue(produto.getGarantia());
     }//GEN-LAST:event_formInternalFrameOpened
