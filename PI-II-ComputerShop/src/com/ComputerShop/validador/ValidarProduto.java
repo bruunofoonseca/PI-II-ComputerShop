@@ -32,6 +32,14 @@ public class ValidarProduto {
         
         if(prod.getValorProduto() == null || "".equals(prod.getValorProduto())){
            throw new ProdutoException("O VALOR do produto não pode estar vazio ou zero");
-        }   
+        }
+        
+        if(prod.getDtFabricacao() == null || prod.getDtFabricacao().equals("") || prod.getDtFabricacao().equals("  /  /    ")) {
+            throw new ProdutoException("Não foi informado Data de Fabricação!");
+        }
+        
+        if(prod.getGarantia() < 0) {
+            throw new ProdutoException("Garantia não pode ser menor que zero!");
+        }
     }
 }

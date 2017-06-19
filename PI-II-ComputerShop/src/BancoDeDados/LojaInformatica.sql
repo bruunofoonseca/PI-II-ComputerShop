@@ -1,6 +1,6 @@
 create table cliente (
     IdCli int generated always as identity (start with 1, increment by 1) primary key,
-    Nome varchar(50) not null,
+    Nome varchar(100) not null,
     Sexo varchar (20),
     Status boolean,
     DataNasc Date not null,
@@ -13,16 +13,16 @@ create table cliente (
     Numero varchar(30) not null,
     Complemento varchar(30),
     CEP varchar(10) not null,
-    Bairro varchar(30) not null,
-    Cidade varchar(30) not null,
-    Estado varchar(30) not null
+    Bairro varchar(100) not null,
+    Cidade varchar(100) not null,
+    Estado varchar(100) not null
 );
 
 create table produto (
     IdProd int generated always as identity (start with 5000, increment by 5) primary key,
-    NomeProd varchar(30) not null,
-    Fabricante varchar(30) not null,
-    TipoProd varchar(30) not null,
+    NomeProd varchar(100) not null,
+    Fabricante varchar(100) not null,
+    TipoProd varchar(100) not null,
     Quantidade int,
     Status boolean,
     Valor float,
